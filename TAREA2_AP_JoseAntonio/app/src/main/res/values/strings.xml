@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TempoEntrenador</string>
+    <string name="twPreparacion">Preparación</string>
+    <string name="twEstado">Preparado</string>
+    <string name="twTrabajo">Trabajo</string>
+    <string name="twDescanso">Descanso</string>
+    <string name="twCiclos">Ciclos</string>
+    <string name="twTiempoTotal">TempoEntrenador</string>
+    <string name="twTiempo">00000</string>
+
+</resources>
