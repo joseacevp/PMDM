@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvTiempoDescanso;
     private TextView tvTiempoCiclos;
     private TextView tvTiempoTotal;
+    private Button INICIO;
+    private TextView twEstado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         tvTiempoDescanso = (TextView) findViewById(R.id.tvTiempoDescaso);
         tvTiempoCiclos = (TextView) findViewById(R.id.tvTiempoCiclos);
         tvTiempoTotal = (TextView) findViewById(R.id.tvTiempoTotal);
+        INICIO = (Button) findViewById(R.id.INICIO);
+        twEstado = (TextView) findViewById(R.id.twEstado);
 
     }
 
@@ -89,26 +94,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     //metodo para iniciar el contador
     public void inicio(View view) {
-        //tvTiempoTotal.setText(00);
+
         if (!iniciado) {//solo arrancar el hilo secundario si  no se ha iniciado ya
             iniciado = true;
+            INICIO.setText("PARAR");//cambia el texto del boton
             new Thread(new Runnable() {//creamos un hilo secundario para evitar el bloqueo de la
                 // aplicación por detener el hilo principal
                 @Override
                 public void run() {
-                    while (iniciado) {//si apretamos el boton cuando esta en proceso
-                        if (contador >= 1) {
-                            contador--;
-                            runOnUiThread(new Runnable() {//ejecutamos los comandos en el hilo
-                                // principal y que no podemos modificar los
-                                // elementos de pantalla desde el hilo secundario
+                    while (iniciado) {
+                        if (tiempoPre >= 0) {//si el tiempo de preparacion no a terminado
+
+                            runOnUiThread(new Runnable() {//cambia los datos del hilo principal
                                 @Override
                                 public void run() {
-                                    tvTiempoTotal.setText(String.valueOf(contador));//muestra el contador
-                                    // por pantalla
+                                    twEstado.setText("Preparación");
+                                    tvTiempoTotal.setText(String.valueOf(tiempoPre));
+                                    tiempoPre--;
+                                }
+                            });
+                        }else
+                        if (tiempoTrab >= 0) {
+                            runOnUiThread(new Runnable() {//cambia los datos del hilo principal
+                                @Override
+                                public void run() {
+                                    twEstado.setText("Trabajo");
+                                    tvTiempoTotal.setText(String.valueOf(tiempoTrab));
+                                    tiempoTrab--;
+                                }
+                            });
+                        }else
+                        if (tiempoDesc >= 0) {
+                            runOnUiThread(new Runnable() {//cambia los datos del hilo principal
+                                @Override
+                                public void run() {
+                                    twEstado.setText("Descanso");
+                                    tvTiempoTotal.setText(String.valueOf(tiempoDesc));
+                                    tiempoDesc--;
                                 }
                             });
                         }
@@ -118,8 +142,14 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
+
+
                 }
             }).start();//iniciamos el hilo secundario
+
+        } else {
+            iniciado = false;
+            INICIO.setText("INICIAR");//cambia el texto del boton
         }
     }
 
