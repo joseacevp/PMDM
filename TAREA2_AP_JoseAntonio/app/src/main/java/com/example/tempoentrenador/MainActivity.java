@@ -9,12 +9,11 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private boolean iniciado = false;
-    private int contador = 5;
     private int tiempoPre;
     private int tiempoTrab;
     private int tiempoDesc;
     private int numCicl;
-    private int total;
+    private boolean ciclo;
     private TextView tvTotal;
     private TextView tvTiempoPreparacion;
     private TextView tvTiempoTrabajo;
@@ -44,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         if (tiempoPre >= 1) {
             tvTiempoPreparacion.setText(String.valueOf(tiempoPre = tiempoPre - 1));//reduce el tiempo
             tvTotal.setText(String.valueOf(tiempoPre + tiempoDesc + tiempoTrab));//calcula el total del tiempo a emplear
+
         }
     }
 
@@ -93,65 +93,102 @@ public class MainActivity extends AppCompatActivity {
         tvTiempoCiclos.setText(String.valueOf(numCicl = numCicl + 1));
     }
 
-
-    //metodo para iniciar el contador
-    public void inicio(View view) {
-
-        if (!iniciado) {//solo arrancar el hilo secundario si  no se ha iniciado ya
-            iniciado = true;
-            INICIO.setText("PARAR");//cambia el texto del boton
-            new Thread(new Runnable() {//creamos un hilo secundario para evitar el bloqueo de la
-                // aplicación por detener el hilo principal
+    public void start(View view) {
+        /*metodo para iniciar el cuenteo
+         * se inicia en caso que no se haya iniciado antes*/
+        if (!iniciado) {
+            iniciado = true;//indica a la variable que a sido iniciado el proceso
+            INICIO.setText("PARAR");//cambia el estado del boton de INICIO a PARAR
+            /*variables que reciven los valores originales de los tiempos para
+             * indicarselos despues de la cuenta a tras y recuperar los datos para
+             * el siguiente ciclo*/
+            int cuentaPrepa = tiempoPre;
+            int cuentaTrabajo = tiempoTrab;
+            int cuentaDesc = tiempoDesc;
+            int cuentaCiclos = numCicl;
+            /*apertura de un nuevo hilo para evitar que la aplicación se cierre al ocupar mas
+             * tiempo de proceso que lo permitido por el hilo principal*/
+            new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    while (iniciado) {
-                        if (tiempoPre >= 0) {//si el tiempo de preparacion no a terminado
-
-                            runOnUiThread(new Runnable() {//cambia los datos del hilo principal
+                    while (numCicl != 0) {//repite el ciclo tantas veces como se indican en el valor
+                        /*bucle para la cuenta a tras del tiempo Preparación inicia un hilo para
+                        * cambiar el valor del texto de cuenta atras en el hilo principal*/
+                        while (tiempoPre >= 0) {
+                            runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    twEstado.setText("Preparación");
+                                    twEstado.setText("PREPARACIÓN");//cambia el titulo
+                                    /*indica el valor del tiempo de Preparacion en el cuenteo
+                                    * en el hilo principal*/
                                     tvTiempoTotal.setText(String.valueOf(tiempoPre));
-                                    tiempoPre--;
+                                    tiempoPre--;//resta uno al tiempo de preparacion
                                 }
                             });
-                        }else
-                        if (tiempoTrab >= 0) {
-                            runOnUiThread(new Runnable() {//cambia los datos del hilo principal
+                            /*relentiza el tiempo de ejecución para que sea un segundo cada cuenta
+                            * hay que controlar las posibles excepciones */
+                            try {
+                                Thread.sleep(1000);//para controlar la velocidad del contador
+                            } catch (InterruptedException e) {//control de excepciones
+                                e.printStackTrace();
+                            }
+                        }
+                        /*recuperamos el valor originalmente indicado para el siguiente ciclo*/
+                        tiempoPre = cuentaPrepa;//recupera el valor original
+                        /*hilo secundario para el cuenteo del tiempo Trabajo
+                        * igual que el anterior hilo para el tiempo Preparacion*/
+                        while (tiempoTrab >= 0) {
+                            runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    twEstado.setText("Trabajo");
+                                    twEstado.setText("TRABAJANDO");
                                     tvTiempoTotal.setText(String.valueOf(tiempoTrab));
                                     tiempoTrab--;
                                 }
                             });
-                        }else
-                        if (tiempoDesc >= 0) {
-                            runOnUiThread(new Runnable() {//cambia los datos del hilo principal
+                            try {
+                                Thread.sleep(1000);//para controlar la velocidad del contador
+                            } catch (InterruptedException e) {//control de excepciones
+                                e.printStackTrace();
+                            }
+                        }
+                        tiempoTrab = cuentaTrabajo;//recupera el valor original
+                        /*hilo secundario para el cuenteo del tiempo Trabajo
+                         * igual que el anterior hilo para el tiempo Descanso*/
+                        while (tiempoDesc >= 0) {
+                            runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    twEstado.setText("Descanso");
+                                    twEstado.setText("DESCANSO");
                                     tvTiempoTotal.setText(String.valueOf(tiempoDesc));
                                     tiempoDesc--;
                                 }
                             });
+                            try {
+                                Thread.sleep(1000);//para controlar la velocidad del contador
+                            } catch (InterruptedException e) {//control de excepciones
+                                e.printStackTrace();
+                            }
                         }
-                        try {
-                            Thread.sleep(1000);//para controlar la velocidad del contador
-                        } catch (InterruptedException e) {//control de excepciones
-                            e.printStackTrace();
-                        }
+                        tiempoDesc = cuentaDesc;//recupera el valor original
+                        numCicl--;//un ciclo finalizado
                     }
-
-
+                    numCicl = cuentaCiclos;////recupera el valor original
+                    /*hilo secundario que cambia el valor del boton INICIO al terminar los
+                    * ciclos indicados y el valor inicio para que se pueda reiniciar el proceso*/
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            iniciado = false;
+                            INICIO.setText("INICIAR");//cambia el texto del boton
+                        }
+                    });
                 }
-            }).start();//iniciamos el hilo secundario
+            }).start();/*fin del hilo secundario*/
 
         } else {
             iniciado = false;
             INICIO.setText("INICIAR");//cambia el texto del boton
         }
     }
-
-
 }
