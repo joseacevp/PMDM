@@ -3,6 +3,7 @@ package com.example.tempoentrenador;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -37,13 +38,16 @@ public class MainActivity extends AppCompatActivity {
         twEstado = (TextView) findViewById(R.id.twEstado);
 
     }
-
+    //metodo para hacer aparecer el menu de colores tresPuntos
+    public boolean onCreateOptionsMenu(Menu m){
+    getMenuInflater().inflate(R.menu.menutrepuntos, m);
+    return true;
+    }
     //metodo para reducir el tiempo de preparacion
     public void preparacionMenos(View view) {
         if (tiempoPre >= 1) {
             tvTiempoPreparacion.setText(String.valueOf(tiempoPre = tiempoPre - 1));//reduce el tiempo
             tvTotal.setText(String.valueOf(tiempoPre + tiempoDesc + tiempoTrab));//calcula el total del tiempo a emplear
-
         }
     }
 
