@@ -2,7 +2,19 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menuColores"
-        android:title="@string/menuColores" />
+        android:id="@+id/ItemTema1"
+        android:title="Tema1" />
+    <item
+        android:id="@+id/ItemTema2"
+        android:title="Tema2" />
+    <item
+        android:id="@+id/ItemTema3"
+        android:title="Tema3" />
+    <item
+        android:id="@+id/ItemReset"
+        android:title="Reset" />
+    <item
+        android:id="@+id/ItemInformacion"
+        android:title="Informacion" />
 
 </menu>

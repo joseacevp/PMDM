@@ -2,8 +2,11 @@ package com.example.tempoentrenador;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,10 +26,27 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvTiempoTotal;
     private Button INICIO;
     private TextView twEstado;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = getSharedPreferences("VALUES", MODE_PRIVATE);
+        int theme = sharedPreferences.getInt("THEME", 1);
+        switch (theme) {
+            case 1:
+                setTheme(R.style.Theme_TempoEntrenador);
+                break;
+            case 2:
+                setTheme(R.style.Theme_TempoEntrenador2);
+                break;
+            case 3:
+                setTheme(R.style.Theme_TempoEntrenador3);
+                break;
+
+        }
+
+
         setContentView(R.layout.activity_main);
         tvTotal = (TextView) findViewById(R.id.tvTotal);
         tvTiempoPreparacion = (TextView) findViewById(R.id.tvTiempoPrepara);
@@ -38,11 +58,49 @@ public class MainActivity extends AppCompatActivity {
         twEstado = (TextView) findViewById(R.id.twEstado);
 
     }
+
     //metodo para hacer aparecer el menu de colores tresPuntos
-    public boolean onCreateOptionsMenu(Menu m){
-    getMenuInflater().inflate(R.menu.menutrepuntos, m);
-    return true;
+    public boolean onCreateOptionsMenu(Menu m) {
+        getMenuInflater().inflate(R.menu.menutrepuntos, m);
+        return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        item.getItemId();
+
+        switch (item.getItemId()) {
+            case R.id.ItemTema1:
+                System.out.println("Item1");
+                sharedPreferences.edit().putInt("THEME", 1).apply();
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.ItemTema2:
+                System.out.println("Item2");
+                sharedPreferences.edit().putInt("THEME", 2).apply();
+                Intent intent2 = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent2);
+                break;
+            case R.id.ItemTema3:
+                System.out.println("Item3");
+                sharedPreferences.edit().putInt("THEME", 3).apply();
+                Intent intent3 = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent3);
+                break;
+            case R.id.ItemInformacion:
+
+                break;
+            case R.id.ItemReset:
+
+                break;
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
     //metodo para reducir el tiempo de preparacion
     public void preparacionMenos(View view) {
         if (tiempoPre >= 1) {
@@ -117,20 +175,20 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     while (numCicl != 0) {//repite el ciclo tantas veces como se indican en el valor
                         /*bucle para la cuenta a tras del tiempo Preparación inicia un hilo para
-                        * cambiar el valor del texto de cuenta atras en el hilo principal*/
+                         * cambiar el valor del texto de cuenta atras en el hilo principal*/
                         while (tiempoPre >= 0) {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     twEstado.setText("PREPARACIÓN");//cambia el titulo
                                     /*indica el valor del tiempo de Preparacion en el cuenteo
-                                    * en el hilo principal*/
+                                     * en el hilo principal*/
                                     tvTiempoTotal.setText(String.valueOf(tiempoPre));
                                     tiempoPre--;//resta uno al tiempo de preparacion
                                 }
                             });
                             /*relentiza el tiempo de ejecución para que sea un segundo cada cuenta
-                            * hay que controlar las posibles excepciones */
+                             * hay que controlar las posibles excepciones */
                             try {
                                 Thread.sleep(1000);//para controlar la velocidad del contador
                             } catch (InterruptedException e) {//control de excepciones
@@ -140,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                         /*recuperamos el valor originalmente indicado para el siguiente ciclo*/
                         tiempoPre = cuentaPrepa;//recupera el valor original
                         /*hilo secundario para el cuenteo del tiempo Trabajo
-                        * igual que el anterior hilo para el tiempo Preparacion*/
+                         * igual que el anterior hilo para el tiempo Preparacion*/
                         while (tiempoTrab >= 0) {
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -179,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     numCicl = cuentaCiclos;////recupera el valor original
                     /*hilo secundario que cambia el valor del boton INICIO al terminar los
-                    * ciclos indicados y el valor inicio para que se pueda reiniciar el proceso*/
+                     * ciclos indicados y el valor inicio para que se pueda reiniciar el proceso*/
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
