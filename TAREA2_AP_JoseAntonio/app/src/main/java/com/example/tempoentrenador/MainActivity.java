@@ -2,6 +2,7 @@ package com.example.tempoentrenador;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private boolean iniciado = false;
@@ -31,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /**
+         * cambia el tema de la aplicacion. Con sharedPreferences guarda un valor dentro de una
+         * etiqueta "VALUES" el cueal es el numero de tema, por defecto el 1
+         */
+
         sharedPreferences = getSharedPreferences("VALUES", MODE_PRIVATE);
         int theme = sharedPreferences.getInt("THEME", 1);
         switch (theme) {
@@ -45,8 +52,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
         }
-
-
+        /**
+         *
+         */
         setContentView(R.layout.activity_main);
         tvTotal = (TextView) findViewById(R.id.tvTotal);
         tvTiempoPreparacion = (TextView) findViewById(R.id.tvTiempoPrepara);
@@ -56,15 +64,24 @@ public class MainActivity extends AppCompatActivity {
         tvTiempoTotal = (TextView) findViewById(R.id.tvTiempoTotal);
         INICIO = (Button) findViewById(R.id.INICIO);
         twEstado = (TextView) findViewById(R.id.twEstado);
+        twEstado.setText("TEMPO ENTRENADOR");
 
     }
 
-    //metodo para hacer aparecer el menu de colores tresPuntos
+    /**
+     *  metodo para hacer aparecer el menu de colores tresPuntos
+     */
+
     public boolean onCreateOptionsMenu(Menu m) {
         getMenuInflater().inflate(R.menu.menutrepuntos, m);
         return true;
     }
 
+    /**
+     *
+     * @param item es la opcion del menu seleccionada
+     * @return una referencia en forma de entero para cambiar el tema de la aplicación
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         item.getItemId();
@@ -89,18 +106,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent3);
                 break;
             case R.id.ItemInformacion:
-
+                Intent i = new Intent(this, Informacion.class);
+                startActivity(i);
                 break;
             case R.id.ItemReset:
-
+                tvTiempoPreparacion.setText(String.valueOf(tiempoPre = 0));
+                tvTiempoTrabajo.setText(String.valueOf(tiempoTrab = 0));
+                tvTiempoDescanso.setText(String.valueOf(tiempoDesc = 0));
+                tvTotal.setText(String.valueOf(0));
+                tvTiempoCiclos.setText(String.valueOf(numCicl = 0));
+                twEstado.setText("TEMPO ENTRENADOR");
                 break;
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 
-
+    /**
+     * Metodo para cambiar los tiempos mediante botones de más o menos
+     * @param view cambia el numero en el texto de seleccion de tiempo
+     */
     //metodo para reducir el tiempo de preparacion
     public void preparacionMenos(View view) {
         if (tiempoPre >= 1) {
@@ -155,6 +179,10 @@ public class MainActivity extends AppCompatActivity {
         tvTiempoCiclos.setText(String.valueOf(numCicl = numCicl + 1));
     }
 
+    /**
+     * metodo para iniciar la cuenta atras de la aplicación. Rediciendo el tiempo de cada apartado.
+     * @param view
+     */
     public void start(View view) {
         /*metodo para iniciar el cuenteo
          * se inicia en caso que no se haya iniciado antes*/
@@ -253,4 +281,7 @@ public class MainActivity extends AppCompatActivity {
             INICIO.setText("INICIAR");//cambia el texto del boton
         }
     }
+    /**
+     *
+     */
 }

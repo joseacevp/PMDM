@@ -16,4 +16,7 @@
     <string name="btMenosTrabaja">MENOS</string>
     <string name="tvTotal">TOTAL</string>
     <string name="menuColores">Temas</string>
+    <string name="TextoInformacion">"Tempo Entrenador. Version 1.0v
+            Desarrollador: Jose Antonio Acevedo
+            Aplicación para contorlar el tiempo de trabajo deportivo" </string>
 </resources>
