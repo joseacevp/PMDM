@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PrincipalFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_centerHorizontal="true"
+        android:gravity="center|center_horizontal">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="248dp"
+            android:gravity="center_horizontal">
+
+
+            <TextView
+                android:id="@+id/textoTiempoSeleccionado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10px"
+                android:layout_marginVertical="20px"
+                android:text="Tiempo Actividad"
+                android:textAlignment="textStart"/>
+
+
+
+            <Button
+                android:id="@+id/buttonIniciarParar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20px"
+                android:layout_marginVertical="30px"
+
+                android:text="INICIO
+" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="248dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/textoPreparacion"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="20px"
+                android:layout_marginVertical="30px"
+                android:text="Preparacion"
+                android:textAlignment="center" />
+
+            <Button
+                android:id="@+id/buttonPreparacionMenos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20px"
+                android:layout_marginVertical="30px"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/textPreparacionTiempo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:layout_marginHorizontal="20px"
+                android:layout_marginVertical="30px"
+                android:text=" 00" />
+
+
+            <Button
+                android:id="@+id/buttonPreparacionMas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20px"
+                android:layout_marginVertical="30px"
+                android:text="Button" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="248dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/textoTrabajo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:layout_marginHorizontal="20px"
+                android:layout_marginVertical="30px"
+                android:text="Trabajo"
+                android:textAlignment="center" />
+
+            <Button
+                android:id="@+id/buttonTrabajoMenos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20px"
+                android:layout_marginVertical="30px"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/textoTrabajoTiempo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20px"
+                android:layout_marginVertical="30px"
+                android:text=" 00" />
+
+
+            <Button
+                android:id="@+id/buttonTrabajoMas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20px"
+                android:layout_marginVertical="30px"
+                android:text="Button" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="248dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/textoDescanso"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:layout_marginHorizontal="20px"
+                android:layout_marginVertical="30px"
+                android:text="Descanso"
+                android:textAlignment="center" />
+
+            <Button
+                android:id="@+id/buttonDescansoMenos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20px"
+                android:layout_marginVertical="30px"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/textTiempoDescanso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20px"
+                android:layout_marginVertical="30px"
+                android:text=" 00" />
+
+
+            <Button
+                android:id="@+id/buttonDescansoMas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20px"
+                android:layout_marginVertical="30px"
+                android:text="Button" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="248dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/textoCiclos"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+               android:layout_marginHorizontal="20px"
+                android:layout_marginVertical="30px"
+                android:text="Ciclos"
+                android:textAlignment="center" />
+
+            <Button
+                android:id="@+id/buttonCiclosMenos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20px"
+                android:layout_marginVertical="30px"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/textNumeroCiclos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20px"
+                android:layout_marginVertical="30px"
+                android:text=" 00" />
+
+
+            <Button
+                android:id="@+id/buttonCinclosMas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20px"
+                android:layout_marginVertical="30px"
+                android:text="Button" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="248dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginHorizontal="20px"
+                android:layout_marginVertical="30px"
+                android:text="Tiempo Total: "
+                android:textSize="40px" />
+
+            <TextView
+                android:id="@+id/textTiempoTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginHorizontal="20px"
+                android:layout_marginVertical="30px"
+                android:text="00000"
+                android:textSize="80px" />
+
+
+        </TableRow>
+
+    </TableLayout>
+</FrameLayout>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">TempoEntrenador</string>
+    <string name="twPreparacion">Preparación</string>
+    <string name="twEstado">Preparado</string>
+    <string name="twTrabajo">Trabajo</string>
+    <string name="twDescanso">Descanso</string>
+    <string name="twCiclos">Ciclos</string>
+    <string name="twTiempoTotal">Tiempo Total</string>
+    <string name="twTiempo">00000</string>
+    <string name="btMenosPrepara">MENOS</string>
+    <string name="btMasPrepara">MAS</string>
+    <string name="btMasTrabaja">MAS</string>
+    <string name="btMenosDescanso">MENOS</string>
+    <string name="btMasCiclo">MAS</string>
+    <string name="btMasDescanso">MAS</string>
+    <string name="btMenosTrabaja">MENOS</string>
+    <string name="tvTotal">TOTAL</string>
+    <string name="menuColores">Temas</string>
+    <string name="TextoInformacion">"Tempo Entrenador. Version 1.0v
+            Desarrollador: Jose Antonio Acevedo
+            Aplicación para contorlar el tiempo de trabajo deportivo" </string>
+</resources>
