@@ -37,11 +37,11 @@ public class MainActivity extends AppCompatActivity {
         int id= menuItem.getItemId();
         if(id==R.id.ItemColores){
             System.out.println("opcion colores");
+                ColoresFragment coloresFragment = new ColoresFragment();
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentContainerViewPrincipal,coloresFragment);
+                fragmentTransaction.commit();
 
-//            PrincipalFragment principalFragment = new PrincipalFragment();
-//            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//            fragmentTransaction.replace(R.id.fragmentContainerViewBarra,principalFragment);
-//            fragmentTransaction.commit();
         }
         return super.onOptionsItemSelected(menuItem);
     }
