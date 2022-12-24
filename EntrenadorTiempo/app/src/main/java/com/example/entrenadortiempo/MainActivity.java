@@ -8,10 +8,19 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ComunicaMenu {
     private FragmentTransaction fragmentTransaction;
-    private Fragment tiemposFragment, menuColoresFragment, informacionFragment, principalFragment;
+    private Fragment tiemposFragment, menuColoresFragment, informacionFragment;
+    private boolean iniciado = false;
+    int cuentaPrepa;
+    int cuentaTrabajo;
+    int cuentaDesc;
+    int cuentaCiclos;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,11 +29,11 @@ public class MainActivity extends AppCompatActivity {
         tiemposFragment = new TiemposFragment();
         menuColoresFragment = new MenuColoresFragment();
         informacionFragment = new InformacionFragment();
-        principalFragment = new PrincipalFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragment, principalFragment).commit();
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
         fragmentTransaction.replace(R.id.contenedorFragment, tiemposFragment).commit();
         //fragmentTransaction.addToBackStack(null).commit();
+
     }
 
     @Override
@@ -44,15 +53,29 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.itemColores) {
             fragmentTransaction2.replace(R.id.contenedorFragment, menuColoresFragment);
             fragmentTransaction2.addToBackStack(null);
-        }if (id == R.id.itemRest){
+        }
+        if (id == R.id.itemRest) {
             System.out.println("realizar Reset");
         }
-        if(id == R.id.itemInfo){
+        if (id == R.id.itemInfo) {
             fragmentTransaction2.replace(R.id.contenedorFragment, informacionFragment);
             fragmentTransaction2.addToBackStack(null);
         }
         fragmentTransaction2.commit();
         return super.onOptionsItemSelected(menuItem);
     }
+
+    //metodo de la interface comunica menu con los datos del fragment TiemposFragment
+    @Override
+    public void menu(int tiempoPre, int tiempoTrab, int tiempoDesc, int numCicl, boolean iniciado) {
+        this.cuentaPrepa = tiempoPre;
+        this.cuentaTrabajo = tiempoTrab;
+        this.cuentaDesc = tiempoDesc;
+        this.cuentaCiclos = numCicl;
+        this.iniciado = iniciado;
+        Toast.makeText(this, String.valueOf(cuentaCiclos), Toast.LENGTH_LONG).show();
+
+    }
+
 
 }
