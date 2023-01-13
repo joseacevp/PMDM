@@ -14,7 +14,7 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class MenuColoresFragment extends Fragment {
-
+    protected int color;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -61,4 +61,5 @@ public class MenuColoresFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_menu_colores, container, false);
     }
+
 }

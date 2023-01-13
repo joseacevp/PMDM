@@ -5,6 +5,7 @@ import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,11 +21,34 @@ public class MainActivity extends AppCompatActivity implements ComunicaMenu {
     int cuentaTrabajo;
     int cuentaDesc;
     int cuentaCiclos;
-
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /**
+         * cambia el tema de la aplicacion. Con sharedPreferences guarda un valor dentro de una
+         * etiqueta "VALUES" el cueal es el numero de tema, por defecto el 1
+         */
+
+        sharedPreferences = getSharedPreferences("VALUES", MODE_PRIVATE);
+        int theme = sharedPreferences.getInt("THEME", 1);
+
+        switch (theme) {
+            case 1:
+                setTheme(R.style.Theme_EntrenadorTiempo1);
+                break;
+            case 2:
+                setTheme(R.style.Theme_EntrenadorTiempo2);
+                break;
+            case 3:
+                setTheme(R.style.Theme_EntrenadorTiempo3);
+                break;
+
+        }
+        /**
+         *
+         */
         setContentView(R.layout.activity_main);
         tiemposFragment = new TiemposFragment();
         menuColoresFragment = new MenuColoresFragment();

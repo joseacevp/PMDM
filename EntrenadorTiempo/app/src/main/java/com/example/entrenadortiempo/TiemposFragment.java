@@ -119,8 +119,6 @@ public class TiemposFragment extends Fragment {
                 tvTiempoCiclos.setText(String.valueOf(numCicl = numCicl + 1));
             }
         });
-
-
         /**
          * metodo para iniciar la cuenta atras de la aplicación. Rediciendo el tiempo de cada apartado.
          * @param view
@@ -130,16 +128,13 @@ public class TiemposFragment extends Fragment {
             public void onClick(View view) {
                 /*metodo para iniciar el cuenteo
                  * se inicia en caso que no se haya iniciado antes*/
-
                 Activity estaAdtividad = getActivity();//recupera la actividad actual
                 //usa la interface comunica menu para pasar los datos del fragment al Main
-
                 /*metodo para iniciar el cuenteo
                  * se inicia en caso que no se haya iniciado antes*/
                 if (iniciado == false) {
-                    //iniciado = true;//indica a la variable que a sido iniciado el proceso
-                    INICIO.setText("PARAR");//cambia el estado del boton de INICIO a PARAR
-
+                    iniciado = true;//indica a la variable que a sido iniciado el proceso
+                    //INICIO.setText("PARAR");//cambia el estado del boton de INICIO a PARAR
                     /*variables que reciven los valores originales de los tiempos para
                      * indicarselos despues de la cuenta a tras y recuperar los datos para
                      * el siguiente ciclo*/
@@ -155,7 +150,6 @@ public class TiemposFragment extends Fragment {
                             while (numCicl != 0) {//repite el ciclo tantas veces como se indican en el valor
                                 /*bucle para la cuenta a tras del tiempo Preparación inicia un hilo para
                                  * cambiar el valor del texto de cuenta atras en el hilo principal*/
-
                                 while (tiempoPre >= 0) {
                                     estaAdtividad.runOnUiThread(new Runnable() {
                                         @Override
@@ -216,13 +210,10 @@ public class TiemposFragment extends Fragment {
                                 numCicl--;//un ciclo finalizado
                             }
                             numCicl = cuentaCiclos;////recupera el valor original
-
                         }
                     }).start();/*fin del hilo secundario*/
-
                 } else {
                     iniciado = false;
-
                     INICIO.setText("INICIAR");//cambia el texto del boton
                 }
             }
