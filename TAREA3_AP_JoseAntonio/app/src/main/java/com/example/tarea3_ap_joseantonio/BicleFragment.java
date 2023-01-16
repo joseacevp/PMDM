@@ -60,7 +60,5 @@ public class BicleFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_bicle, container, false);
-        BikesContent bikesContent = new BikesContent();
-        ListAdaptador listAdaptador = new ListAdaptador(bikesContent,this) ;
     }
 }
