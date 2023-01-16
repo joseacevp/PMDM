@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/itemColores"
+        android:title="Temas" />
+    <item
+        android:id="@+id/itemRest"
+        android:title="Resetear" />
+    <item
+        android:id="@+id/itemInfo"
+        android:title="Información" />
+</menu>

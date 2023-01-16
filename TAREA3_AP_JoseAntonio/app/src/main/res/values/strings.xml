@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TAREA3_AP_JoseAntonio</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="Hola_HomeFragment">Soy el Fragment Home</string>
+    <string name="Hola_BicleFragment">Soy el Fragment Bicle</string>
+    <string name="Hola_CalenFragment">Soy el Fragment Calen</string>
+</resources>
