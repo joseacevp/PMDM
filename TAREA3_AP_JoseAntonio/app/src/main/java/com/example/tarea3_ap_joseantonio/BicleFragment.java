@@ -3,10 +3,14 @@ package com.example.tarea3_ap_joseantonio;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +27,11 @@ public class BicleFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    //referencia a //
+
+    RecyclerView recycleBicicletas;
+    ArrayList<Bikes> listaBicicletas;
 
     public BicleFragment() {
         // Required empty public constructor
@@ -58,7 +67,26 @@ public class BicleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bicle, container, false);
+        View vista =inflater.inflate(R.layout.fragment_bicle, container, false);
+        listaBicicletas=new ArrayList<>();
+
+        recycleBicicletas= vista.findViewById(R.id.idRecicle);
+
+        recycleBicicletas.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        llenarLista();
+
+        Adaptador adaptador= new Adaptador(listaBicicletas);
+        recycleBicicletas.setAdapter(adaptador);
+        return vista;
+    }
+
+    private void llenarLista() {
+
+        listaBicicletas.add(new Bikes(R.drawable.bike01,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
+        listaBicicletas.add(new Bikes(R.drawable.bike01,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
+        listaBicicletas.add(new Bikes(R.drawable.bike01,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
+        listaBicicletas.add(new Bikes(R.drawable.bike01,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
+        listaBicicletas.add(new Bikes(R.drawable.bike01,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
     }
 }
