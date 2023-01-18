@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -78,6 +79,17 @@ public class BicleFragment extends Fragment {
 
         Adaptador adaptador= new Adaptador(listaBicicletas);
         recycleBicicletas.setAdapter(adaptador);
+        adaptador.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity().getApplicationContext(),
+                        "SELECCION: "+listaBicicletas.get
+                                (recycleBicicletas.getChildAdapterPosition(view))
+                                .getDescripcion(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         return vista;
     }
 
