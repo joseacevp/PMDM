@@ -84,9 +84,9 @@ public class BicleFragment extends Fragment {
     private void llenarLista() {
 
         listaBicicletas.add(new Bikes(R.drawable.bike01,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
-        listaBicicletas.add(new Bikes(R.drawable.bike01,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
-        listaBicicletas.add(new Bikes(R.drawable.bike01,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
-        listaBicicletas.add(new Bikes(R.drawable.bike01,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
-        listaBicicletas.add(new Bikes(R.drawable.bike01,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
+        listaBicicletas.add(new Bikes(R.drawable.bike02,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
+        listaBicicletas.add(new Bikes(R.drawable.bike03,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
+        listaBicicletas.add(new Bikes(R.drawable.bike04,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
+        listaBicicletas.add(new Bikes(R.drawable.bike05,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
     }
 }

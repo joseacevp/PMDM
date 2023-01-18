@@ -1,5 +1,6 @@
 package com.example.tarea3_ap_joseantonio;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +63,21 @@ public class CalenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_calen, container, false);
+        View vista =inflater.inflate(R.layout.fragment_calen, container, false);
+
+        Calendar calendario = Calendar.getInstance();
+        int anio = calendario.get(Calendar.YEAR);
+        int mes = calendario.get(Calendar.MONTH);
+        int dia = calendario.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dpd = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+                String fecha= dayOfMonth+"/"+ month+1+"/"+year;
+                System.out.println(fecha);
+            }
+        },anio,mes,dia);
+        dpd.show();
+        return vista;
     }
 }
