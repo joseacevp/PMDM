@@ -6,6 +6,7 @@ android {
     namespace 'com.example.tarea3_ap_joseantonio'
     compileSdk 33
 
+
     defaultConfig {
         applicationId "com.example.tarea3_ap_joseantonio"
         minSdk 31
