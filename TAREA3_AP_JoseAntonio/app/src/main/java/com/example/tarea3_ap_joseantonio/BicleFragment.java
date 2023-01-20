@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,7 +32,7 @@ public class BicleFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    String fecha;
     //referencia a //
 
     RecyclerView recycleBicicletas;
@@ -65,6 +67,12 @@ public class BicleFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
+                @Override
+                public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                     fecha = result.getString("fechaKey");
+                }
+            });
         }
     }
 
@@ -94,7 +102,7 @@ public class BicleFragment extends Fragment {
                 intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"email@email.com"});
                 intent.putExtra(Intent.EXTRA_SUBJECT,"Alquiler de Bicicleta");
                 intent.putExtra(Intent.EXTRA_TEXT,"Hola me encantaria alquilar " +
-                        "tu maravillosa bicicleta el día "+ "dia de calendario" + "\n Un saludo");
+                        "tu maravillosa bicicleta el día "+ fecha + "\n Un saludo");
                 startActivity(intent);
 
             }

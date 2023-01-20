@@ -80,6 +80,11 @@ public class CalenFragment extends Fragment {
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
                 String fecha= dayOfMonth+"/"+ month+1+"/"+year;
                 //System.out.println(fecha);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("fechaKey",fecha);
+                getParentFragmentManager().setFragmentResult("key",bundle);
+
                 Toast.makeText(getContext(),fecha, Toast.LENGTH_LONG).show();
                 //enviar dato a mailFragment
                 Intent i = new Intent(getContext(), MainActivity.class);
