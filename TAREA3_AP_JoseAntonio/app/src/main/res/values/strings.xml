@@ -11,4 +11,6 @@ Esta versión beta de ShareMyBike permite alquilar bicicletas de particulares en
 </string>
     <string name="Hola_BicleFragment">Soy el Fragment Bicle</string>
     <string name="Hola_CalenFragment">Soy el Fragment Calen</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

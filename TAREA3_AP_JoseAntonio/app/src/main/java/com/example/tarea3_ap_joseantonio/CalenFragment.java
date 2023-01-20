@@ -1,14 +1,19 @@
 package com.example.tarea3_ap_joseantonio;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-
+import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -27,7 +32,7 @@ public class CalenFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    HomeFragment homeFragment = new HomeFragment();
     public CalenFragment() {
         // Required empty public constructor
     }
@@ -74,10 +79,15 @@ public class CalenFragment extends Fragment {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
                 String fecha= dayOfMonth+"/"+ month+1+"/"+year;
-                System.out.println(fecha);
+                //System.out.println(fecha);
+                Toast.makeText(getContext(),fecha, Toast.LENGTH_LONG).show();
+                //enviar dato a mailFragment
+                Intent i = new Intent(getContext(), MainActivity.class);
+                startActivity(i);
             }
         },anio,mes,dia);
         dpd.show();
         return vista;
     }
+
 }

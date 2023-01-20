@@ -1,5 +1,7 @@
 package com.example.tarea3_ap_joseantonio;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -34,6 +36,7 @@ public class BicleFragment extends Fragment {
     RecyclerView recycleBicicletas;
     ArrayList<Bikes> listaBicicletas;
 
+    CalenFragment calenFragment = new CalenFragment();
     public BicleFragment() {
         // Required empty public constructor
     }
@@ -82,11 +85,20 @@ public class BicleFragment extends Fragment {
         adaptador.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity().getApplicationContext(),
-                        "SELECCION: "+listaBicicletas.get
-                                (recycleBicicletas.getChildAdapterPosition(view))
-                                .getDescripcion(),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity().getApplicationContext(),
+//                        "SELECCION: "+listaBicicletas.get
+//                                (recycleBicicletas.getChildAdapterPosition(view))
+//                                .getDescripcion(),Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"));
+                intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"email@email.com"});
+                intent.putExtra(Intent.EXTRA_SUBJECT,"Alquiler de Bicicleta");
+                intent.putExtra(Intent.EXTRA_TEXT,"Hola me encantaria alquilar " +
+                        "tu maravillosa bicicleta el día "+ "dia de calendario" + "\n Un saludo");
+                startActivity(intent);
+
             }
+
         });
 
 
