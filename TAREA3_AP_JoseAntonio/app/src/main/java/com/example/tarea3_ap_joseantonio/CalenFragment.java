@@ -23,7 +23,8 @@ import java.util.Calendar;
  * create an instance of this fragment.
  */
 public class CalenFragment extends Fragment {
-
+    Bundle bundle = new Bundle();
+    String fecha;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -78,20 +79,20 @@ public class CalenFragment extends Fragment {
         DatePickerDialog dpd = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                String fecha= dayOfMonth+"/"+ month+1+"/"+year;
+                fecha= dayOfMonth+"/"+ (month+1)+"/"+year;
                 //System.out.println(fecha);
 
-                Bundle bundle = new Bundle();
+
                 bundle.putString("fechaKey",fecha);
                 getParentFragmentManager().setFragmentResult("key",bundle);
 
                 Toast.makeText(getContext(),fecha, Toast.LENGTH_LONG).show();
                 //enviar dato a mailFragment
-                Intent i = new Intent(getContext(), MainActivity.class);
-                startActivity(i);
+
             }
         },anio,mes,dia);
         dpd.show();
+
         return vista;
     }
 
