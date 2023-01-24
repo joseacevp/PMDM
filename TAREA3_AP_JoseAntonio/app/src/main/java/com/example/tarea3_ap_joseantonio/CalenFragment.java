@@ -86,7 +86,7 @@ public class CalenFragment extends Fragment {
                 bundle.putString("fechaKey",fecha);
                 getParentFragmentManager().setFragmentResult("key",bundle);
 
-                Toast.makeText(getContext(),fecha, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(),fecha, Toast.LENGTH_LONG).show();
                 //enviar dato a mailFragment
 
             }

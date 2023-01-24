@@ -7,7 +7,14 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/azul"
+        android:textSize="25dp"
+        android:textColor="@color/white"
+        android:padding="5dp"
+        android:text=" Selecciona una fecha"/>
 
 
 </FrameLayout>
