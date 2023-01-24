@@ -1,14 +1,19 @@
 package com.example.tarea3_ap_joseantonio;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-
+import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -18,7 +23,8 @@ import java.util.Calendar;
  * create an instance of this fragment.
  */
 public class CalenFragment extends Fragment {
-
+    Bundle bundle = new Bundle();
+    String fecha;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -27,7 +33,7 @@ public class CalenFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    HomeFragment homeFragment = new HomeFragment();
     public CalenFragment() {
         // Required empty public constructor
     }
@@ -73,11 +79,21 @@ public class CalenFragment extends Fragment {
         DatePickerDialog dpd = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                String fecha= dayOfMonth+"/"+ month+1+"/"+year;
-                System.out.println(fecha);
+                fecha= dayOfMonth+"/"+ (month+1)+"/"+year;
+                //System.out.println(fecha);
+
+
+                bundle.putString("fechaKey",fecha);
+                getParentFragmentManager().setFragmentResult("key",bundle);
+
+                //Toast.makeText(getContext(),fecha, Toast.LENGTH_LONG).show();
+                //enviar dato a mailFragment
+
             }
         },anio,mes,dia);
         dpd.show();
+
         return vista;
     }
+
 }
