@@ -27,8 +27,7 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-
+    private String fecha;
 
 
     public HomeFragment() {
@@ -70,15 +69,16 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-         View vista = inflater.inflate(R.layout.fragment_home, container, false);
-//        getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
-//            @Override
-//            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-//                fecha = result.getString("fechaKey");
-//                fecha = String.valueOf((TextView) vista.findViewById(R.id.textoSelecciona));
-//
-//            }
-//        });
+        View vista = inflater.inflate(R.layout.fragment_home, container, false);
+        getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                fecha = result.getString("fechaKey");
+                TextView textView = vista.findViewById(R.id.textoSelecciona);
+                textView.setText("Has seleccionado la fecha: " + fecha + " para alquilar una " +
+                        "bicicleta ");
+            }
+        });
         return vista;
     }
 }
