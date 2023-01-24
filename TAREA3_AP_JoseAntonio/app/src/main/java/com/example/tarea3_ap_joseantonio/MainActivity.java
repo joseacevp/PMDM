@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+//main
 @SuppressWarnings("deprecation")
 public class MainActivity extends AppCompatActivity {
     HomeFragment homeFragment = new HomeFragment();
