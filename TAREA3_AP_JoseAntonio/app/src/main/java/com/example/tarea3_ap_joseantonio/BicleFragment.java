@@ -11,14 +11,19 @@ import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -69,17 +74,43 @@ public class BicleFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //metodo para leer el archivo bicicletas.json
 
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        try {
+            String jsonFileContent = Utiles.leerJson(getActivity().getApplicationContext(), "bikeList.json");
+            JSONArray jsonArray = new JSONArray(jsonFileContent);
 
+            for (int i=0 ; i < jsonArray.length();i++)
+
+            {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String owner= jsonObject.getString("owner");
+                String email= jsonObject.getString("email");
+                String city= jsonObject.getString("city");
+                String description= jsonObject.getString("description");
+                String country= jsonObject.getString("country");
+                String location= jsonObject.getString("location");
+                String image= jsonObject.getString("image");
+                Log.d("nombre",owner);
+                System.out.println(owner);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+
+
 
         getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
             @Override
@@ -137,4 +168,5 @@ public class BicleFragment extends Fragment {
         listaBicicletas.add(new Bikes(R.drawable.bike04,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
         listaBicicletas.add(new Bikes(R.drawable.bike05,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
     }
+
 }
