@@ -9,30 +9,68 @@
     android:orientation="horizontal"
     >
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imagenId"
-        android:src="@drawable/bike02"
-        android:layout_marginTop="15dp"
+
+        android:id="@+id/imagen_bici"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/bike01"
 
         />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/localidad"
+            android:id="@+id/owner"
             android:layout_marginTop="15dp"
             android:text="LOCALIDAD"
             />
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/descripcion"
-            android:text="Descripcion de la Bicicleta"
+            android:layout_height="match_parent"
+            android:id="@+id/email"
+            android:layout_marginTop="15dp"
+            android:text="LOCALIDAD"
             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/city"
+            android:layout_marginTop="15dp"
+            android:text="LOCALIDAD"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/descripcion"
+            android:layout_marginTop="15dp"
+            android:text="LOCALIDAD"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/country"
+            android:layout_marginTop="15dp"
+            android:text="LOCALIDAD"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/location"
+            android:layout_marginTop="15dp"
+            android:text="LOCALIDAD"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/image"
+            android:layout_marginTop="15dp"
+            android:text="LOCALIDAD"
+            />
+
 
     </LinearLayout>
 
@@ -42,6 +80,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/mail"
+        android:layout_marginEnd="10dp"
 
         />
 </LinearLayout>

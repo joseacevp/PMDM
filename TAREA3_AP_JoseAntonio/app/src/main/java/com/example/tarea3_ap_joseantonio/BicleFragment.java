@@ -15,13 +15,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -74,8 +71,15 @@ public class BicleFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //metodo para leer el archivo bicicletas.json
 
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        //metodo para leer el archivo bicicletas.json
+        ArrayList<Bicicleta> listaBicicletas = new ArrayList<>();
         try {
             String jsonFileContent = Utiles.leerJson(getActivity().getApplicationContext(), "bikeList.json");
             JSONArray jsonArray = new JSONArray(jsonFileContent);
@@ -92,7 +96,9 @@ public class BicleFragment extends Fragment {
                 String location= jsonObject.getString("location");
                 String image= jsonObject.getString("image");
                 Log.d("nombre",owner);
-                System.out.println(owner);
+                Bicicleta bicicleta = new Bicicleta(owner,email,city,description,country,location,image);
+                listaBicicletas.add(bicicleta);
+
             }
 
         } catch (IOException e) {
@@ -100,13 +106,6 @@ public class BicleFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
 
 
 
@@ -120,7 +119,7 @@ public class BicleFragment extends Fragment {
             }
         });
         View vista =inflater.inflate(R.layout.fragment_bicle, container, false);
-        listaBicicletas=new ArrayList<>();
+
 
         recycleBicicletas= vista.findViewById(R.id.idRecicle);
 
@@ -162,11 +161,11 @@ public class BicleFragment extends Fragment {
 
     private void llenarLista() {
 
-        listaBicicletas.add(new Bikes(R.drawable.bike01,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
-        listaBicicletas.add(new Bikes(R.drawable.bike02,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
-        listaBicicletas.add(new Bikes(R.drawable.bike03,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
-        listaBicicletas.add(new Bikes(R.drawable.bike04,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
-        listaBicicletas.add(new Bikes(R.drawable.bike05,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
+//        listaBicicletas.add(new Bikes(R.drawable.bike01,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
+//        listaBicicletas.add(new Bikes(R.drawable.bike02,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
+//        listaBicicletas.add(new Bikes(R.drawable.bike03,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
+//        listaBicicletas.add(new Bikes(R.drawable.bike04,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
+//        listaBicicletas.add(new Bikes(R.drawable.bike05,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
     }
 
 }
