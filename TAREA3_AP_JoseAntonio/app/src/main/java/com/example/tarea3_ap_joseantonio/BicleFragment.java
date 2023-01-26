@@ -42,7 +42,6 @@ public class BicleFragment extends Fragment {
     //referencia a //
 
     RecyclerView recycleBicicletas;
-    ArrayList<Bikes> listaBicicletas;
 
     CalenFragment calenFragment = new CalenFragment();
     public BicleFragment() {
@@ -125,8 +124,6 @@ public class BicleFragment extends Fragment {
 
         recycleBicicletas.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        llenarLista();
-
         Adaptador adaptador= new Adaptador(listaBicicletas);
         recycleBicicletas.setAdapter(adaptador);
 
@@ -154,18 +151,6 @@ public class BicleFragment extends Fragment {
     public void onViewCreated(@NonNull View bicicletaFragment, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(bicicletaFragment, savedInstanceState);
 
-
-
-
-    }
-
-    private void llenarLista() {
-
-//        listaBicicletas.add(new Bikes(R.drawable.bike01,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
-//        listaBicicletas.add(new Bikes(R.drawable.bike02,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
-//        listaBicicletas.add(new Bikes(R.drawable.bike03,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
-//        listaBicicletas.add(new Bikes(R.drawable.bike04,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
-//        listaBicicletas.add(new Bikes(R.drawable.bike05,"Localizacion","Descripcion de la bicicleta",R.drawable.mail));
     }
 
 }
