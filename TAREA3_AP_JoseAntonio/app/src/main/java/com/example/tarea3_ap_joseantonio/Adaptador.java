@@ -1,6 +1,5 @@
 package com.example.tarea3_ap_joseantonio;
 
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +15,9 @@ public class Adaptador  extends RecyclerView.Adapter<Adaptador.ViewHolderDatos>
 implements View.OnClickListener
 {
 
-    ArrayList<Bikes> listDatos;
+    ArrayList<Bicicleta> listDatos;
     private View.OnClickListener listener;
-    public Adaptador(ArrayList<Bikes> listDatos) {
+    public Adaptador(ArrayList<Bicicleta> listDatos) {
         this.listDatos = listDatos;
     }
 
@@ -35,17 +34,27 @@ implements View.OnClickListener
 
     public class ViewHolderDatos extends RecyclerView.ViewHolder {
 
-        ImageView imagenBici;
-        TextView localidad;
-        TextView descripcion;
-        ImageView icono;
+
+        TextView owner;
+        TextView email;
+        TextView city;
+        TextView description;
+        TextView country;
+        TextView location;
+        TextView image;
+
 
         public ViewHolderDatos(@NonNull View itemView) {
             super(itemView);
-            imagenBici=itemView.findViewById(R.id.imagenId);
-            localidad=itemView.findViewById(R.id.localidad);
-            descripcion=itemView.findViewById(R.id.descripcion);
-            icono=itemView.findViewById(R.id.icono_carta);
+
+            owner=itemView.findViewById(R.id.owner);
+            email=itemView.findViewById(R.id.email);
+            city=itemView.findViewById(R.id.city);
+            description=itemView.findViewById(R.id.descripcion);
+            country=itemView.findViewById(R.id.country);
+            location=itemView.findViewById(R.id.location);
+            image=itemView.findViewById(R.id.image);
+
 
         }
     }
@@ -63,10 +72,16 @@ implements View.OnClickListener
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderDatos holder, int position) {
-       holder.imagenBici.setImageResource(listDatos.get(position).getImagen());
-       holder.localidad.setText(listDatos.get(position).getLocalidad());
-       holder.descripcion.setText(listDatos.get(position).getDescripcion());
-       holder.icono.setImageResource(listDatos.get(position).getIcono());
+
+       holder.owner.setText(listDatos.get(position).getOwner());
+       holder.email.setText(listDatos.get(position).getEmail());
+       holder.city.setText(listDatos.get(position).getCity());
+       holder.description.setText(listDatos.get(position).getDescription());
+       holder.country.setText(listDatos.get(position).getCountry());
+       holder.location.setText(listDatos.get(position).getLocation());
+       holder.image.setText(listDatos.get(position).getImage());
+
+
     }
 
     @Override
