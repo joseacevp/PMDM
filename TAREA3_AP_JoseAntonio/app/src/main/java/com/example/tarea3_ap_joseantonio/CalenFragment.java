@@ -1,19 +1,15 @@
 package com.example.tarea3_ap_joseantonio;
 
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -25,6 +21,8 @@ import java.util.Calendar;
 public class CalenFragment extends Fragment {
     Bundle bundle = new Bundle();
     String fecha;
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,6 +32,7 @@ public class CalenFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     HomeFragment homeFragment = new HomeFragment();
+
     public CalenFragment() {
         // Required empty public constructor
     }
@@ -59,18 +58,40 @@ public class CalenFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View vista =inflater.inflate(R.layout.fragment_calen, container, false);
+        View vista = inflater.inflate(R.layout.fragment_calen, container, false);
+        Button boton = vista.findViewById(R.id.botonFecha);
+        if (fecha == null) {
+            boton.setVisibility(View.INVISIBLE);
+            elegirFecha(vista);
+        } else {
+            boton.setVisibility(View.VISIBLE);
 
+        }
+        boton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                elegirFecha( vista);
+
+            }
+
+        });
+            return vista;
+    }
+
+
+    public void elegirFecha(View view) {
         Calendar calendario = Calendar.getInstance();
         int anio = calendario.get(Calendar.YEAR);
         int mes = calendario.get(Calendar.MONTH);
@@ -79,21 +100,17 @@ public class CalenFragment extends Fragment {
         DatePickerDialog dpd = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                fecha= dayOfMonth+"/"+ (month+1)+"/"+year;
+                fecha = dayOfMonth + "/" + (month + 1) + "/" + year;
                 //System.out.println(fecha);
-
-
-                bundle.putString("fechaKey",fecha);
-                getParentFragmentManager().setFragmentResult("key",bundle);
+                bundle.putString("fechaKey", fecha);
+                getParentFragmentManager().setFragmentResult("key", bundle);
 
                 //Toast.makeText(getContext(),fecha, Toast.LENGTH_LONG).show();
                 //enviar dato a mailFragment
 
             }
-        },anio,mes,dia);
+        }, anio, mes, dia);
         dpd.show();
-
-        return vista;
     }
 
 }
