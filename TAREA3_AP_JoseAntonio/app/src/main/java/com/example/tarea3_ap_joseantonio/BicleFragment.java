@@ -22,6 +22,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,8 +41,9 @@ public class BicleFragment extends Fragment {
     private String mParam2;
     String fecha;
     //referencia a //
-
+    View vista;
     RecyclerView recycleBicicletas;
+    RecyclerView.Adapter miAdaptador;
 
     CalenFragment calenFragment = new CalenFragment();
 
@@ -78,33 +80,34 @@ public class BicleFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View vista = inflater.inflate(R.layout.fragment_bicle, container, false);
 
         //metodo para leer el archivo bicicletas.json
-        ArrayList<Bicicleta> listaBicicletas = new ArrayList<>();
-        try {
-            String jsonFileContent = Utiles.leerJson(getActivity().getApplicationContext(), "bikeList.json");
-            JSONArray jsonArray = new JSONArray(jsonFileContent);
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                String owner = jsonObject.getString("owner");
-                String email = jsonObject.getString("email");
-                String city = jsonObject.getString("city");
-                String description = jsonObject.getString("description");
-                String country = jsonObject.getString("country");
-                String location = jsonObject.getString("location");
-                String image = jsonObject.getString("image");
-                Log.d("nombre", owner);
-                Bicicleta bicicleta = new Bicicleta(owner, email, city, description, country, location, image);
-                listaBicicletas.add(bicicleta);
-
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//
+//        try {
+//            String jsonFileContent = Utiles.leerJson(getActivity().getApplicationContext(), "bikeList.json");
+//            JSONArray jsonArray = new JSONArray(jsonFileContent);
+//
+//            for (int i = 0; i < jsonArray.length(); i++) {
+//                JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                String owner = jsonObject.getString("owner");
+//                String email = jsonObject.getString("email");
+//                String city = jsonObject.getString("city");
+//                String description = jsonObject.getString("description");
+//                String country = jsonObject.getString("country");
+//                String location = jsonObject.getString("location");
+//                String image = jsonObject.getString("image");
+//                Log.d("nombre", owner);
+//                Bicicleta bicicleta = new Bicicleta(owner, email, city, description, country, location, image);
+//                listaBicicletas.add(bicicleta);
+//
+//            }
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
 
         getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
@@ -114,30 +117,24 @@ public class BicleFragment extends Fragment {
 
             }
         });
-        View vista = inflater.inflate(R.layout.fragment_bicle, container, false);
 
 
-        recycleBicicletas = vista.findViewById(R.id.idRecicle);
 
-        recycleBicicletas.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        Adaptador adaptador = new Adaptador(listaBicicletas);
-        recycleBicicletas.setAdapter(adaptador);
-
-        adaptador.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("mailto:"));
-                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"email@email.com"});
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Alquiler de Bicicleta");
-                intent.putExtra(Intent.EXTRA_TEXT, "Hola me encantaria alquilar " + "tu maravillosa bicicleta el día " + fecha + "\n Un saludo");
-                startActivity(intent);
-
-            }
-
-        });
+//        adaptador.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent intent = new Intent(Intent.ACTION_SENDTO);
+//                intent.setData(Uri.parse("mailto:"));
+//                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"email@email.com"});
+//                intent.putExtra(Intent.EXTRA_SUBJECT, "Alquiler de Bicicleta");
+//                intent.putExtra(Intent.EXTRA_TEXT, "Hola me encantaria alquilar " + "tu maravillosa bicicleta el día " + fecha + "\n Un saludo");
+//                startActivity(intent);
+//
+//            }
+//
+//        });
 
 
         return vista;
@@ -146,6 +143,19 @@ public class BicleFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View bicicletaFragment, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(bicicletaFragment, savedInstanceState);
+        BikesContent.clearBikes();
+        BikesContent.loadBikesFromJSON(getContext());
+
+
+
+
+        //recycleBicicletas = vista.findViewById(R.id.idRecicle);
+
+        recycleBicicletas.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        miAdaptador = new Adaptador(BikesContent.ITEMS);
+        recycleBicicletas.setAdapter(miAdaptador);
+
 
     }
 
