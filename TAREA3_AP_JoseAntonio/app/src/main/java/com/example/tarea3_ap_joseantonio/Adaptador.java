@@ -10,43 +10,44 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Adaptador  extends RecyclerView.Adapter<Adaptador.ViewHolderDatos>
-implements View.OnClickListener
+
 {
+//
+//    ArrayList<Bicicleta> listDatos;
+//    private View.OnClickListener listener;
 
-    ArrayList<Bicicleta> listDatos;
-    private View.OnClickListener listener;
-    public Adaptador(ArrayList<Bicicleta> listDatos) {
-        this.listDatos = listDatos;
-    }
-
-    public void setOnClickListener(View.OnClickListener listener){
-        this.listener=listener;
-    }
-
-    @Override
-    public void onClick(View view) {
-        if (listener!=null){
-            listener.onClick(view);
-        }
-    }
-
-    public class ViewHolderDatos extends RecyclerView.ViewHolder {
+    private List<BikesContent.Bike> localDataSet;
+    private BicleFragment saInstance;
 
 
-        TextView owner;
-        TextView email;
-        TextView city;
-        TextView description;
-        TextView country;
-        TextView location;
-        TextView image;
+//
+//    public void setOnClickListener(View.OnClickListener listener){
+//        this.listener=listener;
+//    }
+
+
+
+    public static class ViewHolderDatos extends RecyclerView.ViewHolder {
+
+        public final View mView;
+        public BikesContent.Bike mItem;
+
+        public final TextView owner;
+        public final TextView email;
+        public final  TextView city;
+        public final TextView description;
+        public final  TextView country;
+        public final  TextView location;
+        public final ImageView image;
 
 
         public ViewHolderDatos(@NonNull View itemView) {
             super(itemView);
 
+            mView = itemView;
             owner=itemView.findViewById(R.id.owner);
             email=itemView.findViewById(R.id.email);
             city=itemView.findViewById(R.id.city);
@@ -59,34 +60,42 @@ implements View.OnClickListener
         }
     }
 
+    public Adaptador(List<BikesContent.Bike> dataSet, BicleFragment bicleFragment) {
+       localDataSet = dataSet;
+       saInstance = bicleFragment;
+  }
+
     @NonNull
     @Override
-    public ViewHolderDatos onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_list,null,false);
-
-        view.setOnClickListener(this);
-
-        return new ViewHolderDatos(view);
+    public ViewHolderDatos onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.item_list,viewGroup,false);
+    return new ViewHolderDatos(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolderDatos holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolderDatos holder, final int position) {
 
-       holder.owner.setText(listDatos.get(position).getOwner());
-       holder.email.setText(listDatos.get(position).getEmail());
-       holder.city.setText(listDatos.get(position).getCity());
-       holder.description.setText(listDatos.get(position).getDescription());
-       holder.country.setText(listDatos.get(position).getCountry());
-       holder.location.setText(listDatos.get(position).getLocation());
-       holder.image.setText(listDatos.get(position).getImage());
+       holder.owner.setText(localDataSet.get(position).getOwner());
+       holder.email.setText(localDataSet.get(position).getEmail());
+       holder.city.setText(localDataSet.get(position).getCity());
+       holder.description.setText(localDataSet.get(position).getDescription());
+       holder.country.setText(localDataSet.get(position).getLocation());
+       holder.location.setText(localDataSet.get(position).getLocation());
+       holder.image.setImageBitmap(localDataSet.get(position).getPhoto());
 
+//       holder.mView.setOnClickListener(new View.OnClickListener() {
+//           @Override
+//           public void onClick(View v) {
+//               saInstance.terminar(holder.mItem);
+//           }
+//       });
 
     }
 
     @Override
     public int getItemCount() {
-        return listDatos.size();
+        return localDataSet.size();
     }
 
 
