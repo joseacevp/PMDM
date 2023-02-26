@@ -10,16 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Adaptador  extends RecyclerView.Adapter<Adaptador.ViewHolderDatos>
 implements View.OnClickListener
 {
 
-   private List<BikesContent.Bike> listDatos;
+    ArrayList<Bicicleta> listDatos;
     private View.OnClickListener listener;
-
-    public Adaptador(List<BikesContent.Bike> listDatos) {
+    public Adaptador(ArrayList<Bicicleta> listDatos) {
         this.listDatos = listDatos;
     }
 
@@ -36,15 +34,14 @@ implements View.OnClickListener
 
     public class ViewHolderDatos extends RecyclerView.ViewHolder {
 
-        public BikesContent.Bike mItem;
-        public final View mView;
-        public TextView owner;
-        public TextView email;
-        public  TextView city;
-        public TextView description;
-        public TextView country;
-        public TextView location;
-        public ImageView image;
+
+        TextView owner;
+        TextView email;
+        TextView city;
+        TextView description;
+        TextView country;
+        TextView location;
+        TextView image;
 
 
         public ViewHolderDatos(@NonNull View itemView) {
@@ -59,15 +56,14 @@ implements View.OnClickListener
             image=itemView.findViewById(R.id.image);
 
 
-            mView = itemView;
         }
     }
 
-
+    @NonNull
     @Override
-    public ViewHolderDatos onCreateViewHolder( ViewGroup parent, int viewType) {
+    public ViewHolderDatos onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_list,parent,false);
+                .inflate(R.layout.item_list,null,false);
 
         view.setOnClickListener(this);
 
@@ -76,14 +72,15 @@ implements View.OnClickListener
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderDatos holder, int position) {
-        holder.mItem = listDatos.get(position);
+
        holder.owner.setText(listDatos.get(position).getOwner());
        holder.email.setText(listDatos.get(position).getEmail());
        holder.city.setText(listDatos.get(position).getCity());
        holder.description.setText(listDatos.get(position).getDescription());
-       //holder.country.setText(listDatos.get(position).get);
+       holder.country.setText(listDatos.get(position).getCountry());
        holder.location.setText(listDatos.get(position).getLocation());
-       holder.image.setImageBitmap(listDatos.get(position).getPhoto());
+       holder.image.setText(listDatos.get(position).getImage());
+
 
     }
 

@@ -1,4 +1,4 @@
-package com.example.tarea3_ap_joseantonio;
+package com.example.sharemybike;
 
 import android.content.Context;
 import android.graphics.Bitmap;

@@ -1,5 +1,4 @@
-{
-  "bike_list": [
+ [
     {
       "owner": "Filipo Inzaghi",
       "email": "filipo@level10.com",
@@ -49,4 +48,3 @@
       "description": "Enjoy Argentinian Switzerland with a great bike",
       "image": "bike06.jpg"}
   ]
-}
