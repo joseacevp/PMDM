@@ -1,0 +1,52 @@
+{
+  "bike_list": [
+    {
+      "owner": "Filipo Inzaghi",
+      "email": "filipo@level10.com",
+      "city": "Nápoles",
+      "country": "Italy",
+      "location": "Via Filippo Carcano,26",
+      "description": "Nice bike, 27' wheels",
+      "image": "bike01.jpg"},
+    {
+      "owner": "Juan Damián Villanueva",
+      "email": "juanito@hotmail.com",
+      "city": "Albacete",
+      "country": "Spain",
+      "location": "Avenida de la Estación, 2",
+      "description": "Always garaged, never dropped or ridden in the rain",
+      "image": "bike02.jpg"},
+    {
+      "owner": "Verónica Rabanal",
+      "email": "vero@outlook.es",
+      "city": "Valencia de Don Juan",
+      "description": "Sturdy bike, perfect for mountains",
+      "country": "Spain",
+      "location": "Calle Cromer 1",
+      "image": "bike03.jpg"},
+    {
+      "owner": "Juan Luis Escribano",
+      "email": "jl@protonmail.com",
+      "city": "Cuenca",
+      "country": "Spain",
+      "description": "Small bike for long rides",
+      "location": "Avenida del Zarajo, 10",
+      "image": "bike04.jpg"},
+    {
+      "owner": "Antonio Tristón",
+      "email":"atriston@gmail.com",
+      "city": "Santiago Atitlán",
+      "country": "Guatemala",
+      "location": "Calle Cerro de Oro, 8",
+      "description": "Have some craigh with a reliable bike",
+      "image": "bike05.jpg"},
+    {
+      "owner": "Marcela del Horno",
+      "email":"maho@yahoo.es",
+      "city": "Bariloche",
+      "country": "Argentina",
+      "location": "Vía del Chocolate, 5",
+      "description": "Enjoy Argentinian Switzerland with a great bike",
+      "image": "bike06.jpg"}
+  ]
+}
