@@ -3,28 +3,33 @@ package com.example.tarea3segundo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.Toast;
+
+import com.example.tarea3segundo.databinding.ActivityCalBinding;
 
 import java.util.Calendar;
 
-public class CalActivity extends AppCompatActivity implements View.OnClickListener{
+public class CalActivity extends AppCompatActivity {
     Bundle bundle = new Bundle();
     String fecha;
+    private ActivityCalBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cal);
+        binding = ActivityCalBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
 
-        Button boton = this.findViewById(R.id.botonFecha);
         if (fecha == null) {
-            boton.setVisibility(View.INVISIBLE);
+            binding.botonFecha.setVisibility(View.INVISIBLE);
             elegirFecha();
         } else {
-            boton.setVisibility(View.VISIBLE);
+            binding.botonFecha.setVisibility(View.VISIBLE);
 
         }
 
@@ -41,18 +46,21 @@ public class CalActivity extends AppCompatActivity implements View.OnClickListen
                 fecha = dayOfMonth + "/" + (month + 1) + "/" + year;
                 //System.out.println(fecha);
                 bundle.putString("fechaKey", fecha);
-               // getApplicationContext().("key", bundle);
+               //getApplicationContext().("key", bundle);
 
-                //Toast.makeText(getContext(),fecha, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),fecha, Toast.LENGTH_LONG).show();
                 //enviar dato a mailFragment
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                intent.putExtra("fechaKey",fecha);
+                // Los resultados se devuelven a través de un Intent invocando al método setResult()
+                setResult(RESULT_OK,intent);
 
+                // Se finaliza la actividad invocando al método finish()
+                //finish();
             }
         }, anio, mes, dia);
         dpd.show();
     }
 
-    @Override
-    public void onClick(View v) {
 
-    }
 }

@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ActivityMainBinding binding;
     public static final int SELECCIONA_BICI = 1;
+    public static final int SELECCIONA_FECHA = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             return true;
                         case R.id.calendarioFragment:
                             intent = new Intent(getApplicationContext(),CalActivity.class);
-                            startActivity(intent);
+                            startActivityForResult(intent,SELECCIONA_FECHA);
 
                             return true;
                     }
@@ -78,11 +79,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
 
         // Si se seleccionó correctamente el producto ...
-        if (requestCode == SELECCIONA_BICI) {
+        if (requestCode == SELECCIONA_FECHA) {
             if (resultCode == RESULT_OK) {
                 // El resultado se obtiene a través del objeto Intent
                 binding.textView.setText("Se ha seleccionado:\n"
-                        + data.getStringExtra("PRODUCTO"));
+                        + data.getStringExtra("fechaKey"));
             }
         }
     }
