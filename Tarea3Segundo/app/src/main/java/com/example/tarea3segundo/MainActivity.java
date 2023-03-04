@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ActivityMainBinding binding;
     public static final int SELECCIONA_BICI = 1;
     public static final int SELECCIONA_FECHA = 1;
+    public static final int SELECCIONA_FECHA2 = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +39,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     switch(item.getItemId()) {
                         case R.id.homeFragment:
-
+                            // PASO 1
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivityForResult(intent,SELECCIONA_BICI);
                             return true;
                         case R.id.biciFragment:
 
                             intent = new Intent(getApplicationContext(), BiciActivity.class);
-                            startActivityForResult(intent,SELECCIONA_BICI);
+                            startActivityForResult(intent,SELECCIONA_FECHA2);
                             return true;
                         case R.id.calendarioFragment:
                             intent = new Intent(getApplicationContext(),CalActivity.class);
@@ -62,10 +63,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         // Objeto Intent: intención de arrancar una actividad del tipo SegundaActividad
-        Intent intent = new Intent(this, BiciActivity.class);
+        //Intent intent = new Intent(this, BiciActivity.class);
 
         // Llamada a la actividad SegundaActivity para que se cargue en pantalla
-        startActivityForResult(intent,SELECCIONA_BICI);
+        //startActivityForResult(intent,SELECCIONA_BICI);
     }
 
     /*

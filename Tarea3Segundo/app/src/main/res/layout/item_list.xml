@@ -93,6 +93,7 @@
             </LinearLayout>
 
             <ImageView
+                android:onClick="onClick"
                 android:id="@+id/icono_carta"
                 android:layout_width="50dp"
                 android:layout_height="50dp"

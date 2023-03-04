@@ -45,12 +45,12 @@ public class CalActivity extends AppCompatActivity {
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
                 fecha = dayOfMonth + "/" + (month + 1) + "/" + year;
                 //System.out.println(fecha);
-                bundle.putString("fechaKey", fecha);
+                //bundle.putString("fechaKey", fecha);
                //getApplicationContext().("key", bundle);
 
                 Toast.makeText(getApplicationContext(),fecha, Toast.LENGTH_LONG).show();
                 //enviar dato a mailFragment
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(),BiciActivity.class);
                 intent.putExtra("fechaKey",fecha);
                 // Los resultados se devuelven a través de un Intent invocando al método setResult()
                 setResult(RESULT_OK,intent);
