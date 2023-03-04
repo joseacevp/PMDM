@@ -36,15 +36,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     switch(item.getItemId()) {
                         case R.id.homeFragment:
-                            //loadFragment(homeFragment);
+
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivityForResult(intent,SELECCIONA_BICI);
                             return true;
                         case R.id.biciFragment:
-                              // Llamada a la actividad SegundaActivity para que se cargue en pantalla
-                            Intent intent = new Intent(getApplicationContext(), BiciActivity.class);
+
+                            intent = new Intent(getApplicationContext(), BiciActivity.class);
                             startActivityForResult(intent,SELECCIONA_BICI);
                             return true;
                         case R.id.calendarioFragment:
-                            //loadFragment(calenFragment);
+                            intent = new Intent(getApplicationContext(),CalActivity.class);
+                            startActivity(intent);
+
                             return true;
                     }
 
