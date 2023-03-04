@@ -20,7 +20,7 @@
             android:layout_margin="20dp"
             />
         <TextView
-            android:id="@+id/frase_inicial"
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Todavía no has seleccionado una fecha"

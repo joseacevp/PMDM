@@ -22,8 +22,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(R.layout.activity_main);
-       // binding.button.setOnClickListener(this);
+        setContentView(binding.getRoot());
+
+        binding.bottomNavigation.setOnClickListener(this);
         BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (requestCode == SELECCIONA_BICI) {
             if (resultCode == RESULT_OK) {
                 // El resultado se obtiene a través del objeto Intent
-                binding.fraseInicial.setText("Se ha seleccionado:\n"
+                binding.textView.setText("Se ha seleccionado:\n"
                         + data.getStringExtra("PRODUCTO"));
             }
         }
