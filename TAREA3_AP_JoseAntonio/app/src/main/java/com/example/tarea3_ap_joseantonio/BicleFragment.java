@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,10 +41,14 @@ public class BicleFragment extends Fragment implements View.OnClickListener{
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter myAdapter;
 
+    String fecha;
+    String email;
+    Bundle bundle;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    String fecha;
+
     //referencia a //
 
     RecyclerView recycleBicicletas;
@@ -84,19 +90,12 @@ public class BicleFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
-        getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                fecha = result.getString("fechaKey");
-
-            }
-        });
         View vista = inflater.inflate(R.layout.fragment_bicle, container, false);
 
-
+        //p2
         recycleBicicletas = vista.findViewById(R.id.idRecicle);
 
-       recycleBicicletas.setLayoutManager(new LinearLayoutManager(getContext()));
+        recycleBicicletas.setLayoutManager(new LinearLayoutManager(getContext()));
 
         BikesContent.clearBikes();
         BikesContent.loadBikesFromJSON(getActivity().getApplicationContext());
@@ -119,6 +118,7 @@ public class BicleFragment extends Fragment implements View.OnClickListener{
         recycleBicicletas.setAdapter(myAdapter);
 
 
+
         return vista;
     }
 
@@ -130,6 +130,7 @@ public class BicleFragment extends Fragment implements View.OnClickListener{
         i.putExtra("PRODUCTO", bike.getEmail());
 
         // Los resultados se devuelven a través de un Intent invocando al método setResult()
+        //p3
         setResult(RESULT_OK,i);
 
         // Se finaliza la actividad invocando al método finish()
@@ -143,10 +144,30 @@ public class BicleFragment extends Fragment implements View.OnClickListener{
     public void onViewCreated(@NonNull View bicicletaFragment, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(bicicletaFragment, savedInstanceState);
 
+        getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                fecha = result.getString("fechaKey");
+                Toast.makeText(getContext(),fecha, Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 
     @Override
     public void onClick(View v) {
-        
+        //Recupera los datos de la fecha seleccionada
+        try {
+            //Metodo para enviar Email
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:"));
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Alquiler de Bicicleta");
+            intent.putExtra(Intent.EXTRA_TEXT, "Hola me encantaria alquilar " + "tu maravillosa bicicleta el día " +fecha+  "\n Un saludo");
+            startActivity(intent);
+        }catch (Throwable e){
+            Toast.makeText(getContext(),"fecha no seleccionada", Toast.LENGTH_LONG).show();
+        }
+
     }
 }

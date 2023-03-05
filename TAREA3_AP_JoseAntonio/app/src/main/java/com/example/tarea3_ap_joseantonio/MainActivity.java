@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        //p1
         binding.bottomNavigation.setOnClickListener(this);
 
         BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
