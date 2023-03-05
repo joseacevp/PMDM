@@ -50,11 +50,11 @@ public class CalActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),fecha, Toast.LENGTH_LONG).show();
                 //enviar dato a mailFragment
-                Intent intent = new Intent(getApplicationContext(),BiciActivity.class);
+                Intent intent = new Intent(CalActivity.this,BiciActivity.class);
                 intent.putExtra("fechaKey",fecha);
                 // Los resultados se devuelven a través de un Intent invocando al método setResult()
-                setResult(RESULT_OK,intent);
-
+                //setResult(RESULT_OK,intent);
+                startActivity(intent);
                 // Se finaliza la actividad invocando al método finish()
                 //finish();
             }

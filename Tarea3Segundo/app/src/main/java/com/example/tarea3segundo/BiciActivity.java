@@ -15,6 +15,8 @@ import com.example.tarea3segundo.databinding.ActivityBiciBinding;
 public class BiciActivity extends AppCompatActivity implements View.OnClickListener {
 
     String fecha;
+    Bundle bundle;
+
     private ActivityBiciBinding binding;
     public static final int SELECCIONA_FECHA = 1;
     RecyclerView.LayoutManager layoutManager;
@@ -72,6 +74,8 @@ public class BiciActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public void onClick(View view) {
+        bundle = getIntent().getExtras();
+        fecha = bundle.getString("fechaKey");
         Intent intent2 = new Intent(getApplicationContext(),CalActivity.class);
         startActivityForResult(intent2,SELECCIONA_FECHA);
 
