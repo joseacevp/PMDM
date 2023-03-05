@@ -30,7 +30,7 @@ import java.util.ArrayList;
  * Use the {@link BicleFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BicleFragment extends Fragment implements View.OnClickListener{
+public class BicleFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -119,6 +119,7 @@ public class BicleFragment extends Fragment implements View.OnClickListener{
 
 
 
+
         return vista;
     }
 
@@ -154,20 +155,20 @@ public class BicleFragment extends Fragment implements View.OnClickListener{
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        //Recupera los datos de la fecha seleccionada
-        try {
-            //Metodo para enviar Email
-            Intent intent = new Intent(Intent.ACTION_SENDTO);
-            intent.setData(Uri.parse("mailto:"));
-            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Alquiler de Bicicleta");
-            intent.putExtra(Intent.EXTRA_TEXT, "Hola me encantaria alquilar " + "tu maravillosa bicicleta el día " +fecha+  "\n Un saludo");
-            startActivity(intent);
-        }catch (Throwable e){
-            Toast.makeText(getContext(),"fecha no seleccionada", Toast.LENGTH_LONG).show();
-        }
-
-    }
+//    @Override
+//    public void onClick(View v) {
+//        //Recupera los datos de la fecha seleccionada
+//        try {
+//            //Metodo para enviar Email
+//            Intent intent = new Intent(Intent.ACTION_SENDTO);
+//            intent.setData(Uri.parse("mailto:"));
+//            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
+//            intent.putExtra(Intent.EXTRA_SUBJECT, "Alquiler de Bicicleta");
+//            intent.putExtra(Intent.EXTRA_TEXT, "Hola me encantaria alquilar " + "tu maravillosa bicicleta el día " +fecha+  "\n Un saludo");
+//            startActivity(intent);
+//        }catch (Throwable e){
+//            Toast.makeText(getContext(),"fecha no seleccionada", Toast.LENGTH_LONG).show();
+//        }
+//
+//    }
 }

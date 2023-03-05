@@ -8,9 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.tarea3_ap_joseantonio.databinding.ActivityMainBinding;
 
@@ -69,6 +71,18 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        //Recupera los datos de la fecha seleccionada
+        try {
+            //Metodo para enviar Email
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:"));
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"email"});
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Alquiler de Bicicleta");
+            intent.putExtra(Intent.EXTRA_TEXT, "Hola me encantaria alquilar " + "tu maravillosa bicicleta el día " +  "\n Un saludo");
+            startActivity(intent);
+        }catch (Throwable e){
+            Toast.makeText(this,"fecha no seleccionada", Toast.LENGTH_LONG).show();
+        }
 
     }
 }
