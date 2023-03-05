@@ -1,5 +1,6 @@
 package com.example.tarea3_ap_joseantonio;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -77,6 +78,7 @@ public class HomeFragment extends Fragment {
                 TextView textView = vista.findViewById(R.id.textoSelecciona);
                 textView.setText("Has seleccionado la fecha: " + fecha + " para alquilar una " +
                         "bicicleta ");
+
             }
         });
         return vista;

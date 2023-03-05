@@ -21,8 +21,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 @SuppressWarnings("deprecation")
 public class MainActivity extends AppCompatActivity  implements View.OnClickListener{
     private ActivityMainBinding binding;
-
-
+    public static final int SELECCIONA_PRODUCTO = 1;
+    String fecha;
     HomeFragment homeFragment = new HomeFragment();
     CalenFragment calenFragment = new CalenFragment();
     BicleFragment bicleFragment = new BicleFragment();
@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+         fecha = getIntent().getStringExtra("FECHA");
+
+
         //p1
         binding.bottomNavigation.setOnClickListener(this);
 
@@ -68,21 +71,37 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
 
 
-
+    // PASO 1
     @Override
     public void onClick(View v) {
-        //Recupera los datos de la fecha seleccionada
+
         try {
             //Metodo para enviar Email
             Intent intent = new Intent(Intent.ACTION_SENDTO);
             intent.setData(Uri.parse("mailto:"));
             intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"email"});
             intent.putExtra(Intent.EXTRA_SUBJECT, "Alquiler de Bicicleta");
-            intent.putExtra(Intent.EXTRA_TEXT, "Hola me encantaria alquilar " + "tu maravillosa bicicleta el día " +  "\n Un saludo");
+            intent.putExtra(Intent.EXTRA_TEXT, "Hola me encantaria alquilar " + "tu maravillosa bicicleta el día " + fecha +  "\n Un saludo");
             startActivity(intent);
         }catch (Throwable e){
             Toast.makeText(this,"fecha no seleccionada", Toast.LENGTH_LONG).show();
         }
+    }
+    /*
+     * PASO 3
+     * La actividad principal obtiene los resultados a través de este método, que es la función callback
+     */
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        // Si se seleccionó correctamente el producto ...
+        if (requestCode == SELECCIONA_PRODUCTO) {
+            if (resultCode == RESULT_OK) {
+              //  String fecha = data.getStringExtra("PRODUCTO");
+
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.tarea3_ap_joseantonio;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -105,6 +106,9 @@ public class CalenFragment extends Fragment {
                 bundle.putString("fechaKey", fecha);
                 getParentFragmentManager().setFragmentResult("key", bundle);
 
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.putExtra("FECHA", fecha);
+                startActivity(intent);
                 //Toast.makeText(getContext(),fecha, Toast.LENGTH_LONG).show();
                 //enviar dato a mailFragment
 
