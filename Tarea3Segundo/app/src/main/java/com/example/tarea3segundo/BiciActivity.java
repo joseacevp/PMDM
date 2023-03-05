@@ -15,6 +15,7 @@ import com.example.tarea3segundo.databinding.ActivityBiciBinding;
 public class BiciActivity extends AppCompatActivity implements View.OnClickListener {
 
     String fecha;
+    String email;
     Bundle bundle;
 
     private ActivityBiciBinding binding;
@@ -32,6 +33,7 @@ public class BiciActivity extends AppCompatActivity implements View.OnClickListe
         BikesContent.loadBikesFromJSON(this);
         System.out.println(BikesContent.ITEMS.size());
 
+
         binding.recyclerView.setHasFixedSize(true);
 
         layoutManager= new LinearLayoutManager(this);
@@ -40,10 +42,10 @@ public class BiciActivity extends AppCompatActivity implements View.OnClickListe
         myAdapter = new Adaptador(BikesContent.ITEMS,this);
         binding.recyclerView.setAdapter(myAdapter);
     }
-//        // PASO 2
-//        // Este método captura la selección del usuario
+        // PASO 2
+        // Este método captura la selección del usuario
       public void terminar (BikesContent.Bike bike){
-           //System.out.println("TERMINAR: " + product.toString());
+           System.out.println("TERMINAR: " + bike.toString());
            Intent i = new Intent();
            i.putExtra("PRODUCTO", bike.getEmail());
 
@@ -54,6 +56,27 @@ public class BiciActivity extends AppCompatActivity implements View.OnClickListe
            //finish();
       }
 
+
+    @Override
+    public void onClick(View view) {
+        //Recupera los datos de la fecha seleccionada
+        try {
+            bundle = getIntent().getExtras();
+            fecha = bundle.getString("fechaKey");
+
+            //Metodo para enviar Email
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:"));
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Alquiler de Bicicleta");
+            intent.putExtra(Intent.EXTRA_TEXT, "Hola me encantaria alquilar " + "tu maravillosa bicicleta el día " +fecha+  "\n Un saludo");
+            startActivity(intent);
+        }catch (Throwable e){
+            Toast.makeText(getApplicationContext(),"fecha no seleccionada", Toast.LENGTH_LONG).show();
+        }
+
+
+    }
     /*
      * PASO 3
      * La actividad principal obtiene los resultados a través de este método,
@@ -68,24 +91,10 @@ public class BiciActivity extends AppCompatActivity implements View.OnClickListe
         if (requestCode == SELECCIONA_FECHA) {
             if (resultCode == RESULT_OK) {
                 // El resultado se obtiene a través del objeto Intent
-               fecha= data.getStringExtra("fechaKey").toString();
+                email= data.getStringExtra("PRODUCTO").toString();
+                Toast.makeText(getApplicationContext(),email, Toast.LENGTH_LONG).show();
             }
         }
-    }
-    @Override
-    public void onClick(View view) {
-        bundle = getIntent().getExtras();
-        fecha = bundle.getString("fechaKey");
-        Intent intent2 = new Intent(getApplicationContext(),CalActivity.class);
-        startActivityForResult(intent2,SELECCIONA_FECHA);
-
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:"));
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"email@email.com"});
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Alquiler de Bicicleta");
-        intent.putExtra(Intent.EXTRA_TEXT, "Hola me encantaria alquilar " + "tu maravillosa bicicleta el día " +fecha+  "\n Un saludo");
-        startActivity(intent);
-
     }
 
 }
