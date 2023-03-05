@@ -28,12 +28,16 @@ import java.util.ArrayList;
  * Use the {@link BicleFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BicleFragment extends Fragment {
+public class BicleFragment extends Fragment implements View.OnClickListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final Object RESULT_OK = 1;
+
+    RecyclerView.LayoutManager layoutManager;
+    RecyclerView.Adapter myAdapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -92,12 +96,48 @@ public class BicleFragment extends Fragment {
 
         recycleBicicletas = vista.findViewById(R.id.idRecicle);
 
-        recycleBicicletas.setLayoutManager(new LinearLayoutManager(getContext()));
+       recycleBicicletas.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        BikesContent.clearBikes();
+        BikesContent.loadBikesFromJSON(getActivity().getApplicationContext());
+        System.out.println(BikesContent.ITEMS.size());
+
+
+
+
+        recycleBicicletas.setHasFixedSize(true);
+
+        layoutManager= new LinearLayoutManager(getActivity().getApplicationContext());
+
+
+
+        recycleBicicletas.setLayoutManager(layoutManager);
+
+
+
+        myAdapter = new Adaptador(BikesContent.ITEMS,this);
+        recycleBicicletas.setAdapter(myAdapter);
+
 
         return vista;
     }
 
+    // PASO 2
+    // Este método captura la selección del usuario
+    public void terminar (BikesContent.Bike bike){
+        System.out.println("TERMINAR: " + bike.toString());
+        Intent i = new Intent();
+        i.putExtra("PRODUCTO", bike.getEmail());
 
+        // Los resultados se devuelven a través de un Intent invocando al método setResult()
+        setResult(RESULT_OK,i);
+
+        // Se finaliza la actividad invocando al método finish()
+        //finish();
+    }
+
+    private void setResult(Object resultOk, Intent i) {
+    }
 
     @Override
     public void onViewCreated(@NonNull View bicicletaFragment, @Nullable Bundle savedInstanceState) {
@@ -105,4 +145,8 @@ public class BicleFragment extends Fragment {
 
     }
 
+    @Override
+    public void onClick(View v) {
+        
+    }
 }

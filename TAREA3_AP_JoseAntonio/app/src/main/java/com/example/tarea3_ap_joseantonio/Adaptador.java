@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
     private List<BikesContent.Bike> localDataSet;
-    private MainActivity baInstance;
+    private BicleFragment baInstance;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
@@ -38,7 +38,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
         }
     }
 
-    public Adaptador(List<BikesContent.Bike> dataSet, MainActivity biciActivity){
+    public Adaptador(List<BikesContent.Bike> dataSet, BicleFragment biciActivity){
         localDataSet = dataSet;
         baInstance = biciActivity;
     }
