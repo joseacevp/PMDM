@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -53,6 +54,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    // PASO 2
+    // Este método captura la selección del usuario
+    public void terminar (BikesContent.Bike bike){
+        System.out.println("TERMINAR: " + bike.toString());
+        Intent i = new Intent();
+        i.putExtra("PRODUCTO", bike.getEmail());
 
+        // Los resultados se devuelven a través de un Intent invocando al método setResult()
+        setResult(RESULT_OK,i);
+
+        // Se finaliza la actividad invocando al método finish()
+        //finish();
+    }
 
 }

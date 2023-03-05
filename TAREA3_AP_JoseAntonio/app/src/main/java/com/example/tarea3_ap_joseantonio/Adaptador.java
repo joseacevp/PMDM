@@ -6,88 +6,74 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 
-public class Adaptador  extends RecyclerView.Adapter<Adaptador.ViewHolderDatos>
-implements View.OnClickListener
-{
+import java.util.List;
 
-    ArrayList<Bicicleta> listDatos;
-    private View.OnClickListener listener;
-    public Adaptador(ArrayList<Bicicleta> listDatos) {
-        this.listDatos = listDatos;
-    }
+public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
+    private List<BikesContent.Bike> localDataSet;
+    private MainActivity baInstance;
 
-    public void setOnClickListener(View.OnClickListener listener){
-        this.listener=listener;
-    }
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public final View mView;
+        public BikesContent.Bike mItem;
+        private final ImageView imageViewProduct;
+        private final TextView textViewOwner;
+        private final TextView textViewDescripcion;
+        private final TextView textViewCity;
+        private final TextView textViewLocation;
+        private final TextView textViewEmail;
 
-    @Override
-    public void onClick(View view) {
-        if (listener!=null){
-            listener.onClick(view);
+  public ViewHolder(View view) {
+            super(view);
+            // Define click listener for the ViewHolder's View
+            mView = view;
+            imageViewProduct = view.findViewById(R.id.imagen_bici);
+            textViewOwner = view.findViewById(R.id.owner);
+            textViewDescripcion = view.findViewById(R.id.descripcion);
+            textViewCity = view.findViewById(R.id.city);
+            textViewLocation = view.findViewById(R.id.location);
+            textViewEmail = view.findViewById(R.id.email);
         }
     }
 
-    public class ViewHolderDatos extends RecyclerView.ViewHolder {
-
-
-        TextView owner;
-        TextView email;
-        TextView city;
-        TextView description;
-        TextView country;
-        TextView location;
-        TextView image;
-
-
-        public ViewHolderDatos(@NonNull View itemView) {
-            super(itemView);
-
-            owner=itemView.findViewById(R.id.owner);
-            email=itemView.findViewById(R.id.email);
-            city=itemView.findViewById(R.id.city);
-            description=itemView.findViewById(R.id.descripcion);
-            country=itemView.findViewById(R.id.country);
-            location=itemView.findViewById(R.id.location);
-            image=itemView.findViewById(R.id.image);
-
-
-        }
-    }
-
-    @NonNull
-    @Override
-    public ViewHolderDatos onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_list,null,false);
-
-        view.setOnClickListener(this);
-
-        return new ViewHolderDatos(view);
+    public Adaptador(List<BikesContent.Bike> dataSet, MainActivity biciActivity){
+        localDataSet = dataSet;
+        baInstance = biciActivity;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolderDatos holder, int position) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        // Create a new view, which defines the UI of the list item
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.item_list, viewGroup, false);
 
-       holder.owner.setText(listDatos.get(position).getOwner());
-       holder.email.setText(listDatos.get(position).getEmail());
-       holder.city.setText(listDatos.get(position).getCity());
-       holder.description.setText(listDatos.get(position).getDescription());
-       holder.country.setText(listDatos.get(position).getCountry());
-       holder.location.setText(listDatos.get(position).getLocation());
-       holder.image.setText(listDatos.get(position).getImage());
+        return new ViewHolder(view);
+    }
 
+    @Override
+    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+        viewHolder.mItem = localDataSet.get(position);
+        viewHolder.imageViewProduct.setImageBitmap(localDataSet.get(position).getPhoto());
+        viewHolder.textViewOwner.setText(localDataSet.get(position).getOwner());
+        viewHolder.textViewDescripcion.setText(localDataSet.get(position).getDescription());
+        viewHolder.textViewCity.setText(localDataSet.get(position).getCity());
+        viewHolder.textViewLocation.setText(localDataSet.get(position).getLocation());
+        viewHolder.textViewEmail.setText(localDataSet.get(position).getEmail());
 
+        viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("Dentro de onBindViewHolder() --> setOnClickListener");
+              baInstance.terminar(viewHolder.mItem);
+            }
+        });
+        //Log.i("onBindViewHolder()", viewHolder.textView + " : " + position);
     }
 
     @Override
     public int getItemCount() {
-        return listDatos.size();
+        return localDataSet.size();
     }
-
-
 }
