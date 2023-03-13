@@ -1,6 +1,7 @@
 package com.example.tarea3;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +25,7 @@ public class BicleFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final Object RESULT_OK = 1;
+    String email;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter myAdapter;
     RecyclerView recycleBicicletas;
@@ -90,15 +93,30 @@ public class BicleFragment extends Fragment {
         System.out.println("TERMINAR: " + bike.toString());
         Intent i = new Intent();
         i.putExtra("PRODUCTO", bike.getEmail());
+        email=bike.getEmail();
+        System.out.println(email);
+
+        try {
+            //Metodo para enviar Email
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:"));
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Alquiler de Bicicleta");
+            intent.putExtra(Intent.EXTRA_TEXT, "Hola me encantaria alquilar " + "tu maravillosa bicicleta el día " + "\n Un saludo");
+            startActivity(intent);
+        }catch (Throwable e){
+            Toast.makeText(getContext(),"fecha no seleccionada", Toast.LENGTH_LONG).show();
+        }
 
         // Los resultados se devuelven a través de un Intent invocando al método setResult()
         //p3
-        setResult(RESULT_OK,i);
+        //setResult(RESULT_OK,i);
 
         // Se finaliza la actividad invocando al método finish()
         //finish();
     }
-    private void setResult(Object resultOk, Intent i) {
-    }
+//    private void setResult(Object resultOk, Intent i) {
+//    }
+
 
 }
