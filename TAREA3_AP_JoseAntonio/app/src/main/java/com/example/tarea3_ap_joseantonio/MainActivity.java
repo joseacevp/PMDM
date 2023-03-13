@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tarea3_ap_joseantonio.databinding.ActivityMainBinding;
@@ -32,8 +33,8 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-         fecha = getIntent().getStringExtra("FECHA");
-
+        fecha = getIntent().getStringExtra("FECHA");
+       
 
         //p1
         binding.bottomNavigation.setOnClickListener(this);
