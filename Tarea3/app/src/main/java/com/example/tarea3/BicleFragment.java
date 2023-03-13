@@ -24,7 +24,7 @@ public class BicleFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private static final Object RESULT_OK = 1;
+    //private static final Object RESULT_OK = 1;
     String email;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter myAdapter;

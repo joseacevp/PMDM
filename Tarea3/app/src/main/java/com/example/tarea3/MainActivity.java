@@ -2,6 +2,7 @@ package com.example.tarea3;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     BicleFragment bicleFragment = new BicleFragment();
+    CalenFragment calenFragment = new CalenFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +36,21 @@ public class MainActivity extends AppCompatActivity {
                    // loadFragment(homeFragment);
                     return true;
                 case R.id.biciFragment:
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.fragment_cotainer,bicleFragment);
-                    transaction.commit();
+                    loadFragment(bicleFragment);
                     return true;
                 case R.id.calendarioFragment:
-                   // loadFragment(calenFragment);
+                    loadFragment(calenFragment);
                     return true;
             }
 
             return false;
         }
     };
+
+    public void loadFragment(Fragment fragment){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_cotainer,fragment);
+        transaction.commit();
+    }
+
 }
