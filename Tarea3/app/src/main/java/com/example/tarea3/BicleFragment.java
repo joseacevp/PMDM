@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,9 @@ public class BicleFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final Object RESULT_OK = 1;
+    RecyclerView.LayoutManager layoutManager;
+    RecyclerView.Adapter myAdapter;
+    RecyclerView recycleBicicletas;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -60,8 +65,24 @@ public class BicleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bicle, container, false);
+
+        View vista = inflater.inflate(R.layout.fragment_bicle,container,false);
+
+        //metodo para cargar los datos del archivo .json en le recycleView
+        recycleBicicletas = vista.findViewById(R.id.idRecicle);
+        recycleBicicletas.setLayoutManager(new LinearLayoutManager(getContext()));
+        BikesContent.clearBikes();
+        BikesContent.loadBikesFromJSON(getActivity().getApplicationContext());
+        System.out.println(BikesContent.ITEMS.size());
+        recycleBicicletas.setHasFixedSize(true);
+        layoutManager= new LinearLayoutManager(getActivity().getApplicationContext());
+        recycleBicicletas.setLayoutManager(layoutManager);
+        myAdapter = new Adaptador(BikesContent.ITEMS,this);
+        recycleBicicletas.setAdapter(myAdapter);
+        //
+
+
+        return vista;
     }
     // PASO 2
     // Este método captura la selección del usuario
