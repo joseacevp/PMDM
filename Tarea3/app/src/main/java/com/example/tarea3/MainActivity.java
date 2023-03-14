@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     BicleFragment bicleFragment = new BicleFragment();
     CalenFragment calenFragment = new CalenFragment();
+    HomeFragment homeFragment = new HomeFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
             switch(item.getItemId()) {
                 case R.id.homeFragment:
-                   // loadFragment(homeFragment);
+                   loadFragment(homeFragment);
                     return true;
                 case R.id.biciFragment:
                     loadFragment(bicleFragment);

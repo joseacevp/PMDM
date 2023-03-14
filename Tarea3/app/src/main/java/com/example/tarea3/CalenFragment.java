@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TextView;
 
 import java.util.Calendar;
 
@@ -87,6 +88,7 @@ public class CalenFragment extends Fragment {
                 System.out.println(fecha);
                 bundle.putString("fecha", fecha);
                 getParentFragmentManager().setFragmentResult("fechaKey", bundle);
+
 
 //
 
