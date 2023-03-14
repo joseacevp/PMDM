@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +28,7 @@ public class BicleFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     //private static final Object RESULT_OK = 1;
     String email;
+    String fecha;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter myAdapter;
     RecyclerView recycleBicicletas;
@@ -59,6 +62,12 @@ public class BicleFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getParentFragmentManager().setFragmentResultListener("fechaKey", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                fecha = result.getString("fecha");
+            }
+        });
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -102,7 +111,7 @@ public class BicleFragment extends Fragment {
             intent.setData(Uri.parse("mailto:"));
             intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
             intent.putExtra(Intent.EXTRA_SUBJECT, "Alquiler de Bicicleta");
-            intent.putExtra(Intent.EXTRA_TEXT, "Hola me encantaria alquilar " + "tu maravillosa bicicleta el día " + "\n Un saludo");
+            intent.putExtra(Intent.EXTRA_TEXT, "Hola me encantaria alquilar " + "tu maravillosa bicicleta el día " +fecha+ "\n Un saludo");
             startActivity(intent);
         }catch (Throwable e){
             Toast.makeText(getContext(),"fecha no seleccionada", Toast.LENGTH_LONG).show();
