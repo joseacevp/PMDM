@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment {
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 fecha = result.getString("fecha");
                 mensajeFecha.setText("Has seleccionado la fecha: "+fecha+" para alquilar una bicicleta");
-                bundle.putString("fecha", fecha);
+                bundle.putString("fecha2", fecha);
                 getParentFragmentManager().setFragmentResult("fechaKey2", bundle);
             }
         });

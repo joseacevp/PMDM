@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -13,6 +15,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import com.google.android.material.navigation.NavigationView;
+
 import java.util.Calendar;
 
 /**
@@ -21,7 +25,7 @@ import java.util.Calendar;
  * create an instance of this fragment.
  */
 public class CalenFragment extends Fragment {
-
+    Button boton ;
     Bundle bundle = new Bundle();
     String fecha;
     // TODO: Rename parameter arguments, choose names that match
@@ -58,6 +62,7 @@ public class CalenFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -69,22 +74,30 @@ public class CalenFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View vista = inflater.inflate(R.layout.fragment_calen, container, false);
-        Button boton = vista.findViewById(R.id.botonFecha);
+         return vista;
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        boton= view.findViewById(R.id.botonFecha);
+
         if (fecha == null) {
             boton.setVisibility(View.INVISIBLE);
-            elegirFecha(vista);
+            elegirFecha(view);
         } else {
             boton.setVisibility(View.VISIBLE);
         }
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                elegirFecha( vista);
+            public void onClick(View v) {
+                elegirFecha( view);
             }
         });
 
-        return vista;
     }
+
     public void elegirFecha(View view) {
         Calendar calendario = Calendar.getInstance();
         int anio = calendario.get(Calendar.YEAR);
@@ -98,9 +111,13 @@ public class CalenFragment extends Fragment {
                 System.out.println(fecha);
                 bundle.putString("fecha", fecha);
                 getParentFragmentManager().setFragmentResult("fechaKey", bundle);
+
             }
         }, anio, mes, dia);
+
         dpd.show();
+
     }
+
 
 }

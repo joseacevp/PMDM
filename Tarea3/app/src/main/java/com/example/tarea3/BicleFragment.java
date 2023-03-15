@@ -27,6 +27,7 @@ public class BicleFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     //private static final Object RESULT_OK = 1;
+    Bundle bundle = new Bundle();
     String email;
     String fecha;
     RecyclerView.LayoutManager layoutManager;
@@ -65,7 +66,7 @@ public class BicleFragment extends Fragment {
         getParentFragmentManager().setFragmentResultListener("fechaKey2", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                fecha = result.getString("fecha");
+                fecha = result.getString("fecha2");
             }
         });
         if (getArguments() != null) {
