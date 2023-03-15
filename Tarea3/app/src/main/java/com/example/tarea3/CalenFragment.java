@@ -69,9 +69,19 @@ public class CalenFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View vista = inflater.inflate(R.layout.fragment_calen, container, false);
-        //Button boton = vista.findViewById(R.id.botonFecha);
-        elegirFecha(vista);
-
+        Button boton = vista.findViewById(R.id.botonFecha);
+        if (fecha == null) {
+            boton.setVisibility(View.INVISIBLE);
+            elegirFecha(vista);
+        } else {
+            boton.setVisibility(View.VISIBLE);
+        }
+        boton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                elegirFecha( vista);
+            }
+        });
 
         return vista;
     }
@@ -81,17 +91,13 @@ public class CalenFragment extends Fragment {
         int mes = calendario.get(Calendar.MONTH);
         int dia = calendario.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog dpd = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog dpd = new DatePickerDialog(this.getActivity(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
                 fecha = dayOfMonth + "/" + (month + 1) + "/" + year;
                 System.out.println(fecha);
                 bundle.putString("fecha", fecha);
                 getParentFragmentManager().setFragmentResult("fechaKey", bundle);
-
-
-//
-
             }
         }, anio, mes, dia);
         dpd.show();

@@ -19,6 +19,7 @@ import android.widget.TextView;
 public class HomeFragment extends Fragment {
 
     String fecha;
+    Bundle bundle = new Bundle();
     private TextView mensajeFecha;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +60,8 @@ public class HomeFragment extends Fragment {
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 fecha = result.getString("fecha");
                 mensajeFecha.setText("Has seleccionado la fecha: "+fecha+" para alquilar una bicicleta");
+                bundle.putString("fecha", fecha);
+                getParentFragmentManager().setFragmentResult("fechaKey2", bundle);
             }
         });
         if (getArguments() != null) {

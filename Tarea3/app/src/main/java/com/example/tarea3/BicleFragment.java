@@ -62,7 +62,7 @@ public class BicleFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getParentFragmentManager().setFragmentResultListener("fechaKey", this, new FragmentResultListener() {
+        getParentFragmentManager().setFragmentResultListener("fechaKey2", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 fecha = result.getString("fecha");
@@ -116,16 +116,8 @@ public class BicleFragment extends Fragment {
         }catch (Throwable e){
             Toast.makeText(getContext(),"fecha no seleccionada", Toast.LENGTH_LONG).show();
         }
-
-        // Los resultados se devuelven a través de un Intent invocando al método setResult()
-        //p3
-        //setResult(RESULT_OK,i);
-
         // Se finaliza la actividad invocando al método finish()
         //finish();
     }
-//    private void setResult(Object resultOk, Intent i) {
-//    }
-
 
 }
