@@ -13,4 +13,7 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Menu">
+        <item name="android:background">#A0FAED</item>
+    </style>
 </resources>

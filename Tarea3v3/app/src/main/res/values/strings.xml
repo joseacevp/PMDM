@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Tarea3v3</string>
+    <string name="Hola_HomeActivity">Mucho se dice y se ha escrito acerca
+        de las numerosas y dispares ventajas que ofrece la actividad de
+        montar en bicicleta, pero a la gente parece que no le entra en la cabeza.
+        Enumeramos algunas de ellas: es bueno para tu salud, para tu bolsillo y para el planeta.\n\n
+        Esta versión beta de ShareMyBike permite alquilar bicicletas de particulares en cualquier parte
+        del mundo. ¡Pedalea y disfruta!\n\n
+
+    </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="selecci_HomeActivity"><b>Todavía no has seleccionado una fecha. </b></string>
 </resources>
