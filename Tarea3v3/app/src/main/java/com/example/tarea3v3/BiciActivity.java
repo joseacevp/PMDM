@@ -5,14 +5,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.tarea3v3.databinding.ActivityCalendarioBinding;
 
-public class BiciActivity extends AppCompatActivity {
+public class BiciActivity extends AppCompatActivity implements CalendarioActivity.OnFechaSeleccionada{
     private ActivityCalendarioBinding binding;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter myAdapter;
+    String fecha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +57,26 @@ public class BiciActivity extends AppCompatActivity {
         //System.out.println("TERMINAR: " + product.toString());
         Intent i = new Intent();
         i.putExtra("PRODUCTO", product.getEmail());
-
+        String email=product.getEmail();
         // Los resultados se devuelven a través de un Intent invocando al método setResult()
         setResult(RESULT_OK,i);
-
+        try {
+            //Metodo para enviar Email
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:"));
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Alquiler de Bicicleta");
+            intent.putExtra(Intent.EXTRA_TEXT, "Hola me encantaria alquilar " + "tu maravillosa bicicleta el día " +fecha+ "\n Un saludo");
+            startActivity(intent);
+        }catch (Throwable e){
+            Toast.makeText(getApplicationContext(),"fecha no seleccionada", Toast.LENGTH_LONG).show();
+        }
         // Se finaliza la actividad invocando al método finish()
-        finish();
+        //finish();
+    }
+
+    @Override
+    public void onResultadoFecha(String fecha) {
+        this.fecha = fecha;
     }
 }

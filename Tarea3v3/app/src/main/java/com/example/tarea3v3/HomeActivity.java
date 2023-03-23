@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,6 +18,9 @@ public class HomeActivity extends AppCompatActivity implements CalendarioActivit
 
     private ActivityMainBinding binding;
     public static final int SELECCIONA_PRODUCTO = 1;
+
+    String fecha;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,7 @@ public class HomeActivity extends AppCompatActivity implements CalendarioActivit
     @Override
     public void onResultadoFecha(String fecha) {
         TextView textView = findViewById(R.id.textoSelecciona);
+        this.fecha=fecha;
         textView.setText(fecha);
     }
 }
