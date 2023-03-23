@@ -13,36 +13,37 @@ import com.example.tarea3v3.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class HomeActivity extends AppCompatActivity implements CalendarioActivity.OnFechaSeleccionada{
+public class HomeActivity extends AppCompatActivity implements CalendarioActivity.OnFechaSeleccionada {
 
     private ActivityMainBinding binding;
-    CalendarioActivity calendarioActivity = new CalendarioActivity();
-    public static final int CALCULAR_TIEMPO_VIVIDO = 1;
+    public static final int SELECCIONA_PRODUCTO = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding  =ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        BottomNavigationView navigationView =findViewById(R.id.bottom_navigation);
+        BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
         navigationView.setOnItemSelectedListener(onItemSelectedListener);
 
-        }
+    }
 
     private final NavigationBarView.OnItemSelectedListener onItemSelectedListener = new NavigationBarView.OnItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch(item.getItemId()) {
+            switch (item.getItemId()) {
                 case R.id.homeFragment:
-//                    loadFragment(homeFragment);
+                    Intent intent = new Intent(getApplication(), HomeActivity.class);
+                    startActivity(intent);
                     return true;
                 case R.id.biciFragment:
-//                    loadFragment(bicleFragment);
+                    intent = new Intent(getApplication(), BiciActivity.class);
+                    startActivity(intent);
                     return true;
                 case R.id.calendarioFragment:
-                    CalendarioActivity d=new CalendarioActivity();
-                    d.show(getSupportFragmentManager(),"Mi diálogo Fecha");
+                    CalendarioActivity d = new CalendarioActivity();
+                    d.show(getSupportFragmentManager(), "Mi diálogo Fecha");
                     return true;
             }
 
