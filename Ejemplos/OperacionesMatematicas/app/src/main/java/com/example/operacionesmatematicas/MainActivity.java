@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+ 
+
     public void onClick(View view) {
 
         primerNumero = Integer.parseInt(campoUno.getText().toString());
@@ -35,10 +38,11 @@ public class MainActivity extends AppCompatActivity {
                 restar();
                 break;
             case R.id.botonDividir:
-                if(segundoNumero < 1 ){
-                    etiquetaResultado.setText("Para la División el segundo número ha de ser mayor de Cero");
-                }else{
+                if(segundoNumero > 0 ){
                     dividir();
+                }else{
+                    Toast.makeText(this,"Advertencia",Toast.LENGTH_LONG).show();
+                    etiquetaResultado.setText("Para la División el segundo número ha de ser mayor de Cero");
                 }
                 break;
             case R.id.botonMultiplicar:
