@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
     private void validar() {
         String cadena= "Seleccionada la \n";
         if (c1.isChecked()){
-        cadena += "Opción 1 \n";
+        cadena += " Opción 1 \n";
         }
         if (c2.isChecked()){
-            cadena += "Opción 2 \n";
+            cadena += " Opción 2 \n";
         }
         Toast.makeText(getApplicationContext(),cadena,Toast.LENGTH_LONG).show();
     }
