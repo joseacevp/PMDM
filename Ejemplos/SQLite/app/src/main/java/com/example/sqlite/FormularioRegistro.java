@@ -72,5 +72,6 @@ public class FormularioRegistro extends AppCompatActivity implements View.OnClic
 
         Toast.makeText(getApplicationContext(), "Id Registro: " + idResultante, Toast.LENGTH_SHORT).show();
         db.close();
+
     }
 }
