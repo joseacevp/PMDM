@@ -94,6 +94,7 @@ public class FormularioConsulta extends AppCompatActivity implements View.OnClic
         bd.update(Utilidades.TABLA_USUARIO,values,Utilidades.CAMPO_ID+" =?",consultaParametros);
         Toast.makeText(getApplicationContext(),"Datos Actualizados",Toast.LENGTH_SHORT).show();
         bd.close();
+        limpiar();
 
     }
 

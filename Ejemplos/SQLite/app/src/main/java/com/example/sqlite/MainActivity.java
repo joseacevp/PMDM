@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     break;
                 case R.id.botonListaLisstView:
+                    Intent eventoListaView = new Intent(getApplicationContext(),ConsultaListView.class);
+                    startActivity(eventoListaView);
                     break;
 
             }

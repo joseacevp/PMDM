@@ -55,6 +55,13 @@ public class FormularioRegistro extends AppCompatActivity implements View.OnClic
         db.execSQL(insert);
         db.close();
         Toast.makeText(getApplicationContext(), "Registro realizado", Toast.LENGTH_SHORT).show();
+        limpiar();
+    }
+
+    private void limpiar() {
+        campoId.setText("");
+        campoNombre.setText("");
+        campoTelef.setText("");
     }
 
     private void registroUsuarios() {
