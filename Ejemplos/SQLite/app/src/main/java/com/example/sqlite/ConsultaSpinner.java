@@ -47,9 +47,20 @@ public class ConsultaSpinner extends AppCompatActivity {
 
         comboPersonas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(), "Seleccionado: " + adapterView.getItemAtPosition(i).toString(),
+            public void onItemSelected(AdapterView<?> parent, View view, int posicion, long l) {
+                Toast.makeText(getApplicationContext(), "Seleccionado: " + parent.getItemAtPosition(posicion).toString(),
                         Toast.LENGTH_SHORT).show();
+                //como en el Spinner tenemos una posicion mas que en la lista de Usuarios
+                //para que aparezca la palabra Selecciona en la posicion 0 tenemos que validar
+                //la posicion distinta de cero si no se cuelga porque Selecciona no es un objeto
+                //de la lista de Usuarios
+                //e indicar -1 en la posicion para compensar la posición.
+                if (posicion!=0){
+                    id.setText(listaUsuarios.get(posicion-1).getId().toString());
+                    nombre.setText(listaUsuarios.get(posicion-1).getNombre());
+                    telefono.setText(listaUsuarios.get(posicion-1).getTelefono());
+                }
+
             }
 
             @Override
