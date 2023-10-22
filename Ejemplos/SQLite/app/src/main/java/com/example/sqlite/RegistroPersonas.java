@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.example.sqlite.utilidades.Utilidades;
 
-public class FormularioRegistro extends AppCompatActivity implements View.OnClickListener {
+public class RegistroPersonas extends AppCompatActivity implements View.OnClickListener {
 
     EditText campoId, campoNombre, campoTelef;
     Button registrar;

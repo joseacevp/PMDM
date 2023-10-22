@@ -1,5 +1,6 @@
 package com.example.sqlite;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -41,8 +42,19 @@ public class ConsultaListView extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int posicion, long l) {
                 String informacion = "id: " + listaUsuarios.get(posicion).getId().toString() + "\n";
                 informacion += "nombre: " + listaUsuarios.get(posicion).getNombre()+ "\n";
-                informacion += "telefono: " + listaUsuarios.get(posicion).getTelefono()+ "\n";
+//                informacion += "telefono: " + listaUsuarios.get(posicion).getTelefono()+ "\n";
                 Toast.makeText(getApplicationContext(), informacion, Toast.LENGTH_SHORT).show();
+
+                //recuperamos el usuario seleccionado en el evento
+                Usuario user = listaUsuarios.get(posicion);
+                //creamos el intencion para lanzar la actividad detalle Persona
+                Intent eventoDetallePersona = new Intent(ConsultaListView.this,DetallePersona.class);
+                //creamos el bundle para enviar en la intencion el objeto serializable usuario
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Persona",user);
+                //indicamos a la intencion que envie el bundle con el objeto
+                eventoDetallePersona.putExtras(bundle);
+                startActivity(eventoDetallePersona);
             }
         });
     }
@@ -76,8 +88,7 @@ public class ConsultaListView extends AppCompatActivity {
         listaString = new ArrayList<String>();
         for (int i = 0; i < listaUsuarios.size(); i++){
             listaString.add(listaUsuarios.get(i).getId().toString() +
-                    " " + listaUsuarios.get(i).getNombre() +
-                    " " + listaUsuarios.get(i).getTelefono());
+                    " " + listaUsuarios.get(i).getNombre() );
 
         }
     }

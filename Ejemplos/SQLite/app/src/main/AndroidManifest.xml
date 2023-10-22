@@ -13,6 +13,20 @@
         android:theme="@style/Theme.SQLite"
         tools:targetApi="31">
         <activity
+            android:name=".DetallePersona"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".RegistroMascotas"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ConsultaListView"
             android:exported="false">
             <meta-data
@@ -34,7 +48,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".FormularioRegistro"
+            android:name=".RegistroPersonas"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
