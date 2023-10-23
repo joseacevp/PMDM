@@ -20,13 +20,16 @@ public class ConexionSQLiteHelper extends SQLiteOpenHelper {
     //Genera las Tablas de la Base de Datos
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         db.execSQL(Utilidades.CREAR_TABLA_USUARIO);
+        db.execSQL(Utilidades.CREAR_TABLA_MASCOTA);
     }
 
     //Al instalar la aplicación comprueba si hay versiones anteriores de la Base de Datos y las actualiza
     @Override
     public void onUpgrade(SQLiteDatabase db, int versionAntigua, int versionNueva) {
-        db.execSQL("DROP TABLE IF EXISTS usuario ");
+        db.execSQL("DROP TABLE IF EXISTS "+Utilidades.TABLA_USUARIO);
+        db.execSQL("DROP TABLE IF EXISTS "+Utilidades.TABLA_MASCOTA);
         onCreate(db);
     }
 }

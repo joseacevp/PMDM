@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.sqlite.utilidades.Utilidades;
 
-public class FormularioConsulta extends AppCompatActivity implements View.OnClickListener {
+public class ConsultaUsuario extends AppCompatActivity implements View.OnClickListener {
 
     EditText editId, editNombre, editTelefono;
 
@@ -64,11 +64,11 @@ public class FormularioConsulta extends AppCompatActivity implements View.OnClic
                 editId.getText().toString()};//parametros de la consulta, pueden ser varios
         try {
             //select nombre,telefono from usuario where codigo = ?
-            Cursor cursor = bd.rawQuery("SELECT " + Utilidades.CAMPO_NOMBRE
+            Cursor cursor = bd.rawQuery("SELECT " + Utilidades.CAMPO_NOMBRE_PROPIETARIO
                     + " , "
                     + Utilidades.CAMPO_TELEFONO + " FROM "
                     + Utilidades.TABLA_USUARIO + " WHERE "
-                    + Utilidades.CAMPO_ID + " =?", consultaParametros);
+                    + Utilidades.CAMPO_ID_PROPIETARIO + " =?", consultaParametros);
             cursor.moveToFirst();
             editNombre.setText(cursor.getString(0));//inserta los resultados de la posicion 0 en el editext
             editTelefono.setText(cursor.getString(1));
@@ -88,10 +88,10 @@ public class FormularioConsulta extends AppCompatActivity implements View.OnClic
         String[] consultaParametros = {
                 editId.getText().toString()};//parametros de la consulta, pueden ser varios
         ContentValues values = new ContentValues();
-        values.put(Utilidades.CAMPO_NOMBRE,editNombre.getText().toString());
+        values.put(Utilidades.CAMPO_NOMBRE_PROPIETARIO,editNombre.getText().toString());
         values.put(Utilidades.CAMPO_TELEFONO,editTelefono.getText().toString());
         //sustituye a la consulta SQL select  nombre,telefono from usuario
-        bd.update(Utilidades.TABLA_USUARIO,values,Utilidades.CAMPO_ID+" =?",consultaParametros);
+        bd.update(Utilidades.TABLA_USUARIO,values,Utilidades.CAMPO_ID_PROPIETARIO +" =?",consultaParametros);
         Toast.makeText(getApplicationContext(),"Datos Actualizados",Toast.LENGTH_SHORT).show();
         bd.close();
         limpiar();
@@ -103,7 +103,7 @@ public class FormularioConsulta extends AppCompatActivity implements View.OnClic
         Log.i("info", "Abierta base datos para eliminar");
         String[] consultaParametros = {
                 editId.getText().toString()};//parametros de la consulta, pueden ser varios
-        bd.delete(Utilidades.TABLA_USUARIO,Utilidades.CAMPO_ID + "=?",consultaParametros);
+        bd.delete(Utilidades.TABLA_USUARIO,Utilidades.CAMPO_ID_PROPIETARIO + "=?",consultaParametros);
         Toast.makeText(getApplicationContext(),"Datos Eliminados",Toast.LENGTH_SHORT).show();
         limpiar();
         bd.close();
@@ -117,10 +117,10 @@ public class FormularioConsulta extends AppCompatActivity implements View.OnClic
         String[] consultaParametros = {
                 editId.getText().toString()};//parametros de la consulta, pueden ser varios
         String[] consultaResultados = {
-                Utilidades.CAMPO_NOMBRE, Utilidades.CAMPO_TELEFONO
+                Utilidades.CAMPO_NOMBRE_PROPIETARIO, Utilidades.CAMPO_TELEFONO
         };
         try {
-            Cursor cursor = bd.query(Utilidades.TABLA_USUARIO, consultaResultados, Utilidades.CAMPO_ID + "=?", consultaParametros, null, null, null);
+            Cursor cursor = bd.query(Utilidades.TABLA_USUARIO, consultaResultados, Utilidades.CAMPO_ID_PROPIETARIO + "=?", consultaParametros, null, null, null);
             cursor.moveToFirst();
             editNombre.setText(cursor.getString(0));//inserta los resultados en la posicion 0
             editTelefono.setText(cursor.getString(1));

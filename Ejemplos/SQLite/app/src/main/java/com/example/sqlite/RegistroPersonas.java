@@ -20,7 +20,7 @@ public class RegistroPersonas extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_formulario_registro);
+        setContentView(R.layout.activity_registro_persona);
         campoId = findViewById(R.id.editTextTextId);
         campoNombre = findViewById(R.id.editTextTextNombre);
         campoTelef = findViewById(R.id.editTextTextTelefono);
@@ -34,7 +34,7 @@ public class RegistroPersonas extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
 
 //        registroUsuarios();
-        registrarUsuarioSQL();
+    registrarUsuarioSQL();
 
     }
 
@@ -46,8 +46,8 @@ public class RegistroPersonas extends AppCompatActivity implements View.OnClickL
 
         //insert into usuario (id,nombre,telefono) values (123,'Jose','55566677')
         String insert = "insert into " + Utilidades.TABLA_USUARIO +
-                " ( "+ Utilidades.CAMPO_ID +
-                " , "+ Utilidades.CAMPO_NOMBRE +
+                " ( "+ Utilidades.CAMPO_ID_PROPIETARIO +
+                " , "+ Utilidades.CAMPO_NOMBRE_PROPIETARIO +
                 " ,"+ Utilidades.CAMPO_TELEFONO +
                 " )" + " values (" + campoId.getText().toString() +
                 ", ' "+ campoNombre.getText().toString() + " ' , ' " + campoTelef.getText().toString() + " ' )";
@@ -71,11 +71,11 @@ public class RegistroPersonas extends AppCompatActivity implements View.OnClickL
         SQLiteDatabase db = conn.getWritableDatabase();//abre la base de datos para editarla
 
         ContentValues values = new ContentValues();
-        values.put(Utilidades.CAMPO_ID, campoId.getText().toString());
-        values.put(Utilidades.CAMPO_NOMBRE, campoNombre.getText().toString());
+        values.put(Utilidades.CAMPO_ID_PROPIETARIO, campoId.getText().toString());
+        values.put(Utilidades.CAMPO_NOMBRE_PROPIETARIO, campoNombre.getText().toString());
         values.put(Utilidades.CAMPO_TELEFONO, campoTelef.getText().toString());
 
-        Long idResultante = db.insert(Utilidades.TABLA_USUARIO, Utilidades.CAMPO_ID, values);
+        Long idResultante = db.insert(Utilidades.TABLA_USUARIO, Utilidades.CAMPO_ID_PROPIETARIO, values);
 
         Toast.makeText(getApplicationContext(), "Id Registro: " + idResultante, Toast.LENGTH_SHORT).show();
         db.close();

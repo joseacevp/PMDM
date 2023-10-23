@@ -34,7 +34,8 @@ public class ConsultaListView extends AppCompatActivity {
 
         recupertarUsuariosBd();
 
-        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,listaString);
+        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),
+                android.R.layout.simple_list_item_1,listaString);
         vistaLista.setAdapter(adapter);
 
         vistaLista.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -8,23 +8,31 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button botonRegistrar, botonConsultar, botonListaSpinner, botonListaListView;
+    Button botonRegistrarPersonas, botonConsultarPersonas, botonListaSpinner,
+            botonListaListView, botonRegistrarMascotas, botonConsultarMascotas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        botonRegistrar = findViewById(R.id.botonRegistrar);
-        botonRegistrar.setOnClickListener(this);
+        botonRegistrarPersonas = findViewById(R.id.botonRegistrarPersonas);
+        botonRegistrarPersonas.setOnClickListener(this);
 
-        botonConsultar = findViewById(R.id.botonConsultar);
-        botonConsultar.setOnClickListener(this);
+        botonConsultarPersonas = findViewById(R.id.botonConsultar);
+        botonConsultarPersonas.setOnClickListener(this);
 
-        botonListaListView = findViewById(R.id.botonListaLisstView);
+        botonListaListView = findViewById(R.id.botonListaListView);
         botonListaListView.setOnClickListener(this);
 
         botonListaSpinner = findViewById(R.id.botonListaSpinner);
         botonListaSpinner.setOnClickListener(this);
+
+        botonRegistrarMascotas = findViewById(R.id.botonRegistrarMascotas);
+        botonRegistrarMascotas.setOnClickListener(this);
+
+        botonConsultarMascotas = findViewById(R.id.botonListaMascotas);
+        botonConsultarMascotas.setOnClickListener(this);
+
 
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this,
                 "db_usuarios", null, 1);
@@ -33,25 +41,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-            switch (view.getId()){
-                case R.id.botonRegistrar:
-                    Intent evento = new Intent(getApplicationContext(), RegistroPersonas.class);
-                    startActivity(evento);
-                    break;
-                case R.id.botonConsultar:
-                    Intent eventoBuscar = new Intent(getApplicationContext(),FormularioConsulta.class);
-                    startActivity(eventoBuscar);
-                    break;
-                case R.id.botonListaSpinner:
-                    Intent eventoListSp = new Intent(getApplicationContext(),ConsultaSpinner.class);
-                    startActivity(eventoListSp);
+        switch (view.getId()) {
+            case R.id.botonRegistrarPersonas:
+                Intent evento = new Intent(getApplicationContext(), RegistroPersonas.class);
+                startActivity(evento);
+                break;
+            case R.id.botonConsultar:
+                Intent eventoBuscar = new Intent(getApplicationContext(), ConsultaUsuario.class);
+                startActivity(eventoBuscar);
+                break;
+            case R.id.botonListaSpinner:
+                Intent eventoListSp = new Intent(getApplicationContext(), ConsultaSpinner.class);
+                startActivity(eventoListSp);
 
-                    break;
-                case R.id.botonListaLisstView:
-                    Intent eventoListaView = new Intent(getApplicationContext(),ConsultaListView.class);
-                    startActivity(eventoListaView);
-                    break;
+                break;
+            case R.id.botonListaListView:
+                Intent eventoListaView = new Intent(getApplicationContext(), ConsultaListView.class);
+                startActivity(eventoListaView);
+                break;
+            case R.id.botonRegistrarMascotas:
+                Intent eventoRegistroMascotas = new Intent(getApplicationContext(), RegistroMascotas.class);
+                startActivity(eventoRegistroMascotas);
+                break;
+            case R.id.botonListaMascotas:
+                Intent eventoListarMascotas = new Intent(getApplicationContext(),  ListaMascotas.class);
+                startActivity(eventoListarMascotas);
+                break;
 
-            }
+        }
     }
 }
