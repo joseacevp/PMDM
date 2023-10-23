@@ -120,7 +120,9 @@ public class ConsultaUsuario extends AppCompatActivity implements View.OnClickLi
                 Utilidades.CAMPO_NOMBRE_PROPIETARIO, Utilidades.CAMPO_TELEFONO
         };
         try {
-            Cursor cursor = bd.query(Utilidades.TABLA_USUARIO, consultaResultados, Utilidades.CAMPO_ID_PROPIETARIO + "=?", consultaParametros, null, null, null);
+            Cursor cursor = bd.query(Utilidades.TABLA_USUARIO, consultaResultados,
+                    Utilidades.CAMPO_ID_PROPIETARIO + "=?",
+                    consultaParametros, null, null, null);
             cursor.moveToFirst();
             editNombre.setText(cursor.getString(0));//inserta los resultados en la posicion 0
             editTelefono.setText(cursor.getString(1));

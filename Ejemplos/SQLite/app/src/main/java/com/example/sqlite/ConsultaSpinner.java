@@ -35,7 +35,8 @@ public class ConsultaSpinner extends AppCompatActivity {
         telefono = findViewById(R.id.editTextTelefono);
 
         //conexion con la base de datos para consultar los usuarios
-        conexion = new ConexionSQLiteHelper(getApplicationContext(), "db_usuarios", null, 1);
+        conexion = new ConexionSQLiteHelper(getApplicationContext(),
+                "db_usuarios", null, 1);
         consutarBDusuarios();
 
         //rellena los datos del Spinner con los datos de la lista de String que contien datos de la lista de Usuarios

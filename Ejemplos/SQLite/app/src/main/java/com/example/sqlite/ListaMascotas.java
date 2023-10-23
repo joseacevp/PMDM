@@ -70,7 +70,7 @@ public class ListaMascotas extends AppCompatActivity {
             mascota.setIdMascota(cursor.getInt(0));
             mascota.setNombreMascato(cursor.getString(1));
             mascota.setRaza(cursor.getString(2));
-            mascota.setIdDueño(cursor.getInt(3));
+            mascota.setIdDuenio(cursor.getInt(3));
 
             listaMascotas.add(mascota);
 
@@ -83,8 +83,8 @@ public class ListaMascotas extends AppCompatActivity {
 
         listaString = new ArrayList<String>();
         for (int i = 0 ; i < listaMascotas.size() ; i++){
-            listaString.add(listaMascotas.get(i).getIdMascota().toString()
-            + " " + listaMascotas.get(i).getNombreMascato());
+            listaString.add("Id Mascota: "+listaMascotas.get(i).getIdMascota().toString()
+            + "\nNombre: " + listaMascotas.get(i).getNombreMascato());
         }
     }
 }

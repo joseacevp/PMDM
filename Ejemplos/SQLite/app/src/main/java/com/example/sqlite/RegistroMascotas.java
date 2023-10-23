@@ -43,9 +43,8 @@ public class RegistroMascotas extends AppCompatActivity {
         //rellena los datos del Spinner con los datos de la lista de String que contien datos de la lista de Usuarios
         //obtenidos con una consulta a la base de datos
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter
-                (this, android.R.layout.simple_spinner_item,listaString);
+                (this, android.R.layout.simple_spinner_item, listaString);
         spinnerPropietarios.setAdapter(adapter);
-
 
 
     }
@@ -93,7 +92,7 @@ public class RegistroMascotas extends AppCompatActivity {
     }
 
     private void trasladarLista() {
-         listaString = new ArrayList<String>();
+        listaString = new ArrayList<String>();
 
         //indicamos que el primer dato de la lista sea Seleccione para que aparezca en el Spinner
         listaString.add("Seleccione");
@@ -101,7 +100,7 @@ public class RegistroMascotas extends AppCompatActivity {
         //añadimos los datos de id y nombre de la lista de usuarios obtenida de la base datos
         //al la lista de String que usarimos para rellenar el Spinner
         for (int i = 0; i < listaUsuarios.size(); i++) {
-            listaString.add(listaUsuarios.get(i).getId() +" - " + listaUsuarios.get(i).getNombre());
+            listaString.add(listaUsuarios.get(i).getId() + " - " + listaUsuarios.get(i).getNombre());
         }
     }
 
@@ -114,21 +113,26 @@ public class RegistroMascotas extends AppCompatActivity {
         values.put(Utilidades.CAMPO_MOMBRE_MASCOTA, campoNombreMascota.getText().toString());
         values.put(Utilidades.CAMPO_RAZA, raza.getText().toString());
 
-        int idDuenio ;
+        int idDuenio;
 
         if (idSpinner != 0) {
-            idDuenio = listaUsuarios.get(idSpinner -1 ).getId();
-            values.put(Utilidades.CAMPO_ID_DUENIO,idDuenio);
-            int idResultado = (int) bd.insert(Utilidades.TABLA_MASCOTA,Utilidades.CAMPO_ID_MASCOTA,values);
+            idDuenio = listaUsuarios.get(idSpinner - 1).getId();
+            values.put(Utilidades.CAMPO_ID_DUENIO, idDuenio);
+            int idResultado = (int) bd.insert(Utilidades.TABLA_MASCOTA, Utilidades.CAMPO_ID_MASCOTA, values);
             Toast.makeText(getApplicationContext(),
-                    "El id del Propietario es : "+idResultado,
+                    "El id del Propietario es : " + idResultado,
                     Toast.LENGTH_SHORT).show();
 
-        }
-    else {
+        } else {
             Toast.makeText(getApplicationContext(),
-                    "Seleccione un Id de propietario valido",
+                    "Fallo al escribir en la Base de Datos.",
                     Toast.LENGTH_SHORT).show();
         }
+        limpieza();
+    }
+
+    private void limpieza() {
+        campoNombreMascota.setText("");
+        raza.setText("");
     }
 }

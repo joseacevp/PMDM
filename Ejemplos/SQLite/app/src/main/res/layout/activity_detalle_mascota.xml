@@ -18,7 +18,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/ediId"
+        android:id="@+id/ediIdMascota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -28,7 +28,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/editNombre"
+        android:id="@+id/editNombreMascota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -38,7 +38,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/editTelefono"
+        android:id="@+id/editRazaMascota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -60,7 +60,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/ediId"
+        android:id="@+id/ediIdPersona"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -70,7 +70,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/editNombre"
+        android:id="@+id/editNombrePersona"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -80,7 +80,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/editTelefono"
+        android:id="@+id/editTelefonoPersona"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
