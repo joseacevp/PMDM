@@ -10,9 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sqlite.entidades.Mascotas;
 import com.example.sqlite.entidades.Usuario;
 import com.example.sqlite.utilidades.Utilidades;
 
@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class ConsultaMascota extends AppCompatActivity implements View.OnClickListener {
     EditText id, nombre, raza;
+    TextView idPropi;
     Button buscar, actualizar, eliminar;
     Spinner spinnerDuenios;
     ArrayList<Usuario> listaPropietarios;
@@ -34,6 +35,8 @@ public class ConsultaMascota extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_consulta_mascota);
 
         conexion = new ConexionSQLiteHelper(getApplicationContext(), "db_usuarios", null, 1);
+
+        idPropi = findViewById(R.id.textViewIdPropietario);
 
         buscar = findViewById(R.id.botonBuscar);
         buscar.setOnClickListener(this);
@@ -101,7 +104,7 @@ public class ConsultaMascota extends AppCompatActivity implements View.OnClickLi
         listaString = new ArrayList<String>();
 
         //indicamos que el primer dato de la lista sea Seleccione para que aparezca en el Spinner
-        listaString.add("Seleccione");
+        listaString.add("Lista de Propietarios");
 
         //añadimos los datos de id y nombre de la lista de usuarios obtenida de la base datos
         //al la lista de String que usarimos para rellenar el Spinner
@@ -148,6 +151,7 @@ public class ConsultaMascota extends AppCompatActivity implements View.OnClickLi
             //recibe los datos
             nombre.setText(cursor.getString(0));
             raza.setText(cursor.getString(1));
+            idPropi.setText("Id Propieteario actual: " + cursor.getString(2));
             Toast.makeText(this, cursor.getInt(2), Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
