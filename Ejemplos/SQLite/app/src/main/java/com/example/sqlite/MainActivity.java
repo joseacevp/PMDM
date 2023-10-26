@@ -15,6 +15,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        botonConsultarMascotas = findViewById(R.id.botonConsultarMascota);
+        botonConsultarMascotas.setOnClickListener(this);
+
         botonRegistrarPersonas = findViewById(R.id.botonRegistrarPersonas);
         botonRegistrarPersonas.setOnClickListener(this);
 
@@ -49,6 +53,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.botonConsultar:
                 Intent eventoBuscar = new Intent(getApplicationContext(), ConsultaUsuario.class);
                 startActivity(eventoBuscar);
+                break;
+            case R.id.botonConsultarMascota:
+                Intent eventoBuscarMascota = new Intent(getApplicationContext(), ConsultaMascota.class);
+                startActivity(eventoBuscarMascota);
                 break;
             case R.id.botonListaSpinner:
                 Intent eventoListSp = new Intent(getApplicationContext(), ConsultaSpinner.class);

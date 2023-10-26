@@ -23,7 +23,7 @@ public class ConsultaUsuario extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_formulario_consulta);
+        setContentView(R.layout.activity_consulta_usuario);
         botonBuscar = findViewById(R.id.botonBuscar);
         botonBuscar.setOnClickListener(this);
         botonActualizar = findViewById(R.id.botonActualizar);
