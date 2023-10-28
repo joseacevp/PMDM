@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="spinner_departamentos">
+    <item>Seleccione un Departamento</item>
+    <item>Electrico</item>
+    <item>Climatizacion</item>
+    <item>Albanil</item>
+    <item>Fontanero</item>
+    <item>Cerrajero</item>
+    <item>Administrativo</item>
+</string-array>
+</resources>
