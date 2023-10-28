@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:background="@color/teal_700">
+
+    <TextView
+        android:textColor="@color/purple_200"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BIENVENIDO"
+        android:textSize="28dp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"/>
+    <EditText
+        android:textColorHint="@color/white"
+        android:id="@+id/campoEditable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Indique su Nombre"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        />
+    <Button
+        android:onClick="onClickGrabar"
+        android:id="@+id/botonGrabar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Grabar"
+        android:layout_margin="20dp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:textColor="@color/white"
+        android:id="@+id/campoEditado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bienvenido don: "
+        android:textSize="20dp"
+        android:layout_margin="20dp"
+        />
+
+</LinearLayout>
