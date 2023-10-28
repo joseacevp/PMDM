@@ -122,7 +122,7 @@ public class RegistroMascotas extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),
                     "El id del Propietario es : " + idResultado,
                     Toast.LENGTH_SHORT).show();
-
+            bd.close();
         } else {
             Toast.makeText(getApplicationContext(),
                     "Fallo al escribir en la Base de Datos.",

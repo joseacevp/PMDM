@@ -1,5 +1,6 @@
 package com.example.sqlite;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -75,7 +76,8 @@ public class ConsultaMascota extends AppCompatActivity implements View.OnClickLi
 
         //select * from usuarios
         //Cursor para consultar la base de datos
-        Cursor cursor = db.rawQuery("SELECT * FROM " + Utilidades.TABLA_USUARIO, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " +
+                Utilidades.TABLA_USUARIO, null);
 
         //recorremos el cursor para optener los datos obtenidos
         while (cursor.moveToNext()) {
@@ -120,13 +122,52 @@ public class ConsultaMascota extends AppCompatActivity implements View.OnClickLi
                 buscarMascota();
                 break;
             case R.id.botonEliminarMascota:
-
+                eliminar();
                 break;
             case R.id.botonActualizarMascota:
-
+                actualizar();
                 break;
 
         }
+    }
+
+    private void actualizar() {
+        SQLiteDatabase bd = conexion.getWritableDatabase();
+        Log.i("info", "Abierta base datos para actualizar");
+
+        int idSpinner = (int) spinnerDuenios.getSelectedItemId();//numero de id propietario
+
+        String[] parametrosConsulta = {id.getText().toString()};
+        ContentValues values = new ContentValues();
+        int idDuenio;
+
+        if (idSpinner != 0) {
+            idDuenio = listaPropietarios.get(idSpinner - 1).getId();
+// no se actualiza el id de la mascota por que es autoincrementable
+//            values.put(Utilidades.CAMPO_ID_MASCOTA, String.valueOf(id));
+            values.put(Utilidades.CAMPO_ID_DUENIO, idDuenio);
+            values.put(Utilidades.CAMPO_MOMBRE_MASCOTA, nombre.getText().toString());
+            values.put(Utilidades.CAMPO_RAZA, raza.getText().toString());
+            bd.update(Utilidades.TABLA_MASCOTA, values, Utilidades.CAMPO_ID_MASCOTA + " = ? ", parametrosConsulta);
+            Toast.makeText(getApplicationContext(), "Datos Actualizados", Toast.LENGTH_SHORT).show();
+            bd.close();
+        } else {
+            Toast.makeText(getApplicationContext(), "No se pudo actualizar", Toast.LENGTH_SHORT).show();
+        }
+
+        limpiar();
+    }
+
+    private void eliminar() {
+        SQLiteDatabase bd = conexion.getReadableDatabase();
+        Log.i("info", "Abierta la base de datos para leztura");
+        String[] consultaParametros = {
+                id.getText().toString()
+        };
+        bd.delete(Utilidades.TABLA_MASCOTA, Utilidades.CAMPO_ID_MASCOTA + " = ?", consultaParametros);
+        Toast.makeText(getApplicationContext(), "Dato Eliminado", Toast.LENGTH_SHORT).show();
+        limpiar();
+        bd.close();
     }
 
     private void buscarMascota() {
@@ -152,11 +193,20 @@ public class ConsultaMascota extends AppCompatActivity implements View.OnClickLi
             nombre.setText(cursor.getString(0));
             raza.setText(cursor.getString(1));
             idPropi.setText("Id Propieteario actual: " + cursor.getString(2));
-            Toast.makeText(this, cursor.getInt(2), Toast.LENGTH_SHORT).show();
-
+//            Toast.makeText(this,String.valueOf( cursor.getInt(2)), Toast.LENGTH_SHORT).show();
+            bd.close();
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "FALLO EN CONSULTA BASE DE DATOS", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "No existe ninguna mascota con este ID.", Toast.LENGTH_SHORT).show();
+            limpiar();
         }
-        bd.close();
+
+    }
+
+    private void limpiar() {
+        id.setText("");
+        nombre.setText("");
+        raza.setText("");
+        idPropi.setText("");
+
     }
 }
