@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -18,17 +19,20 @@ import com.example.basedatosoperariomaterial.Utilidades.Utilidades;
 import com.example.basedatosoperariomaterial.entidades.Operario;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class ActualizarOperario extends AppCompatActivity {
 
+    Integer idOperario;
     String departamentoSeleccionado = "";
     Button botonBuscar;
-    Spinner spinnerDepartamentos;
+    Spinner spinnerDepartamentos, spinnerOperarios;
     ConexioSQLiteHelper conexion;
     SQLiteDatabase baseDatos;
     Operario operario;
     ArrayList<Operario> listaOperarios = new ArrayList<Operario>();
+    ArrayList<String> listaStringOperarios = new ArrayList<String>();
+    EditText nombre;
+    EditText departamento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,20 +41,36 @@ public class ActualizarOperario extends AppCompatActivity {
 
         //asignaciones
         spinnerDepartamentos = findViewById(R.id.spinnerDepartamento);
-        botonBuscar = findViewById(R.id.buttonBucarOperario);
+        spinnerOperarios = findViewById(R.id.spinnerOperarios);
+        botonBuscar = findViewById(R.id.buttonActualizarOper);
+        nombre = findViewById(R.id.editTextNombre);
+        departamento = findViewById(R.id.editTextDepartamentoOperario);
 
-        ArrayAdapter<CharSequence> adaptadorDepartamentos = ArrayAdapter.createFromResource(getApplicationContext(), R.array.spinner_departamentos, android.R.layout.simple_spinner_item);
+        crearSpinner();
+
+        //adaptadores Spinner
+        ArrayAdapter<CharSequence> adaptadorDepartamentos = ArrayAdapter.createFromResource(getApplicationContext(),
+                R.array.spinner_departamentos, android.R.layout.simple_spinner_dropdown_item);
         spinnerDepartamentos.setAdapter(adaptadorDepartamentos);
+
+
+    }
+
+    private void crearSpinner() {
 
         //metodo para recuperar el dato de la seleccion del Spinner departamentos
         spinnerDepartamentos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
-                if (posicion!=0){
+                if (posicion != 0) {
                     departamentoSeleccionado = spinnerDepartamentos.getSelectedItem().toString();
                     Toast.makeText(getApplicationContext(), departamentoSeleccionado, Toast.LENGTH_SHORT).show();
                     //consultar a la base de datos operarios segun departamentos
-                    consultarOperarios();
+                    consultarOperarios(departamentoSeleccionado);
+                    //carga la lista de operarios en el spinner
+                    ArrayAdapter<CharSequence> adaptardorOperarios = new ArrayAdapter(getApplicationContext(),
+                            android.R.layout.simple_spinner_item, listaStringOperarios);
+                    spinnerOperarios.setAdapter(adaptardorOperarios);
                 }
             }
 
@@ -59,17 +79,31 @@ public class ActualizarOperario extends AppCompatActivity {
 
             }
         });
+        //metodo para escribir los datos del operario seleccionado en los campos editables
+        spinnerOperarios.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
+                if (posicion != 0) {
+                    nombre.setText(listaOperarios.get(posicion -1 ).getNombre());
+                    departamento.setText(listaOperarios.get(posicion -1 ).getDepartamento());
+                    idOperario = listaOperarios.get(posicion -1 ).getIdOperario();
+                }
 
-        //consultar a la base de datos operarios segun departamentos
-        consultarOperarios();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
-    private void consultarOperarios() {
+    private void consultarOperarios(String departamento) {
         conexion = new ConexioSQLiteHelper(getApplicationContext(), "base_dato", null, 1);
         baseDatos = conexion.getReadableDatabase();
         //campo para comparar y seleccionar el resultado
         String[] parametrosConsulta = {
-               departamentoSeleccionado
+                departamento
         };
         //datos a optener desde la base de datos através de la consulta
         String[] resultadoConsulta = {
@@ -98,15 +132,34 @@ public class ActualizarOperario extends AppCompatActivity {
         }
         baseDatos.close();
         trasladarLista();
-
     }
 
     private void trasladarLista() {
-        
+        listaStringOperarios.add("Operarios\b");
+        for (int i = 0; i < listaOperarios.size(); i++) {
+            listaStringOperarios.add("Id: " + listaOperarios.get(i).getIdOperario() + " Nombre: " + listaOperarios.get(i).getNombre());
+            Log.i("info", listaOperarios.get(i).getNombre());
+        }
     }
 
+    public void onClickActualizar(View view) {
+    actualizar();
+    finish();
+    }
 
-    public void onClick(View view) {
-        consultarOperarios();
+    private void actualizar() {
+        conexion = new ConexioSQLiteHelper(getApplicationContext(), "base_dato", null, 1);
+        baseDatos = conexion.getReadableDatabase();
+        String[] consultaParametros = {
+                idOperario.toString()
+                };//parametros de la consulta, pueden ser varios
+        ContentValues values = new ContentValues();
+        values.put(Utilidades.CAMPO_NOMBREOPERARIO,nombre.getText().toString());
+        values.put(Utilidades.CAMPO_DEPARTAMENTO,departamento.getText().toString());
+        //sustituye a la consulta SQL select  nombre,telefono from usuario
+        baseDatos.update(Utilidades.TABLA_OPERARIOS,values,Utilidades.CAMPO_ID_OPERARIO +" = ?",consultaParametros);
+        Toast.makeText(getApplicationContext(),"Datos Actualizados",Toast.LENGTH_SHORT).show();
+        baseDatos.close();
+
     }
 }
