@@ -1,6 +1,7 @@
 package com.example.tarea2sodoku;
 
 public class RemovedNumber {
+    //clase constructura de columnas lias y valores
     public int row;
     public int col;
     public int value;

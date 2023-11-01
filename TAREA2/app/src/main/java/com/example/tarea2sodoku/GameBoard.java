@@ -41,6 +41,7 @@ import java.util.List;
             void onGameOver();
         }
 
+        //constructor de la clase que recibe por parametros el argumento attrs que define el estilo
         public GameBoard(Context context, AttributeSet attrs) {
             super(context, attrs);
             TypedArray a = context.getTheme().obtainStyledAttributes(
@@ -87,7 +88,7 @@ import java.util.List;
         protected void onDraw(Canvas canvas) {
 
             boardPaint.setStyle(Paint.Style.STROKE);
-            boardPaint.setStrokeWidth(16);
+            boardPaint.setStrokeWidth(16);//grueso de la liena esterior
             boardPaint.setColor(boardColor);
             boardPaint.setAntiAlias(true);
 
@@ -137,18 +138,19 @@ import java.util.List;
             }
         }
 
+        //claser que define las lineas que separan los cuadrados de 3 * 3 lienes gruesas
         private void drawThickLines(Canvas canvas) {
             boardPaint.setStyle(Paint.Style.STROKE);
             boardPaint.setStrokeWidth(8);
             boardPaint.setColor(boardColor);
         }
-
+        //clase que define las lineas finas que separan los numeros
         private void drawThinLines(Canvas canvas) {
             boardPaint.setStyle(Paint.Style.STROKE);
             boardPaint.setStrokeWidth(4);
             boardPaint.setColor(boardColor);
         }
-
+        //define las celdas donde se dibujaran los numeros
         private void drawNumbers(Canvas canvas, Paint textPaint) {
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
@@ -163,7 +165,7 @@ import java.util.List;
         }
 
         private void drawInputNumbers(Canvas canvas, Paint paint) {
-            for (int row = 0; row < 9; row++) {
+            for (int row = 0; row <7; row++) {
                 for (int col = 0; col < 9; col++) {
                     if (editableCells[row][col]) {
                         if (sudokuBoard[row][col] != 0) {
@@ -179,6 +181,7 @@ import java.util.List;
             }
         }
 
+        //metodo para registrar el evento de tocar la pantalla
         @Override
         public boolean onTouchEvent(MotionEvent event) {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -200,6 +203,7 @@ import java.util.List;
             return true;
         }
 
+  //metodo introducir numero
         public void setInputNumber(int number) {
             inputNumber = number;
             if (selectedRow != -1 && selectedCol != -1) {
@@ -267,6 +271,8 @@ import java.util.List;
             sudokuBoard[row][col] = value;
         }
 
+
+//reiniciar tablero
         public void resetBoard(int n) {
             sudokuBoard = generator.generate();
             removedNumbers = generator.removeNumbers(n);
