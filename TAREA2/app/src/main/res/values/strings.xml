@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">Tarea2Sodoku</string>
+    <string name="app_name">Sudoku</string>
+    <string name="info">
+        Cada fila, columna y cadrado (9 espacios cada uno) debe completarse con los números
+        del 1 al 9,sin repetir ningún número dentro de la fila, columna o cuadrado.</string>
 </resources>

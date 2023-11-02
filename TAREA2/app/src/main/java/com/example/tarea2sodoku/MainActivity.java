@@ -1,5 +1,6 @@
 package com.example.tarea2sodoku;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -55,11 +56,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_pregunta:
-        Toast.makeText(getApplicationContext(), "¿CÓMO JUGAR?\n" +
-                "Cada fila, columna y cadrado (9 espacios cada uno)" +
-                "debe completarse conlos números del 1 al 9," +
-                "sin repetir ningún número dentro de la fila," +
-                "columna o cuadrado.", Toast.LENGTH_LONG).show();
+                    Intent intencionPregunta = new Intent(this,MensageInfoActivity.class);
+                    startActivity(intencionPregunta);
                 break;
 
             case R.id.menu_dificultad:
