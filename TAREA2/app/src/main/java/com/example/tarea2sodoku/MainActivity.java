@@ -1,7 +1,10 @@
 package com.example.tarea2sodoku;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TimePicker;
@@ -38,6 +41,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         boton9.setOnClickListener(this);
 
 
+    }
+
+    //inicia el menu en la pantalla
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        return true;
+    }
+
+    //maneja las acciones que adoptemos en el menu
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_pregunta:
+        Toast.makeText(getApplicationContext(), "¿CÓMO JUGAR?\n" +
+                "Cada fila, columna y cadrado (9 espacios cada uno)" +
+                "debe completarse conlos números del 1 al 9," +
+                "sin repetir ningún número dentro de la fila," +
+                "columna o cuadrado.", Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.menu_dificultad:
+
+                break;
+
+            case R.id.menu_nueva_partida:
+
+                break;
+
+        }
+        return true;
     }
 
     @Override
