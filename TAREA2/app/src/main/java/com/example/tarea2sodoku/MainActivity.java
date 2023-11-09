@@ -1,20 +1,22 @@
 package com.example.tarea2sodoku;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button boton1, boton2, boton3, boton4, boton5, boton6, boton7, boton8, boton9;
     GameBoard board;
+    int dificultad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         boton9 = findViewById(R.id.button9);
         boton9.setOnClickListener(this);
 
+        board.resetBoard(cargarDificultad());
+    }
 
+    private int cargarDificultad() {
+        SharedPreferences preferencias = getSharedPreferences
+                ("nivelDificultad", Context.MODE_PRIVATE);
+        int numeroCasillasVacias = preferencias.getInt("dificultad", 20);//en caso de no optener
+        // dato por defecto 20 dificultad normal
+
+        Log.i("info", "dificultad recuperada: " + dificultad);
+        return numeroCasillasVacias;
     }
 
     //inicia el menu en la pantalla
@@ -56,20 +68,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_pregunta:
-                    Intent intencionPregunta = new Intent(this,MensageInfoActivity.class);
-                    startActivity(intencionPregunta);
+                Intent intencionPregunta = new Intent(this, MensageInfoActivity.class);
+                startActivity(intencionPregunta);
                 break;
-
             case R.id.menu_dificultad:
-
+                dificultadActivity();
                 break;
-
             case R.id.menu_nueva_partida:
-
+                nuevaPartida(cargarDificultad());
                 break;
-
         }
         return true;
+    }
+
+    private void dificultadActivity() {
+        Intent intencionDificultad = new Intent(this, MenuDificulad.class);
+        startActivity(intencionDificultad);
+    }
+
+    private void nuevaPartida(int dificultad) {
+        board.resetBoard(dificultad);//numero de casillas vacia determina la dificultad
     }
 
     @Override
@@ -77,7 +95,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.button1:
                 board.setInputNumber(1);
-//                board.resetBoard(0);
                 break;
             case R.id.button2:
                 board.setInputNumber(2);
@@ -104,8 +121,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 board.setInputNumber(9);
                 break;
         }
-
-
     }
-
 }

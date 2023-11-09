@@ -8,11 +8,11 @@
 
     <TextView
         android:id="@+id/textViewInfo"
-        android:padding="20dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
+        android:padding="20dp"
         android:text="@string/info"
         android:textAlignment="textStart"
         android:textStyle="bold"
