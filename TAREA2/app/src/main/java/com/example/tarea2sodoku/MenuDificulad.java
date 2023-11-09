@@ -65,5 +65,6 @@ public class MenuDificulad extends AppCompatActivity implements View.OnClickList
         Log.i("info", "dificultad " + dificultad);
         Intent intencion = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intencion);
+        finish();
     }
 }

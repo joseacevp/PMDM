@@ -153,7 +153,7 @@ public class GameBoard extends View {
         boardPaint.setColor(boardColor);
     }
 
-    //define las celdas donde se dibujaran los numeros
+    //define las celdas donde se dibujaran los numeros negros
     private void drawNumbers(Canvas canvas, Paint textPaint) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -166,9 +166,9 @@ public class GameBoard extends View {
             }
         }
     }
-
+    //define el color de los numeros escritos segun el acierto o no
     private void drawInputNumbers(Canvas canvas, Paint paint) {
-        for (int row = 0; row < 7; row++) {
+        for (int row = 0; row < 9; row++) {//fallo color negro en numeros indicados solución cambiar de 7 a 9
             for (int col = 0; col < 9; col++) {
                 if (editableCells[row][col]) {
                     if (sudokuBoard[row][col] != 0) {
