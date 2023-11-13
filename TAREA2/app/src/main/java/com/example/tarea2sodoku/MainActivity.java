@@ -95,8 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_pregunta:
-                Intent intencionPregunta = new Intent(this, MensageInfoActivity.class);
-                startActivity(intencionPregunta);
+                mensageEmerg();
                 break;
             case R.id.menu_dificultad:
                 dificultadActivity();
@@ -141,4 +140,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onKeyDown(keyCode, event);
     }
 
+    public void mensageEmerg() {
+
+//      mensage emergente
+        AlertDialog.Builder constructor = new AlertDialog.Builder(MainActivity.this);
+        constructor.setMessage(R.string.info).setTitle(R.string.titulo_como);
+        AlertDialog dialogo = constructor.create();
+        dialogo.show();
+    }
 }

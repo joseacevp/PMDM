@@ -22,16 +22,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MensageInfoActivity"
-            android:exported="false"
-            android:label="@string/titulo_como"
-
-            android:theme="@style/Theme.AppCompat.Light.Dialog">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="locked"><!--bloquea la orientación de la apicación-->
