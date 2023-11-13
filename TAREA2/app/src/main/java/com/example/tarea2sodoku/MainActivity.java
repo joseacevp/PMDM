@@ -49,50 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         board.resetBoard(cargarDificultad());
     }
 
-    private int cargarDificultad() {
-        SharedPreferences preferencias = getSharedPreferences
-                ("nivelDificultad", Context.MODE_PRIVATE);
-        int numeroCasillasVacias = preferencias.getInt("dificultad", 20);//en caso de no optener
-        // dato por defecto 20 dificultad normal
-
-        Log.i("info", "dificultad recuperada: " + dificultad);
-        return numeroCasillasVacias;
-    }
-
-    //inicia el menu en la pantalla
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_principal, menu);
-        return true;
-    }
-
-    //maneja las acciones que adoptemos en el menu
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_pregunta:
-                Intent intencionPregunta = new Intent(this, MensageInfoActivity.class);
-                startActivity(intencionPregunta);
-                break;
-            case R.id.menu_dificultad:
-                dificultadActivity();
-                break;
-            case R.id.menu_nueva_partida:
-                nuevaPartida(cargarDificultad());
-                break;
-        }
-        return true;
-    }
-
-    private void dificultadActivity() {
-        Intent intencionDificultad = new Intent(this, MenuDificulad.class);
-        startActivity(intencionDificultad);
-    }
-
-    private void nuevaPartida(int dificultad) {
-        board.resetBoard(dificultad);//numero de casillas vacia determina la dificultad
-    }
-
+    //metodo que indica la acción a seguir segun el numero pulsado.
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -125,6 +82,55 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+    //inicia el menu en la pantalla
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        return true;
+    }
+
+    //maneja las acciones que adoptemos en el menu
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_pregunta:
+                Intent intencionPregunta = new Intent(this, MensageInfoActivity.class);
+                startActivity(intencionPregunta);
+                break;
+            case R.id.menu_dificultad:
+                dificultadActivity();
+                break;
+            case R.id.menu_nueva_partida:
+                nuevaPartida(cargarDificultad());
+                break;
+        }
+        return true;
+    }
+
+    //crea el nivel de dificultad recuperado del archivo SharedPreferences
+    private int cargarDificultad() {
+        SharedPreferences preferencias = getSharedPreferences
+                ("nivelDificultad", Context.MODE_PRIVATE);
+        int numeroCasillasVacias = preferencias.getInt("dificultad", 20);//en caso de no optener
+        // dato por defecto 20 dificultad normal
+
+        Log.i("info", "dificultad recuperada: " + dificultad);
+        return numeroCasillasVacias;
+    }
+
+    //lanza al actividad para seleccionar el nivel de dificultad
+    private void dificultadActivity() {
+        Intent intencionDificultad = new Intent(this, MenuDificulad.class);
+        startActivity(intencionDificultad);
+    }
+
+    //metodo para iniciar una nueva partida usara por defecto la ultima dificultad indicada.
+    private void nuevaPartida(int dificultad) {
+        board.resetBoard(dificultad);//numero de casillas vacia determina la dificultad
+    }
+
+
     //cierra la aplicación si damos a la tecla atras.
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
