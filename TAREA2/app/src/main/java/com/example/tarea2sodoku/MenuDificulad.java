@@ -22,10 +22,12 @@ public class MenuDificulad extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_menu_dificulad);
 
         botonFacil = findViewById(R.id.radioButtonFacil);
+        botonFacil.setOnClickListener(this);
         botonNormal = findViewById(R.id.radioButtonNormal);
+        botonNormal.setOnClickListener(this);
         botonDificil = findViewById(R.id.radioButtonDificil);
+        botonDificil.setOnClickListener(this);
         ingresarDifi = findViewById(R.id.textViewVolver);
-        seleccion();
     }
 
     private void enviarDificultad(int dificultad) {
@@ -39,32 +41,25 @@ public class MenuDificulad extends AppCompatActivity implements View.OnClickList
         editor.commit();
     }
 
-//    private void cargarDificultad() {
-//        SharedPreferences preferencias = getSharedPreferences
-//                ("nivelDificultad", Context.MODE_PRIVATE);
-//        dificultad = preferencias.getInt("dificultad",20);
-//        Log.i("info","dificultad recuperada: "+dificultad);
-//    }
-
-    private void seleccion() {
-        if (botonFacil.isChecked()) {
-            dificultad = 10;//diez casillas vacias nivel Facil
-        }
-        if (botonNormal.isChecked()) {
-            dificultad = 20;//veinte casillas vacias nivel Normal
-        }
-        if (botonDificil.isChecked()) {//treintra casillas vacias nivel Dificil
-            dificultad = 30;
-        }
-    }
-
     @Override
     public void onClick(View view) {
-        seleccion();
-        enviarDificultad(dificultad);
-        Log.i("info", "dificultad " + dificultad);
-        Intent intencion = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intencion);
-        finish();
+        switch (view.getId()) {
+            case R.id.radioButtonFacil:
+                dificultad = 10;
+                break;
+            case R.id.radioButtonNormal:
+                dificultad = 20;
+                break;
+            case R.id.radioButtonDificil:
+                dificultad = 30;
+                break;
+            case R.id.textViewVolver:
+                enviarDificultad(dificultad);
+                Log.i("info", "dificultad " + dificultad);
+                Intent intencion = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intencion);
+                break;
+        }
+//
     }
 }

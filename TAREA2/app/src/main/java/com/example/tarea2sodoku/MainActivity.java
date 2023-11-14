@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -129,7 +130,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         board.resetBoard(dificultad);//numero de casillas vacia determina la dificultad
     }
 
-
     //cierra la aplicación si damos a la tecla atras.
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -148,4 +148,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AlertDialog dialogo = constructor.create();
         dialogo.show();
     }
+
+
 }
