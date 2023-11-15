@@ -1,7 +1,6 @@
 package com.example.tarea2sodoku;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
@@ -14,22 +13,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    //instancia de los botones para indicar el numero en la casilla seleccionada
     Button boton1, boton2, boton3, boton4, boton5, boton6, boton7, boton8, boton9;
-    static GameBoard board;//estatico para poder cambiar la dificulad en tiempo real
-    int dificultad ;
+
+    //estatico para poder cambiar la dificulad en tiempo real
+    static GameBoard board;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dificultad = cargarDificultad();
+        //relacionamos el objeto creado de GameBoarD con el xml
         board = findViewById(R.id.gameBoard);
-        board.resetBoard(cargarDificultad());
+
+        //cargamos la dificultad almacenada en disco PERSISTENCIA
+        board.dificultad(descargarDificultad());
 
         boton1 = findViewById(R.id.button1);
         boton1.setOnClickListener(this);
@@ -49,8 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         boton8.setOnClickListener(this);
         boton9 = findViewById(R.id.button9);
         boton9.setOnClickListener(this);
-
-
     }
 
     //metodo que indica la acción a seguir segun el numero pulsado.
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dificultadActivity();
                 break;
             case R.id.menu_nueva_partida:
-                nuevaPartida(cargarDificultad());//nueva partida con la ultima
+                nuevaPartida(descargarDificultad());//nueva partida con la ultima
                 // dificultad seleccionada
                 break;
         }
@@ -113,13 +113,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //crea el nivel de dificultad recuperado del archivo SharedPreferences
-    private int cargarDificultad() {
+    private int descargarDificultad() {
         SharedPreferences preferencias = getSharedPreferences
                 ("nivelDificultad", Context.MODE_PRIVATE);
-        int numeroCasillasVacias = preferencias.getInt("dificultad",20);//en caso de no optener
+        int numeroCasillasVacias = preferencias.getInt("dificultad", 20);//en caso de no optener
         // dato por defecto 20 dificultad normal
 
-        Log.i("info", "dificultad recuperada: " + 20);
+        Log.i("info", "dificultad recuperada: " + numeroCasillasVacias);
         return numeroCasillasVacias;
     }
 
@@ -148,12 +148,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onKeyDown(keyCode, event);
     }
 
-    public void mensageEmerg() {
     //mensage emergente lanza un dialogo con las instrupciones del juego
+    public void mensageEmerg() {
         AlertDialog.Builder constructor = new AlertDialog.Builder(MainActivity.this);
         constructor.setMessage(R.string.info).setTitle(R.string.titulo_como);
         AlertDialog dialogo = constructor.create();
         dialogo.show();
     }
-
 }
