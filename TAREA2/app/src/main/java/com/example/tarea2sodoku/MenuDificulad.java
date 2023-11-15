@@ -1,17 +1,16 @@
 package com.example.tarea2sodoku;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 public class MenuDificulad extends AppCompatActivity implements View.OnClickListener {
+    //instancia de los botones de las opciones de dificultad y tecla volver
     RadioButton botonFacil, botonNormal, botonDificil;
     TextView ingresarDifi;
     int dificultad;
@@ -30,17 +29,19 @@ public class MenuDificulad extends AppCompatActivity implements View.OnClickList
         ingresarDifi = findViewById(R.id.textViewVolver);
     }
 
-    private void enviarDificultad(int dificultad) {
+    //guarda la dificultad seleccionada en disco PERSISTENCIA
+    private void guardarDificultad(int dificultad) {
         SharedPreferences preferencias = getSharedPreferences
                 ("nivelDificultad", Context.MODE_PRIVATE);
         //alamacenamos los datos de los campos
-        //introduciomos los en el archivo XML con un editor.
+        //introducidos  en el archivo XML con un editor.
         SharedPreferences.Editor editor = preferencias.edit();
         editor.putInt("dificultad", dificultad);
         Log.i("info", "dificultad almacenada: " + dificultad);
         editor.commit();
     }
 
+    //llama al metodo nueva partida indicando la dificultad según la selección
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -58,10 +59,10 @@ public class MenuDificulad extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.textViewVolver:
                 Log.i("info", "dificultad " + dificultad);
-                enviarDificultad(dificultad);//graba la dificultad en disco
+                guardarDificultad(dificultad);//graba la dificultad en disco
                 finish();
                 break;
         }
-//
+
     }
 }
