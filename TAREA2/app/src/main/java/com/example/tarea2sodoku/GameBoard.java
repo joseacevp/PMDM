@@ -2,6 +2,7 @@ package com.example.tarea2sodoku;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import android.content.res.TypedArray;
@@ -33,7 +34,7 @@ public class GameBoard extends View {
     private final Paint textPaint = new Paint();
     private final Paint inputTextPaint = new Paint();
 
-    public void dificultad(int casillasVacias){//para cambiar la dificultad
+    public void dificultad(int casillasVacias) {//para cambiar la dificultad
         removedNumbers = generator.removeNumbers(casillasVacias);
 
     }
@@ -166,6 +167,7 @@ public class GameBoard extends View {
             }
         }
     }
+
     //define el color de los numeros escritos segun el acierto o no
     private void drawInputNumbers(Canvas canvas, Paint paint) {
         for (int row = 0; row < 9; row++) {//fallo color negro en numeros indicados solución cambiar de 7 a 9
@@ -230,11 +232,20 @@ public class GameBoard extends View {
         if (isBoardFull()) {
             if (isBoardValid()) {
                 System.out.println("Board is valid");
-                Toast.makeText(getContext().getApplicationContext(), "Enhorabuena", Toast.LENGTH_SHORT).show();
+                //dialogo para notificar que has ganado
+                AlertDialog.Builder constructor = new AlertDialog.Builder(getContext());
+                constructor.setTitle(R.string.ganaste)
+                        .setMessage("\n");
+                AlertDialog dialog = constructor.create();
+                dialog.show();
                 return true;
             } else {
                 System.out.println("Board is not valid");
-                Toast.makeText(getContext().getApplicationContext(), "Intentalo de nuevo", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder constructor = new AlertDialog.Builder(getContext());
+                constructor.setTitle(R.string.perdiste)
+                        .setMessage("\n");
+                AlertDialog dialog = constructor.create();
+                dialog.show();
                 resetBoard(20);
                 return false;
             }
@@ -242,7 +253,6 @@ public class GameBoard extends View {
         }
         return false;
     }
-
 
     private boolean isBoardFull() {//determina si esta completa la tabla
         for (int row = 0; row < generator.getBoardSize(); row++) {

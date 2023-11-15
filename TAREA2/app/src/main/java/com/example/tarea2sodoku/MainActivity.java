@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //cargamos la dificultad almacenada en disco PERSISTENCIA
         board.dificultad(descargarDificultad());
+        board.resetBoard(descargarDificultad());
 
         boton1 = findViewById(R.id.button1);
         boton1.setOnClickListener(this);

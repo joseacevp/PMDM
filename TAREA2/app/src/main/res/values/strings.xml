@@ -9,5 +9,7 @@
     <string name="volver">volver</string>
     <string name="titulo_dificultad">Elija la Dificultad del Nivel</string>
     <string name="titulo_como">¿Como se Juega?</string>
+    <string name="ganaste">Ganaste Enhorabuena</string>
+    <string name="perdiste">Intentalo de Nuevo</string>
 
 </resources>
