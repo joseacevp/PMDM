@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class MenuDificulad extends AppCompatActivity implements View.OnClickListener {
     RadioButton botonFacil, botonNormal, botonDificil;
     TextView ingresarDifi;
-    int dificultad = 20;
+    int dificultad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +46,20 @@ public class MenuDificulad extends AppCompatActivity implements View.OnClickList
         switch (view.getId()) {
             case R.id.radioButtonFacil:
                 dificultad = 10;
+                MainActivity.nuevaPartida(dificultad);
                 break;
             case R.id.radioButtonNormal:
                 dificultad = 20;
+                MainActivity.nuevaPartida(dificultad);
                 break;
             case R.id.radioButtonDificil:
                 dificultad = 30;
+                MainActivity.nuevaPartida(dificultad);
                 break;
             case R.id.textViewVolver:
-                enviarDificultad(dificultad);
                 Log.i("info", "dificultad " + dificultad);
-                Intent intencion = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intencion);
+                enviarDificultad(dificultad);//graba la dificultad en disco
+                finish();
                 break;
         }
 //

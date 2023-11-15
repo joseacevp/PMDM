@@ -19,14 +19,17 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button boton1, boton2, boton3, boton4, boton5, boton6, boton7, boton8, boton9;
-    GameBoard board;
-    int dificultad;
+    static GameBoard board;//estatico para poder cambiar la dificulad en tiempo real
+    int dificultad ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dificultad = cargarDificultad();
         board = findViewById(R.id.gameBoard);
+        board.resetBoard(cargarDificultad());
 
         boton1 = findViewById(R.id.button1);
         boton1.setOnClickListener(this);
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         boton9 = findViewById(R.id.button9);
         boton9.setOnClickListener(this);
 
-        board.resetBoard(cargarDificultad());
+
     }
 
     //metodo que indica la acción a seguir segun el numero pulsado.
@@ -84,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    //inicia el menu en la pantalla
+    //inicia el menu infla el menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_principal, menu);
@@ -102,7 +105,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dificultadActivity();
                 break;
             case R.id.menu_nueva_partida:
-                nuevaPartida(cargarDificultad());
+                nuevaPartida(cargarDificultad());//nueva partida con la ultima
+                // dificultad seleccionada
                 break;
         }
         return true;
@@ -112,10 +116,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int cargarDificultad() {
         SharedPreferences preferencias = getSharedPreferences
                 ("nivelDificultad", Context.MODE_PRIVATE);
-        int numeroCasillasVacias = preferencias.getInt("dificultad", 20);//en caso de no optener
+        int numeroCasillasVacias = preferencias.getInt("dificultad",20);//en caso de no optener
         // dato por defecto 20 dificultad normal
 
-        Log.i("info", "dificultad recuperada: " + dificultad);
+        Log.i("info", "dificultad recuperada: " + 20);
         return numeroCasillasVacias;
     }
 
@@ -126,11 +130,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //metodo para iniciar una nueva partida usara por defecto la ultima dificultad indicada.
-    private void nuevaPartida(int dificultad) {
+    //para poder modificar el estado de la dificulad de la partida en tiempo real de seleccion
+    //modificamos los metodos board y nuevaPartida a publicos y estaticos
+    public static void nuevaPartida(int dificultad) {
         board.resetBoard(dificultad);//numero de casillas vacia determina la dificultad
     }
 
     //cierra la aplicación si damos a la tecla atras.
+    //esto evita que la aplicación cambie de dificultad a una en la que se encontraba
+    //anteriormente
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -141,13 +149,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void mensageEmerg() {
-
-//      mensage emergente
+    //mensage emergente lanza un dialogo con las instrupciones del juego
         AlertDialog.Builder constructor = new AlertDialog.Builder(MainActivity.this);
         constructor.setMessage(R.string.info).setTitle(R.string.titulo_como);
         AlertDialog dialogo = constructor.create();
         dialogo.show();
     }
-
 
 }
