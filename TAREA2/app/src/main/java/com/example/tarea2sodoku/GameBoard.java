@@ -41,6 +41,8 @@ public class GameBoard extends View {
 
     private interface OnGameOverListener {
         void onGameOver();
+
+
     }
 
     //constructor de la clase que recibe por parametros el argumento attrs que define el estilo
@@ -235,7 +237,7 @@ public class GameBoard extends View {
                 //dialogo para notificar que has ganado
                 AlertDialog.Builder constructor = new AlertDialog.Builder(getContext());
                 constructor.setTitle(R.string.ganaste)
-                        .setMessage("\n");
+                        .setMessage("\n\n\n\n");
                 AlertDialog dialog = constructor.create();
                 dialog.show();
                 return true;
@@ -243,10 +245,10 @@ public class GameBoard extends View {
                 System.out.println("Board is not valid");
                 AlertDialog.Builder constructor = new AlertDialog.Builder(getContext());
                 constructor.setTitle(R.string.perdiste)
-                        .setMessage("\n");
+                        .setMessage("\n\n\n\n ");
                 AlertDialog dialog = constructor.create();
                 dialog.show();
-                resetBoard(20);
+                resetBoard(10);
                 return false;
             }
 
@@ -308,7 +310,9 @@ public class GameBoard extends View {
         }
     }
 
+
     private boolean checkNumberPlacement(int row, int col, int number) {
+        
         for (int i = 0; i < 9; i++) {
             if (sudokuBoard[row][i] == number && i != col) {
                 return false;
@@ -333,5 +337,6 @@ public class GameBoard extends View {
 
         return true;
     }
+
 }
 

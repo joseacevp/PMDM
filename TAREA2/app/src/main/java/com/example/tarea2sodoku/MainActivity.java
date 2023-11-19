@@ -117,8 +117,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int descargarDificultad() {
         SharedPreferences preferencias = getSharedPreferences
                 ("nivelDificultad", Context.MODE_PRIVATE);
-        int numeroCasillasVacias = preferencias.getInt("dificultad", 20);//en caso de no optener
-        // dato por defecto 20 dificultad normal
+        int numeroCasillasVacias = preferencias.getInt("dificultad", 10);//en caso de no optener
+        // dato por defecto 10 dificultad facil
 
         Log.i("info", "dificultad recuperada: " + numeroCasillasVacias);
         return numeroCasillasVacias;
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onKeyDown(keyCode, event);
     }
 
-    //mensage emergente lanza un dialogo con las instrupciones del juego
+    //mensaje emergente lanza un dialogo con las instrupciones del juego
     public void mensageEmerg() {
         AlertDialog.Builder constructor = new AlertDialog.Builder(MainActivity.this);
         constructor.setMessage(R.string.info).setTitle(R.string.titulo_como);
