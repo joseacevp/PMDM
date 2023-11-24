@@ -142,7 +142,7 @@ public class GameBoard extends View {
         }
     }
 
-    //claser que define las lineas que separan los cuadrados de 3 * 3 lienes gruesas
+    //clase que define las lineas que separan los cuadrados de 3 * 3 lienes gruesas
     private void drawThickLines(Canvas canvas) {
         boardPaint.setStyle(Paint.Style.STROKE);
         boardPaint.setStrokeWidth(8);
@@ -245,7 +245,7 @@ public class GameBoard extends View {
                 System.out.println("Board is not valid");
                 AlertDialog.Builder constructor = new AlertDialog.Builder(getContext());
                 constructor.setTitle(R.string.perdiste)
-                        .setMessage("\n\n\n\n ");
+                        .setMessage("El numero de aciertos fue: " + consutarAciertos());
                 AlertDialog dialog = constructor.create();
                 dialog.show();
                 resetBoard(10);
@@ -267,6 +267,8 @@ public class GameBoard extends View {
         return true;
     }
 
+    //El método recorre las casillas por columnas y filas y determina si se repite algún numero
+    // si no es así determina que la tabla es valida y el Jugador Gana.
     private boolean isBoardValid() {//ganas
         for (int row = 0; row < generator.getBoardSize(); row++) {
             for (int col = 0; col < generator.getBoardSize(); col++) {
@@ -336,6 +338,22 @@ public class GameBoard extends View {
         }
 
         return true;
+    }
+
+    private int  consutarAciertos() {
+        int aciertos=0;
+        for (int row = 0; row < 9; row++) {//fallo color negro en numeros indicados solución cambiar de 7 a 9
+            for (int col = 0; col < 9; col++) {
+                if (editableCells[row][col]) {
+                    if (sudokuBoard[row][col] != 0) {
+                        if (checkNumberPlacement(row, col, sudokuBoard[row][col])) {
+                           aciertos++;
+                        }
+                    }
+                }
+            }
+        }
+        return aciertos;
     }
 
 }

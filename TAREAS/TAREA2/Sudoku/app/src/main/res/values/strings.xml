@@ -10,6 +10,7 @@
     <string name="titulo_dificultad">Elija la Dificultad del Nivel</string>
     <string name="titulo_como">¿Como se Juega?</string>
     <string name="ganaste">Ganaste Enhorabuena</string>
-    <string name="perdiste">Intentalo de Nuevo</string>
+    <string name="perdiste">Intentalo de Nuevo El numero de numeros acertados es:</string>
+
 
 </resources>

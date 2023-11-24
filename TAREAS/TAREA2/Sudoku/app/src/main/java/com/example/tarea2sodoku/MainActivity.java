@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_pregunta:
-                mensageEmerg();
+                mensajeEmerg();
                 break;
             case R.id.menu_dificultad:
                 dificultadActivity();
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //mensaje emergente lanza un dialogo con las instrupciones del juego
-    public void mensageEmerg() {
+    public void mensajeEmerg() {
         AlertDialog.Builder constructor = new AlertDialog.Builder(MainActivity.this);
         constructor.setMessage(R.string.info).setTitle(R.string.titulo_como);
         AlertDialog dialogo = constructor.create();
