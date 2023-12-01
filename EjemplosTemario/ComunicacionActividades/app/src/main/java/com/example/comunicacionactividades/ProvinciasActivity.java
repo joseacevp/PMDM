@@ -1,6 +1,7 @@
 package com.example.comunicacionactividades;
 
 import android.content.Intent;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,7 @@ public class ProvinciasActivity extends AppCompatActivity   {
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,listaProvincias);
         listVista.setAdapter(adapter);
+
 
         listVista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
