@@ -16,6 +16,16 @@
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
+                <!--                filtro de intent para poder recibir email
+                Este filtro de intent, indicaría que nuestra App está preparada para recibir datos,
+                es decir, tratar un ACTION_SEND, formateado en texto plano (mimeType=”text/plain”).
+                La categoría DEFAULT es la categoría que se debe usar para que tu App pueda ser
+                candidata a tratar un intent implícito de este tipo de acción. -->
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+                <!--                Fin  de filtro email-->
+
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
