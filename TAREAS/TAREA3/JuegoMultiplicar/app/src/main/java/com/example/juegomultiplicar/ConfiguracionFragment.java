@@ -149,12 +149,5 @@ public class ConfiguracionFragment extends Fragment {
             return miFila;
         }
     }
-    public class AdaptadorDificultad extends ArrayAdapter{
-        public AdaptadorDificultad(@NonNull Context context, int resource) {
-            super(context, resource);
-            
-        }
-
-    }
 
 }
