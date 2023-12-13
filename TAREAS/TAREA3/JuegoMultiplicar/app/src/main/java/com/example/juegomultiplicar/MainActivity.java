@@ -1,14 +1,16 @@
 package com.example.juegomultiplicar;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.GregorianCalendar;
+
+public class MainActivity extends AppCompatActivity implements DialogoFecha.OnFechaSeleccionada{
 
     ConfiguracionFragment pantallaConfig = new ConfiguracionFragment();
     EntrenarFragment pantallaEntrenar = new EntrenarFragment();
@@ -54,5 +56,10 @@ public class MainActivity extends AppCompatActivity {
         //relaciona el fragment recibido "f" con el contenedor de fragment 'frame_container'
         transaction.replace(R.id.fragment_container,f);
         transaction.commit();
+    }
+//manejo de la fecha seleccionada en la pantalla configuracion
+    @Override
+    public void onResultadoFecha(GregorianCalendar fecha) {
+
     }
 }

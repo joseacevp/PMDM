@@ -10,17 +10,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.support.v4.app.DialogFragment;
+import java.util.GregorianCalendar;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ConfiguracionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ConfiguracionFragment extends Fragment {
+public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFechaSeleccionada {
     View view;
+    DialogoFecha fecha = new DialogoFecha();
     String[] ciudades = {"Batman",
             "Hulk",
             "Airon Man",
@@ -30,7 +34,7 @@ public class ConfiguracionFragment extends Fragment {
             "Hulk, El Increíble Hulk,\u200B El Justiciero, El Hombre Increíble",
             "Tony Stark, Iron Man (El Hombre de Hierro)",
             "Nómada, El Capitán, Cap, Steve Rogers, Steve"
-            };
+    };
 
     int imagenes[] = {R.drawable.batmancuatro,
             R.drawable.huld_cuatro,
@@ -80,6 +84,8 @@ public class ConfiguracionFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_configuracion, container, false);
 
+        Button boton = view.findViewById(R.id.boton_fecha_config);
+        boton.setOnClickListener(this::seleccion_fecha);
         Spinner selectorAbatar = view.findViewById(R.id.spinner_avatar);
         AdaptadorPersonalizado a = new AdaptadorPersonalizado(getContext(),
                 R.layout.linea_personajes, ciudades);
@@ -98,11 +104,24 @@ public class ConfiguracionFragment extends Fragment {
         });
 
         Spinner selectorDificultad = view.findViewById(R.id.spinner_dificultad);
-        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(getContext(),R.array.array_dificultad,
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.array_dificultad,
                 android.R.layout.simple_spinner_item);
         selectorDificultad.setAdapter(adapter);
 
+
         return view;
+
+    }
+
+    @Override
+    public void onResultadoFecha(GregorianCalendar fecha) {
+
+
+    }
+
+    public void seleccion_fecha(View view) {
+
+        fecha.show(getFragmentManager(), "fecha");
 
     }
 

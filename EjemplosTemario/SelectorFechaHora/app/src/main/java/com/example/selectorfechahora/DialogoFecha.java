@@ -14,21 +14,21 @@ import java.util.GregorianCalendar;
 public class DialogoFecha extends DialogFragment implements DatePickerDialog.OnDateSetListener {
     OnFechaSeleccionada f;
 
-    @Override
-    public void onAttach(Context activity) {
-        f = (OnFechaSeleccionada) activity;
-        super.onAttach(activity);
-    }
+        @Override
+        public void onAttach(Context activity) {
+            f = (OnFechaSeleccionada) activity;
+            super.onAttach(activity);
+        }
 
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Calendar c = Calendar.getInstance();
-        int ano = c.get(Calendar.YEAR);
-        int mes = c.get(Calendar.MONTH);
-        int dia = c.get(Calendar.DAY_OF_MONTH);
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            Calendar c = Calendar.getInstance();
+            int ano = c.get(Calendar.YEAR);
+            int mes = c.get(Calendar.MONTH);
+            int dia = c.get(Calendar.DAY_OF_MONTH);
 
-        return new DatePickerDialog(getActivity(),this,ano,mes,dia);
-    }
+            return new DatePickerDialog(getActivity(),this,ano,mes,dia);
+        }
 
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
