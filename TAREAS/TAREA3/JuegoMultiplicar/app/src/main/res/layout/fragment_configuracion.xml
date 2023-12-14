@@ -91,6 +91,7 @@
                     android:id="@+id/tabla_layout"
                     android:layout_width="409dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp">
 
                     <TableRow
@@ -190,11 +191,12 @@
 
                 <Button
                     android:id="@+id/boton_fecha_config"
-                    android:onClick="seleccion_fecha"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="32dp"
+                    android:onClick="seleccion_fecha"
                     android:text="Seleccionar Fecha"
                     android:textStyle="bold" />
 

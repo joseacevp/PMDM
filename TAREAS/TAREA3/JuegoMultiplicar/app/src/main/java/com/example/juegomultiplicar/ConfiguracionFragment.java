@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.support.v4.app.DialogFragment;
+
 import java.util.GregorianCalendar;
 
 /**
@@ -25,18 +25,18 @@ import java.util.GregorianCalendar;
 public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFechaSeleccionada {
     View view;
     DialogoFecha fecha = new DialogoFecha();
-    String[] ciudades = {"Batman",
+   private String[] heroes = {"Batman",
             "Hulk",
             "Airon Man",
             "Capitan America"};
 
-    String[] descripcion = {"Matches Malone\u200B El caballero de la noche El caballero oscuro Zurdo Knox\u200B El señor de la noche\u200B",
+    private String[] descripcion = {"Matches Malone\u200B El caballero de la noche El caballero oscuro Zurdo Knox\u200B El señor de la noche\u200B",
             "Hulk, El Increíble Hulk,\u200B El Justiciero, El Hombre Increíble",
             "Tony Stark, Iron Man (El Hombre de Hierro)",
             "Nómada, El Capitán, Cap, Steve Rogers, Steve"
     };
 
-    int imagenes[] = {R.drawable.batmancuatro,
+    private int imagenes[] = {R.drawable.batman,
             R.drawable.huld_cuatro,
             R.drawable.iron_cuatro,
             R.drawable.capi_cuatro
@@ -88,7 +88,7 @@ public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFe
         boton.setOnClickListener(this::seleccion_fecha);
         Spinner selectorAbatar = view.findViewById(R.id.spinner_avatar);
         AdaptadorPersonalizado a = new AdaptadorPersonalizado(getContext(),
-                R.layout.linea_personajes, ciudades);
+                R.layout.linea_personajes, heroes);
         selectorAbatar.setAdapter(a);
 
         selectorAbatar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -158,7 +158,7 @@ public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFe
                     parent, false);
 
             TextView nombre = miFila.findViewById(R.id.nombre);
-            nombre.setText(ciudades[position]);
+            nombre.setText(heroes[position]);
 
             TextView descipcion = miFila.findViewById(R.id.descripcion);
             descipcion.setText(descripcion[position]);

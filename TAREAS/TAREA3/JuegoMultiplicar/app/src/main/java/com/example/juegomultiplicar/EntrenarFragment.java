@@ -5,6 +5,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -12,6 +15,17 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class EntrenarFragment extends Fragment {
+
+    View view;
+
+
+    private int[] imagen = {R.drawable.batmanuno
+            , R.drawable.batmandos, R.drawable.batmantres
+            , R.drawable.batmancuatro, R.drawable.batmancinco, R.drawable.batmanseis
+            , R.drawable.batmansiete, R.drawable.batmanocho
+            , R.drawable.batmannueve, R.drawable.batman};
+    private int indiceActual = 0;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,6 +71,44 @@ public class EntrenarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_entrenar, container, false);
+        view = inflater.inflate(R.layout.fragment_entrenar, container, false);
+
+
+
+
+        mostrarImagen();
+        ///////   prueba imagen progresiva
+        Button bonton_cero = view.findViewById(R.id.boton_tabla_cero);
+        bonton_cero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                mostrarImagen();
+                mostrarBara();
+            }
+        });
+        ///////           fin
+        return view;
+
     }
+
+    private void mostrarBara() {
+        ProgressBar bar = view.findViewById(R.id.progressBar);
+
+            indiceActual++;
+
+
+        bar.setProgress(indiceActual);
+    }
+
+    private void mostrarImagen() {
+            ImageView imageView = view.findViewById(R.id.imageViewHeroe);
+        if (indiceActual < imagen.length - 1) {
+            indiceActual++;
+
+        } else {
+            indiceActual = 0;
+        }
+        imageView.setImageResource(imagen[indiceActual]);
+    }
+
 }
