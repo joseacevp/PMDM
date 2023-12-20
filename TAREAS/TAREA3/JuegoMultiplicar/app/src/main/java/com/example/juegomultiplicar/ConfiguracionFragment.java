@@ -27,7 +27,7 @@ public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFe
     DialogoFecha fecha = new DialogoFecha();
    private String[] heroes = {"Batman",
             "Hulk",
-            "Airon Man",
+            "Iron Man",
             "Capitan America"};
 
     private String[] descripcion = {"Matches Malone\u200B El caballero de la noche El caballero oscuro Zurdo Knox\u200B El señor de la noche\u200B",
@@ -37,9 +37,9 @@ public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFe
     };
 
     private int imagenes[] = {R.drawable.batman,
-            R.drawable.huld_cuatro,
-            R.drawable.iron_cuatro,
-            R.drawable.capi_cuatro
+            R.drawable.huld,
+            R.drawable.iron,
+            R.drawable.capi
     };
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
