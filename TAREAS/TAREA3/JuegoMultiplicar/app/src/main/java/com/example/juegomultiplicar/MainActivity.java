@@ -52,6 +52,9 @@ public class MainActivity extends AppCompatActivity implements DialogoFecha.OnFe
     };
 
     public void loadFragment(Fragment f){
+
+
+        //
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         //relaciona el fragment recibido "f" con el contenedor de fragment 'frame_container'
         transaction.replace(R.id.fragment_container,f);

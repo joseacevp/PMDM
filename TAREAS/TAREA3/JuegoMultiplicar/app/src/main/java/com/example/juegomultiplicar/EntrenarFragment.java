@@ -2,6 +2,8 @@ package com.example.juegomultiplicar;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,10 @@ import java.util.Random;
 public class EntrenarFragment extends Fragment implements View.OnClickListener {
 
     View view;
+    EstadisticasFragment estadisticasFragment = new EstadisticasFragment();
+
+    Bundle datosRecividos ;
+
     private int indiceActualImagen = 0;
     private int indiceActualBarra = 0;
     TextView respuesta, pregunta, respuestaUsuario;
@@ -86,6 +92,14 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_entrenar, container, false);
+
+        datosRecividos = getActivity().getIntent().getExtras();
+        if (datosRecividos!=null){
+            int numeroTabla = datosRecividos.getInt("numero");
+            Log.i("Info",Integer.toString(numeroTabla));
+            String dificultad = datosRecividos.getString("dificultad");
+            Log.i("Info",dificultad);
+        }
 
         Button boton_cero = view.findViewById(R.id.boton_cero);
         Button boton_uno = view.findViewById(R.id.boton_uno);
@@ -181,7 +195,17 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
             case R.id.boton_ok:
                 // Aquí puedes procesar la respuesta actual (respuestaUsuario.getText().toString())
                 // y verificar si es correcta.
-                chekearRespuesta(1);
+
+                if (indiceActualBarra < 10) {
+                    chekearRespuesta(1);
+                    iniciarTablaDificil();
+
+                } else {
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    //relaciona el fragment recibido "f" con el contenedor de fragment 'frame_container'
+                    transaction.replace(R.id.fragment_container, estadisticasFragment);
+                    transaction.commit();
+                }
             case R.id.boton_borrar:
                 // Aquí puedes implementar la lógica para borrar un dígito de la respuestaUsuario.
                 borrarNumeroRespuesta();
