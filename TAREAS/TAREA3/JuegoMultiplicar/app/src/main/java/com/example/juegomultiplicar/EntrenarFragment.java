@@ -26,14 +26,14 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
     View view;
     EstadisticasFragment estadisticasFragment = new EstadisticasFragment();
     SharedPreferences preferencias;
-    Bundle datosRecividos ;
+    Bundle datosRecividos;
     String tabla, dificultad, heroe, fecha;
 
     private int indiceActualImagen = 0;
     private int indiceActualBarra = 0;
     TextView respuesta, pregunta, respuestaUsuario;
 
-
+    int[] imagen;
     private int[] imagen_batman = {R.drawable.batmanuno
             , R.drawable.batmandos, R.drawable.batmantres
             , R.drawable.batmancuatro, R.drawable.batmancinco
@@ -97,16 +97,16 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.fragment_entrenar, container, false);
 
         cargarPreferencias();
-        Log.i("Dificulatad",tabla);
-        Log.i("Dificulatad",dificultad);
-        Log.i("Dificulatad",heroe);
-        Log.i("Dificulatad",fecha);
+        Log.i("Dificulatad", tabla);
+        Log.i("Dificulatad", dificultad);
+        Log.i("Dificulatad", heroe);
+        Log.i("Dificulatad", fecha);
         datosRecividos = getActivity().getIntent().getExtras();
-        if (datosRecividos!=null){
+        if (datosRecividos != null) {
             int numeroTabla = datosRecividos.getInt("numero");
-            Log.i("Info",Integer.toString(numeroTabla));
+            Log.i("Info", Integer.toString(numeroTabla));
             String dificultad = datosRecividos.getString("dificultad");
-            Log.i("Info",dificultad);
+            Log.i("Info", dificultad);
         }
 
         Button boton_cero = view.findViewById(R.id.boton_diez);
@@ -173,16 +173,30 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         bar.setProgress(indiceActualBarra);
     }
 
-    private void mostrarImagen() {
+    private void mostrarImagen(String heroe) {
+        switch (heroe) {
+            case "Batman":
+                imagen = imagen_batman;
+                break;
+            case "Hulk":
+                imagen = imagen_hulk;
+                break;
+            case "Iron Man":
+                imagen = imagen_iron;
+                break;
+            case "Capitan America":
+                imagen = imagen_capi;
+                break;
+        }
         ImageView imageView = view.findViewById(R.id.imageViewHeroe);
-        if (indiceActualImagen < imagen_batman.length - 1) {
+        if (indiceActualImagen < imagen.length - 1){
             indiceActualImagen++;
 
         }
 //        else {
 //            indiceActual = 0;
 //        }
-        imageView.setImageResource(imagen_batman[indiceActualImagen]);
+        imageView.setImageResource(imagen[indiceActualImagen]);
     }
 
     @Override
@@ -237,7 +251,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
             if (respuestaUsuarioInt == respuestaEsperada) {
                 // La respuesta es correcta
 //                respuesta.setText("¡Respuesta Correcta!");
-                mostrarImagen();
+                mostrarImagen(heroe);
             } else {
                 // La respuesta es incorrecta
 
