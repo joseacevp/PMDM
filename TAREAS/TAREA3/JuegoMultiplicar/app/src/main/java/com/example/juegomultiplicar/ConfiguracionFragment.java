@@ -25,10 +25,12 @@ import java.util.GregorianCalendar;
  * Use the {@link ConfiguracionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFechaSeleccionada {
+public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFechaSeleccionada, View.OnClickListener {
     View view;
     DialogoFecha fecha = new DialogoFecha();
-    String heroe,dificultad,fechaSeleccionada;
+    String heroe, dificultad, fechaSeleccionada, tabla,numero_tabla_selec;
+    Button botonGrabar;
+
     private String[] heroes = {"Batman",
             "Hulk",
             "Iron Man",
@@ -92,15 +94,18 @@ public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFe
         SharedPreferences.Editor editor = preferencias.edit();
         editor.putString("heroe", heroe);
         editor.putString("dificultad", dificultad);
-        editor.putString("fecha",fechaSeleccionada);
+        editor.putString("fecha", fechaSeleccionada);
+        editor.putString("tabla", numero_tabla_selec);
         editor.commit();
 
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_configuracion, container, false);
-      
+
+        botonGrabar = view.findViewById(R.id.botonGrabarConf);
         Button boton = view.findViewById(R.id.boton_fecha_config);
         boton.setOnClickListener(this::seleccion_fecha);
         Spinner selectorAbatar = view.findViewById(R.id.spinner_avatar);
@@ -129,9 +134,9 @@ public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFe
         selectorDificultad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                dificultad =adapterView.getItemAtPosition(i).toString();
+                dificultad = adapterView.getItemAtPosition(i).toString();
                 Toast.makeText(getContext(), dificultad, Toast.LENGTH_SHORT).show();
-                          }
+            }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -139,8 +144,19 @@ public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFe
             }
         });
 
+        grabarConfiguracion();
         return view;
 
+    }
+
+    private void grabarConfiguracion() {
+        botonGrabar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                guardarPreferencias();
+            }
+        });
     }
 
     @Override
@@ -153,12 +169,52 @@ public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFe
 //
 //
         fechaSeleccionada = String.valueOf(fecha.get(Calendar.DAY_OF_MONTH));
-         }
+    }
 
     public void seleccion_fecha(View view) {
 
         fecha.show(getFragmentManager(), "fecha");
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.boton_diez:
+                tabla = "10";
+                break;
+            case R.id.boton_uno:
+                tabla = "1";
+                break;
+            case R.id.boton_dos:
+                tabla = "2";
+                break;
+            case R.id.boton_tres:
+                tabla = "3";
+                break;
+            case R.id.boton_cuatro:
+                tabla = "4";
+                break;
+            case R.id.boton_cinco:
+                tabla = "5";
+                break;
+            case R.id.boton_seis:
+                tabla = "6";
+                break;
+            case R.id.boton_siete:
+                tabla = "7";
+                break;
+            case R.id.boton_ocho:
+
+                tabla = "8";
+                break;
+            case R.id.boton_nueve:
+                tabla = "9";
+                break;
+            case R.id.boton_ok:
+                numero_tabla_selec = tabla;
+                break;
+        }
     }
 
 

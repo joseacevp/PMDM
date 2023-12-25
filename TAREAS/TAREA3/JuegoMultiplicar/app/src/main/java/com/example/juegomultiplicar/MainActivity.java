@@ -10,11 +10,12 @@ import android.view.MenuItem;
 
 import java.util.GregorianCalendar;
 
-public class MainActivity extends AppCompatActivity implements DialogoFecha.OnFechaSeleccionada{
+public class MainActivity extends AppCompatActivity implements DialogoFecha.OnFechaSeleccionada {
 
     ConfiguracionFragment pantallaConfig = new ConfiguracionFragment();
     EntrenarFragment pantallaEntrenar = new EntrenarFragment();
     EstadisticasFragment pantallaEstadisticas = new EstadisticasFragment();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements DialogoFecha.OnFe
         loadFragment(pantallaConfig);
 
     }
+
+
 
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavegationListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -51,16 +54,15 @@ public class MainActivity extends AppCompatActivity implements DialogoFecha.OnFe
         }
     };
 
-    public void loadFragment(Fragment f){
+    public void loadFragment(Fragment f) {
 
-
-        //
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         //relaciona el fragment recibido "f" con el contenedor de fragment 'frame_container'
-        transaction.replace(R.id.fragment_container,f);
+        transaction.replace(R.id.fragment_container, f);
         transaction.commit();
     }
-//manejo de la fecha seleccionada en la pantalla configuracion
+
+    //manejo de la fecha seleccionada en la pantalla configuracion
     @Override
     public void onResultadoFecha(GregorianCalendar fecha) {
 

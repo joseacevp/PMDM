@@ -1,5 +1,7 @@
 package com.example.juegomultiplicar;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -23,8 +25,9 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
 
     View view;
     EstadisticasFragment estadisticasFragment = new EstadisticasFragment();
-
+    SharedPreferences preferencias;
     Bundle datosRecividos ;
+    String tabla, dificultad, heroe, fecha;
 
     private int indiceActualImagen = 0;
     private int indiceActualBarra = 0;
@@ -93,6 +96,11 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_entrenar, container, false);
 
+        cargarPreferencias();
+        Log.i("Dificulatad",tabla);
+        Log.i("Dificulatad",dificultad);
+        Log.i("Dificulatad",heroe);
+        Log.i("Dificulatad",fecha);
         datosRecividos = getActivity().getIntent().getExtras();
         if (datosRecividos!=null){
             int numeroTabla = datosRecividos.getInt("numero");
@@ -101,7 +109,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
             Log.i("Info",dificultad);
         }
 
-        Button boton_cero = view.findViewById(R.id.boton_cero);
+        Button boton_cero = view.findViewById(R.id.boton_diez);
         Button boton_uno = view.findViewById(R.id.boton_uno);
         Button boton_dos = view.findViewById(R.id.boton_dos);
         Button boton_tres = view.findViewById(R.id.boton_tres);
@@ -180,7 +188,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.boton_cero:
+            case R.id.boton_diez:
             case R.id.boton_uno:
             case R.id.boton_dos:
             case R.id.boton_tres:
@@ -256,5 +264,17 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         if (!respuestaString.isEmpty()) {
             respuestaUsuario.setText(respuestaString.substring(0, respuestaString.length() - 1));
         }
+    }
+
+    //metodo que carga los datos previamente almacenados en un XML de preferencias
+    private void cargarPreferencias() {
+        SharedPreferences preferencias = requireActivity().getSharedPreferences
+                ("credenciales", Context.MODE_PRIVATE);
+
+        tabla = preferencias.getString("tabla", "Sin información");
+        dificultad = preferencias.getString("dificultad", "Sin información");
+        heroe = preferencias.getString("heroe", "Sin información");
+        fecha = preferencias.getString("fecha", "Sin información");
+
     }
 }
