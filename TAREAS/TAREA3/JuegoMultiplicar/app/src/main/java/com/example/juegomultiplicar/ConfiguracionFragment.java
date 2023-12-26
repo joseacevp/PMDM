@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -209,6 +208,7 @@ public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFe
 
     @Override
     public void onClick(View view) {
+
         switch (view.getId()) {
             case R.id.boton_tabla_diez:
                 tabla = "10";
@@ -243,13 +243,13 @@ public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFe
             case R.id.boton_tabla_aleatorio:
                 tabla = "aleatorio";
                 break;
-            case R.id.boton_ok:
+            case R.id.boton_tabla_ok:
                 numero_tabla_selec = tabla;
-                Log.i("numero", tabla);
+                 System.out.println(numero_tabla_selec);
                 break;
         }
-    }
 
+    }
 
     public class AdaptadorPersonalizado extends ArrayAdapter {
 
