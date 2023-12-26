@@ -27,7 +27,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
     EstadisticasFragment estadisticasFragment = new EstadisticasFragment();
     SharedPreferences preferencias;
     Bundle datosRecividos;
-    String tabla, dificultad, heroe, fecha;
+    private String tabla, dificultad, heroe, fecha;
 
     private int indiceActualImagen = 0;
     private int indiceActualBarra = 0;
@@ -97,10 +97,10 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.fragment_entrenar, container, false);
 
         cargarPreferencias();
-        Log.i("Dificulatad", tabla);
+        Log.i("Tabla", tabla);
         Log.i("Dificulatad", dificultad);
-        Log.i("Dificulatad", heroe);
-        Log.i("Dificulatad", fecha);
+        Log.i("Heroe", heroe);
+        Log.i("Fecha", fecha);
         datosRecividos = getActivity().getIntent().getExtras();
         if (datosRecividos != null) {
             int numeroTabla = datosRecividos.getInt("numero");
@@ -189,7 +189,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
                 break;
         }
         ImageView imageView = view.findViewById(R.id.imageViewHeroe);
-        if (indiceActualImagen < imagen.length - 1){
+        if (indiceActualImagen < imagen.length - 1) {
             indiceActualImagen++;
 
         }

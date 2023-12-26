@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,7 @@ import java.util.GregorianCalendar;
 public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFechaSeleccionada, View.OnClickListener {
     View view;
     DialogoFecha fecha = new DialogoFecha();
-    String heroe, dificultad, fechaSeleccionada, tabla,numero_tabla_selec;
+    private String heroe, dificultad, fechaSeleccionada, tabla, numero_tabla_selec;
     Button botonGrabar;
 
     private String[] heroes = {"Batman",
@@ -96,14 +97,41 @@ public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFe
         editor.putString("dificultad", dificultad);
         editor.putString("fecha", fechaSeleccionada);
         editor.putString("tabla", numero_tabla_selec);
-        editor.commit();
 
+        editor.commit();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_configuracion, container, false);
+        //botones numericos
+        Button boton_diez = view.findViewById(R.id.boton_tabla_diez);
+        Button boton_uno = view.findViewById(R.id.boton_tabla_uno);
+        Button boton_dos = view.findViewById(R.id.boton_tabla_dos);
+        Button boton_tres = view.findViewById(R.id.boton_tabla_tres);
+        Button boton_cuatro = view.findViewById(R.id.boton_tabla_cuatro);
+        Button boton_cinco = view.findViewById(R.id.boton_tabla_cinco);
+        Button boton_seis = view.findViewById(R.id.boton_tabla_seis);
+        Button boton_siete = view.findViewById(R.id.boton_tabla_siete);
+        Button boton_ocho = view.findViewById(R.id.boton_tabla_ocho);
+        Button boton_nueve = view.findViewById(R.id.boton_tabla_nueve);
+        Button boton_ok = view.findViewById(R.id.boton_tabla_ok);
+        Button boton_aleatorio = view.findViewById(R.id.boton_tabla_aleatorio);
+        boton_diez.setOnClickListener(this);
+        boton_uno.setOnClickListener(this);
+        boton_dos.setOnClickListener(this);
+        boton_tres.setOnClickListener(this);
+        boton_cuatro.setOnClickListener(this);
+        boton_cinco.setOnClickListener(this);
+        boton_seis.setOnClickListener(this);
+        boton_siete.setOnClickListener(this);
+        boton_ocho.setOnClickListener(this);
+        boton_nueve.setOnClickListener(this);
+        boton_ok.setOnClickListener(this);
+        boton_aleatorio.setOnClickListener(this);
+
+        //
 
         botonGrabar = view.findViewById(R.id.botonGrabarConf);
         Button boton = view.findViewById(R.id.boton_fecha_config);
@@ -145,6 +173,7 @@ public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFe
         });
 
         grabarConfiguracion();
+
         return view;
 
     }
@@ -155,6 +184,7 @@ public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFe
             public void onClick(View view) {
 
                 guardarPreferencias();
+
             }
         });
     }
@@ -180,39 +210,42 @@ public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.boton_diez:
+            case R.id.boton_tabla_diez:
                 tabla = "10";
                 break;
-            case R.id.boton_uno:
+            case R.id.boton_tabla_uno:
                 tabla = "1";
                 break;
-            case R.id.boton_dos:
+            case R.id.boton_tabla_dos:
                 tabla = "2";
                 break;
-            case R.id.boton_tres:
+            case R.id.boton_tabla_tres:
                 tabla = "3";
                 break;
-            case R.id.boton_cuatro:
+            case R.id.boton_tabla_cuatro:
                 tabla = "4";
                 break;
-            case R.id.boton_cinco:
+            case R.id.boton_tabla_cinco:
                 tabla = "5";
                 break;
-            case R.id.boton_seis:
+            case R.id.boton_tabla_seis:
                 tabla = "6";
                 break;
-            case R.id.boton_siete:
+            case R.id.boton_tabla_siete:
                 tabla = "7";
                 break;
-            case R.id.boton_ocho:
-
+            case R.id.boton_tabla_ocho:
                 tabla = "8";
                 break;
-            case R.id.boton_nueve:
+            case R.id.boton_tabla_nueve:
                 tabla = "9";
+                break;
+            case R.id.boton_tabla_aleatorio:
+                tabla = "aleatorio";
                 break;
             case R.id.boton_ok:
                 numero_tabla_selec = tabla;
+                Log.i("numero", tabla);
                 break;
         }
     }

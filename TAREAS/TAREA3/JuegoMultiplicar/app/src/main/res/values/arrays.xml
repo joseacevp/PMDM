@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="array_dificultad">
-        <item>Dificultad</item>
         <item>Facil</item>
         <item>Normal</item>
         <item>Dificil</item>

@@ -98,11 +98,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <Button
-                            android:id="@+id/boton_tabla_cero"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0" />
 
                         <Button
                             android:id="@+id/boton_tabla_uno"
@@ -122,17 +117,17 @@
                             android:layout_height="wrap_content"
                             android:text="3" />
 
+                        <Button
+                            android:id="@+id/boton_tabla_cuatro"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4" />
                     </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <Button
-                            android:id="@+id/boton_tabla_cuatro"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="4" />
 
                         <Button
                             android:id="@+id/boton_tabla_cinco"
@@ -151,23 +146,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="7" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <Button
-                            android:id="@+id/boton_tabla_borrar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Borrar" />
 
                         <Button
                             android:id="@+id/boton_tabla_ocho"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="8" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
 
                         <Button
                             android:id="@+id/boton_tabla_nueve"
@@ -175,6 +165,17 @@
                             android:layout_height="wrap_content"
                             android:text="9" />
 
+                        <Button
+                            android:id="@+id/boton_tabla_diez"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="10" />
+
+                        <Button
+                            android:id="@+id/boton_tabla_aleatorio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="¿" />
 
                         <Button
                             android:id="@+id/boton_tabla_ok"
