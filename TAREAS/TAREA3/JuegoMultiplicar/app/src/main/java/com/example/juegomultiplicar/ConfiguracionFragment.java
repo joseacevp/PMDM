@@ -20,12 +20,9 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ConfiguracionFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class ConfiguracionFragment extends Fragment implements View.OnClickListener, DialogoFecha.OnFechaSeleccionada {
+    //variables
     View view;
     String heroe, dificultad, fechaSeleccionada, tabla, numero_tabla_selec;
     Button botonGrabar;
@@ -46,41 +43,16 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             R.drawable.iron,
             R.drawable.capi
     };
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public ConfiguracionFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ConfiguracionFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ConfiguracionFragment newInstance(String param1, String param2) {
-        ConfiguracionFragment fragment = new ConfiguracionFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
     }
 
@@ -103,6 +75,46 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_configuracion, container, false);
+
+        //spinner selector de abatar
+        Spinner selectorAbatar = view.findViewById(R.id.spinner_avatar);
+        AdaptadorPersonalizado a = new AdaptadorPersonalizado(getContext(),
+                R.layout.linea_personajes, heroes);
+        selectorAbatar.setAdapter(a);
+
+        selectorAbatar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //codigo para gestionar lo que ocurre cuando seleccionas una opcion del Spinner
+                heroe = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(getContext(), heroe, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+        //spinner selector de dificultad
+        Spinner selectorDificultad = view.findViewById(R.id.spinner_dificultad);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.array_dificultad,
+                android.R.layout.simple_spinner_item);
+        selectorDificultad.setAdapter(adapter);
+        selectorDificultad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                dificultad = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(getContext(), dificultad, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         //botones numericos
         Button boton_diez = view.findViewById(R.id.boton_tabla_diez);
         Button boton_uno = view.findViewById(R.id.boton_tabla_uno);
@@ -129,9 +141,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
         boton_ok.setOnClickListener(this);
         boton_aleatorio.setOnClickListener(this);
 
-        //
-
-        botonGrabar = view.findViewById(R.id.botonGrabarConf);
+        //boton seleccionar fecha
         Button boton = view.findViewById(R.id.boton_fecha_config);
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,48 +153,16 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
 
             }
         });
-        Spinner selectorAbatar = view.findViewById(R.id.spinner_avatar);
-        AdaptadorPersonalizado a = new AdaptadorPersonalizado(getContext(),
-                R.layout.linea_personajes, heroes);
-        selectorAbatar.setAdapter(a);
 
-        selectorAbatar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //codigo para gestionar lo que ocurre cuando seleccionas una opcion del Spinner
-                heroe = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(getContext(), heroe, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        Spinner selectorDificultad = view.findViewById(R.id.spinner_dificultad);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.array_dificultad,
-                android.R.layout.simple_spinner_item);
-        selectorDificultad.setAdapter(adapter);
-        selectorDificultad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                dificultad = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(getContext(), dificultad, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
+        //boton grabar preferencias
+        botonGrabar = view.findViewById(R.id.botonGrabarConf);
         grabarConfiguracion();
 
         return view;
 
     }
 
+    //graba la configuración en fichero XML
     private void grabarConfiguracion() {
         botonGrabar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,6 +172,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
         });
     }
 
+    //botonera para seleccionar el numero de tabla multiplicar
     @Override
     public void onClick(View view) {
 
@@ -239,12 +218,14 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
 
     }
 
+    //control de los datos optenidos en la selección de la fecha
     @Override
     public void onResultadoFecha(GregorianCalendar fecha) {
         fechaSeleccionada = fecha.get(Calendar.DAY_OF_MONTH) + "/" + fecha.get(Calendar.MONTH) + "/" + fecha.get(Calendar.YEAR);
         Toast.makeText(getContext(), fechaSeleccionada, Toast.LENGTH_SHORT).show();
     }
 
+    //adaptador personalizado para el spinner de los heroes
     public class AdaptadorPersonalizado extends ArrayAdapter {
 
 
@@ -289,6 +270,5 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
 
 
     }
-
 
 }

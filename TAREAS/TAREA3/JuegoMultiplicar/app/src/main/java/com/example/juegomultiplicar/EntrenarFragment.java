@@ -16,20 +16,15 @@ import android.widget.TextView;
 
 import java.util.Random;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EntrenarFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class EntrenarFragment extends Fragment implements View.OnClickListener {
 
     View view;
     EstadisticasFragment estadisticasFragment = new EstadisticasFragment();
-
+    int i = 1;
     private String tabla, dificultad, heroe, fecha;
 
     private int indiceActualImagen = 0;
-    private int indiceActualBarra = 0;
+    private int indiceActualBarra = 1;
     TextView respuesta, pregunta, respuestaUsuario;
 
     int[] imagen;
@@ -45,7 +40,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
             , R.drawable.huldsiete, R.drawable.huldocho
             , R.drawable.huldnueve, R.drawable.huld};
     private int[] imagen_iron = {R.drawable.ironuno
-            , R.drawable.capidos, R.drawable.irontres
+            , R.drawable.irondos, R.drawable.irontres
             , R.drawable.ironcuatro, R.drawable.ironcinco, R.drawable.ironseis
             , R.drawable.ironsiete, R.drawable.ironocho
             , R.drawable.ironnueve, R.drawable.iron};
@@ -55,38 +50,15 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
             , R.drawable.capisiete, R.drawable.capiocho
             , R.drawable.capinueve, R.drawable.capi};
 
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     public EntrenarFragment() {
         // Required empty public constructor
     }
 
 
-    // TODO: Rename and change types and number of parameters
-    public static EntrenarFragment newInstance(String param1, String param2) {
-        EntrenarFragment fragment = new EntrenarFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -95,13 +67,14 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_entrenar, container, false);
 
+        //carga los datos de la configuración almacenada y los muestra en logcat
         cargarPreferencias();
         Log.i("Tabla", tabla);
         Log.i("Dificulatad", dificultad);
         Log.i("Heroe", heroe);
         Log.i("Fecha", fecha);
 
-
+        //botones de la botonera para indicar los datos
         Button boton_cero = view.findViewById(R.id.boton_diez);
         Button boton_uno = view.findViewById(R.id.boton_uno);
         Button boton_dos = view.findViewById(R.id.boton_dos);
@@ -132,28 +105,48 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         respuestaUsuario = view.findViewById(R.id.area_respuesta_usuario);
         pregunta = view.findViewById(R.id.area_pregunta);
 
-        iniciarTablaDificil();
+        iniciarTablaDificil(dificultad, tabla);
         return view;
 
     }
 
-    private void iniciarTablaDificil() {
+    private void iniciarTablaDificil(String dificultad, String tabla) {
+
+        switch (dificultad) {
+            case "Facil":
+                int primer = Integer.parseInt(tabla);
+                    // Muestra la pregunta en el formato "número X número"
+                    pregunta.setText(primer + " x " + i);
+                    // Establece la respuesta esperada para la multiplicación de los dos números
+                    int respuestaEsperada = primer * i;
+                    // Guarda la respuesta esperada para usarla en el método chekearRespuesta
+                    respuesta.setTag(respuestaEsperada);
+                    // Limpia el área de respuesta del usuario
+                    respuestaUsuario.setText("");
+             i++;
+                break;
+            case "Normal":
+                break;
+            case "Dificil":
+                break;
+        }
+
         Random random = new Random();
         // Genera dos números aleatorios para la pregunta
         int numero1 = random.nextInt(10) + 1;
         int numero2 = random.nextInt(10) + 1;
 
         // Muestra la pregunta en el formato "número X número"
-        pregunta.setText(numero1 + " x " + numero2);
+//        pregunta.setText(numero1 + " x " + numero2);
 
         // Establece la respuesta esperada para la multiplicación de los dos números
-        int respuestaEsperada = numero1 * numero2;
-
-        // Guarda la respuesta esperada para usarla en el método chekearRespuesta
-        respuesta.setTag(respuestaEsperada);
-
-        // Limpia el área de respuesta del usuario
-        respuestaUsuario.setText("");
+//        int respuestaEsperada = numero1 * numero2;
+//
+//        // Guarda la respuesta esperada para usarla en el método chekearRespuesta
+//        respuesta.setTag(respuestaEsperada);
+//
+//        // Limpia el área de respuesta del usuario
+//        respuestaUsuario.setText("");
 
     }
 
@@ -186,9 +179,6 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
             indiceActualImagen++;
 
         }
-//        else {
-//            indiceActual = 0;
-//        }
         imageView.setImageResource(imagen[indiceActualImagen]);
     }
 
@@ -213,9 +203,12 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
 
                 if (indiceActualBarra < 10) {
                     chekearRespuesta(1);
-                    iniciarTablaDificil();
+                    iniciarTablaDificil(dificultad, tabla);
 
                 } else {
+                    //la tabla enpieza de 1 nuevamente
+                    i=1;
+                    //llamamos al fragmento estadisticas
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     //relaciona el fragment recibido "f" con el contenedor de fragment 'frame_container'
                     transaction.replace(R.id.fragment_container, estadisticasFragment);
