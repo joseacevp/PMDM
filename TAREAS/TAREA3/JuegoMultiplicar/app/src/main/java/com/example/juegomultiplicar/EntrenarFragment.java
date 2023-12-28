@@ -25,8 +25,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
 
     View view;
     EstadisticasFragment estadisticasFragment = new EstadisticasFragment();
-    SharedPreferences preferencias;
-    Bundle datosRecividos;
+
     private String tabla, dificultad, heroe, fecha;
 
     private int indiceActualImagen = 0;
@@ -101,13 +100,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         Log.i("Dificulatad", dificultad);
         Log.i("Heroe", heroe);
         Log.i("Fecha", fecha);
-        datosRecividos = getActivity().getIntent().getExtras();
-        if (datosRecividos != null) {
-            int numeroTabla = datosRecividos.getInt("numero");
-            Log.i("Info", Integer.toString(numeroTabla));
-            String dificultad = datosRecividos.getString("dificultad");
-            Log.i("Info", dificultad);
-        }
+
 
         Button boton_cero = view.findViewById(R.id.boton_diez);
         Button boton_uno = view.findViewById(R.id.boton_uno);
@@ -282,7 +275,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
 
     //metodo que carga los datos previamente almacenados en un XML de preferencias
     private void cargarPreferencias() {
-        SharedPreferences preferencias = requireActivity().getSharedPreferences
+        SharedPreferences preferencias = getActivity().getSharedPreferences
                 ("credenciales", Context.MODE_PRIVATE);
 
         tabla = preferencias.getString("tabla", "Sin información");

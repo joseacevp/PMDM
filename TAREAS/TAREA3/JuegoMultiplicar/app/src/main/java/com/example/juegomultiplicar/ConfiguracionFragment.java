@@ -25,10 +25,9 @@ import java.util.GregorianCalendar;
  * Use the {@link ConfiguracionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFechaSeleccionada, View.OnClickListener {
+public class ConfiguracionFragment extends Fragment implements View.OnClickListener, DialogoFecha.OnFechaSeleccionada {
     View view;
-    DialogoFecha fecha = new DialogoFecha();
-    private String heroe, dificultad, fechaSeleccionada, tabla, numero_tabla_selec;
+    String heroe, dificultad, fechaSeleccionada, tabla, numero_tabla_selec;
     Button botonGrabar;
 
     private String[] heroes = {"Batman",
@@ -134,7 +133,16 @@ public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFe
 
         botonGrabar = view.findViewById(R.id.botonGrabarConf);
         Button boton = view.findViewById(R.id.boton_fecha_config);
-        boton.setOnClickListener(this::seleccion_fecha);
+        boton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogoFecha fecha = new DialogoFecha();
+                // Establece ConfiguracionFragment como el oyente para los eventos de fecha
+                fecha.setFechaSeleccionadaListener(ConfiguracionFragment.this);
+                fecha.show(getFragmentManager(), "fecha");
+
+            }
+        });
         Spinner selectorAbatar = view.findViewById(R.id.spinner_avatar);
         AdaptadorPersonalizado a = new AdaptadorPersonalizado(getContext(),
                 R.layout.linea_personajes, heroes);
@@ -181,29 +189,9 @@ public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFe
         botonGrabar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 guardarPreferencias();
-
             }
         });
-    }
-
-    @Override
-    public void onResultadoFecha(GregorianCalendar fecha) {
-//        // Formato deseado de la fecha
-//        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-//
-//        // Convertir la fecha a String
-//        fechaSeleccionada = formato.format(fecha.getTime());
-//
-//
-        fechaSeleccionada = String.valueOf(fecha.get(Calendar.DAY_OF_MONTH));
-    }
-
-    public void seleccion_fecha(View view) {
-
-        fecha.show(getFragmentManager(), "fecha");
-
     }
 
     @Override
@@ -245,10 +233,16 @@ public class ConfiguracionFragment extends Fragment implements DialogoFecha.OnFe
                 break;
             case R.id.boton_tabla_ok:
                 numero_tabla_selec = tabla;
-                 System.out.println(numero_tabla_selec);
+                System.out.println(numero_tabla_selec);
                 break;
         }
 
+    }
+
+    @Override
+    public void onResultadoFecha(GregorianCalendar fecha) {
+        fechaSeleccionada = fecha.get(Calendar.DAY_OF_MONTH) + "/" + fecha.get(Calendar.MONTH) + "/" + fecha.get(Calendar.YEAR);
+        Toast.makeText(getContext(), fechaSeleccionada, Toast.LENGTH_SHORT).show();
     }
 
     public class AdaptadorPersonalizado extends ArrayAdapter {

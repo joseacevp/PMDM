@@ -2,30 +2,25 @@ package com.example.juegomultiplicar;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.support.v4.app.DialogFragment;
-import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class DialogoFecha extends DialogFragment implements DatePickerDialog.OnDateSetListener{
-    OnFechaSeleccionada f;
+    private OnFechaSeleccionada fechaSeleccionadaListener;
 
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-        GregorianCalendar g = new GregorianCalendar(i, i1, i2);
-        f.onResultadoFecha(g);
+        GregorianCalendar fecha = new GregorianCalendar(i, i1, i2);
+        fechaSeleccionadaListener.onResultadoFecha(fecha);
     }
     public interface OnFechaSeleccionada {
         public void onResultadoFecha(GregorianCalendar fecha);
     }
-    @Override
-    public void onAttach(Context activity) {
-        f = (OnFechaSeleccionada) activity;
-        super.onAttach(activity);
-    }
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -36,5 +31,7 @@ public class DialogoFecha extends DialogFragment implements DatePickerDialog.OnD
 
         return new DatePickerDialog(getActivity(),this,ano,mes,dia);
     }
-
+    public void setFechaSeleccionadaListener(OnFechaSeleccionada listener) {
+        fechaSeleccionadaListener = listener;
+    }
 }

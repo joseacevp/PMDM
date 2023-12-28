@@ -197,8 +197,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="32dp"
-                    android:onClick="seleccion_fecha"
-                    android:text="Seleccionar Fecha"
+                      android:text="Seleccionar Fecha"
                     android:textStyle="bold" />
 
                 <Button

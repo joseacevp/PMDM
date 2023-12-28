@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements DialogoFecha.OnFe
     //manejo de la fecha seleccionada en la pantalla configuracion
     @Override
     public void onResultadoFecha(GregorianCalendar fecha) {
-
+//        String fechaSeleccionada = fecha.get(Calendar.DAY_OF_MONTH)+"/"+fecha.get(Calendar.MONTH)+"/"+fecha.get(Calendar.YEAR);
+//        Toast.makeText(this, fechaSeleccionada, Toast.LENGTH_SHORT).show();
     }
 }
