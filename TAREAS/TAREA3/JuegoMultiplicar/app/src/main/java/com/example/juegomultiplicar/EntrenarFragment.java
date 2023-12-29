@@ -20,7 +20,11 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
 
     View view;
     EstadisticasFragment estadisticasFragment = new EstadisticasFragment();
-    int i = 1;
+    private int i = 1;
+    private int e = 10;
+    Random random = new Random();
+
+    private int primer,respuestaEsperada ;
     private String tabla, dificultad, heroe, fecha;
 
     private int indiceActualImagen = 0;
@@ -113,28 +117,49 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
     private void iniciarTablaDificil(String dificultad, String tabla) {
 
         switch (dificultad) {
-            case "Facil":
-                int primer = Integer.parseInt(tabla);
-                    // Muestra la pregunta en el formato "número X número"
-                    pregunta.setText(primer + " x " + i);
-                    // Establece la respuesta esperada para la multiplicación de los dos números
-                    int respuestaEsperada = primer * i;
-                    // Guarda la respuesta esperada para usarla en el método chekearRespuesta
-                    respuesta.setTag(respuestaEsperada);
-                    // Limpia el área de respuesta del usuario
-                    respuestaUsuario.setText("");
-             i++;
+            case "Facil"://tabla de multiplicar en orden ascendente
+               primer = Integer.parseInt(tabla);
+                // Muestra la pregunta en el formato "número X número"
+                pregunta.setText(primer + " x " + i);
+                // Establece la respuesta esperada para la multiplicación de los dos números
+                respuestaEsperada = primer * i;
+                // Guarda la respuesta esperada para usarla en el método chekearRespuesta
+                respuesta.setTag(respuestaEsperada);
+                // Limpia el área de respuesta del usuario
+                respuestaUsuario.setText("");
+                i++;
                 break;
-            case "Normal":
+            case "Normal"://tabla de multiplicar en orden descendente
+                primer = Integer.parseInt(tabla);
+                // Muestra la pregunta en el formato "número X número"
+                pregunta.setText(primer + " x " + e);
+                // Establece la respuesta esperada para la multiplicación de los dos números
+                respuestaEsperada = primer * e;
+                // Guarda la respuesta esperada para usarla en el método chekearRespuesta
+                respuesta.setTag(respuestaEsperada);
+                // Limpia el área de respuesta del usuario
+                respuestaUsuario.setText("");
+                e--;
                 break;
-            case "Dificil":
+            case "Dificil"://tabla de multiplicar en orden aleatorio
+                // Genera dos números aleatorios para la pregunta
+                 int numero1 = random.nextInt(10) + 1;
+                primer = Integer.parseInt(tabla);
+                // Muestra la pregunta en el formato "número X número"
+                pregunta.setText(primer + " x " + numero1);
+                // Establece la respuesta esperada para la multiplicación de los dos números
+                respuestaEsperada = primer * numero1;
+                // Guarda la respuesta esperada para usarla en el método chekearRespuesta
+                respuesta.setTag(respuestaEsperada);
+                // Limpia el área de respuesta del usuario
+                respuestaUsuario.setText("");
                 break;
         }
 
-        Random random = new Random();
-        // Genera dos números aleatorios para la pregunta
-        int numero1 = random.nextInt(10) + 1;
-        int numero2 = random.nextInt(10) + 1;
+//        Random random = new Random();
+//        // Genera dos números aleatorios para la pregunta
+//        int numero1 = random.nextInt(10) + 1;
+//        int numero2 = random.nextInt(10) + 1;
 
         // Muestra la pregunta en el formato "número X número"
 //        pregunta.setText(numero1 + " x " + numero2);
@@ -152,10 +177,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
 
     private void mostrarBarra() {
         ProgressBar bar = view.findViewById(R.id.progressBar);
-
         indiceActualBarra++;
-
-
         bar.setProgress(indiceActualBarra);
     }
 
@@ -177,11 +199,11 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         ImageView imageView = view.findViewById(R.id.imageViewHeroe);
         if (indiceActualImagen < imagen.length - 1) {
             indiceActualImagen++;
-
         }
         imageView.setImageResource(imagen[indiceActualImagen]);
     }
 
+    //comportamiento de los botones de la botonera
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -201,19 +223,22 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
                 // Aquí puedes procesar la respuesta actual (respuestaUsuario.getText().toString())
                 // y verificar si es correcta.
 
-                if (indiceActualBarra < 10) {
-                    chekearRespuesta(1);
-                    iniciarTablaDificil(dificultad, tabla);
+                if (!respuestaUsuario.getText().toString().equals("")){//si la respuesta del usuario no esta vacia
+                    if (indiceActualBarra < 10) {//si no a respondido 10 veces
+                        chekearRespuesta(1);
+                        iniciarTablaDificil(dificultad, tabla);
 
-                } else {
-                    //la tabla enpieza de 1 nuevamente
-                    i=1;
-                    //llamamos al fragmento estadisticas
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    //relaciona el fragment recibido "f" con el contenedor de fragment 'frame_container'
-                    transaction.replace(R.id.fragment_container, estadisticasFragment);
-                    transaction.commit();
+                    } else {
+                        //la tabla enpieza de 1 nuevamente
+                        i = 1;
+                        //llamamos al fragmento estadisticas
+                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        //relaciona el fragment recibido "f" con el contenedor de fragment 'frame_container'
+                        transaction.replace(R.id.fragment_container, estadisticasFragment);
+                        transaction.commit();
+                    }
                 }
+
             case R.id.boton_borrar:
                 // Aquí puedes implementar la lógica para borrar un dígito de la respuestaUsuario.
                 borrarNumeroRespuesta();
@@ -231,30 +256,26 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         if (!respuestaUsuarioStr.isEmpty()) {
             // Convierte la respuesta del usuario a un número entero
             int respuestaUsuarioInt = Integer.parseInt(respuestaUsuarioStr);
-
-
             // Compara la respuesta del usuario con la respuesta esperada
             if (respuestaUsuarioInt == respuestaEsperada) {
                 // La respuesta es correcta
 //                respuesta.setText("¡Respuesta Correcta!");
                 mostrarImagen(heroe);
-            } else {
-                // La respuesta es incorrecta
-
-//                respuesta.setText("Respuesta Incorrecta. La respuesta correcta es " + respuestaEsperada);
             }
+//            else {
+//                // La respuesta es incorrecta
+////  respuesta.setText("Respuesta Incorrecta. La respuesta correcta es " + respuestaEsperada);
+//            }
             mostrarBarra();
-
         }
     }
 
     private void addNumeroRespuesta(View view) {
         Button button = (Button) view;
         String respuestaString = respuestaUsuario.getText().toString();
-
         // Limita la longitud de la respuesta a dos dígitos
-        if (respuestaString.length() < 2) {
-            respuestaUsuario.setText(respuestaString + button.getText().toString());
+        if (respuestaString.length() < 2  ) {
+                respuestaUsuario.setText(respuestaString + button.getText().toString());
         }
     }
 

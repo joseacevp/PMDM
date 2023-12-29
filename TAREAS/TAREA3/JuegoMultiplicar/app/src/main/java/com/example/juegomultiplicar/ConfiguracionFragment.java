@@ -146,6 +146,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 DialogoFecha fecha = new DialogoFecha();
                 // Establece ConfiguracionFragment como el oyente para los eventos de fecha
                 fecha.setFechaSeleccionadaListener(ConfiguracionFragment.this);

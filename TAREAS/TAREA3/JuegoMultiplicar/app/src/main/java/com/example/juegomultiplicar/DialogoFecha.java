@@ -9,18 +9,23 @@ import android.widget.DatePicker;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class DialogoFecha extends DialogFragment implements DatePickerDialog.OnDateSetListener{
+public class DialogoFecha extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+
     private OnFechaSeleccionada fechaSeleccionadaListener;
+
+    public interface OnFechaSeleccionada {
+        public void onResultadoFecha(GregorianCalendar fecha);
+    }
+
+    public void setFechaSeleccionadaListener(OnFechaSeleccionada listener) {
+        fechaSeleccionadaListener = listener;
+    }
 
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
         GregorianCalendar fecha = new GregorianCalendar(i, i1, i2);
         fechaSeleccionadaListener.onResultadoFecha(fecha);
     }
-    public interface OnFechaSeleccionada {
-        public void onResultadoFecha(GregorianCalendar fecha);
-    }
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -29,9 +34,7 @@ public class DialogoFecha extends DialogFragment implements DatePickerDialog.OnD
         int mes = c.get(Calendar.MONTH);
         int dia = c.get(Calendar.DAY_OF_MONTH);
 
-        return new DatePickerDialog(getActivity(),this,ano,mes,dia);
+        return new DatePickerDialog(getActivity(), this, ano, mes, dia);
     }
-    public void setFechaSeleccionadaListener(OnFechaSeleccionada listener) {
-        fechaSeleccionadaListener = listener;
-    }
+
 }
