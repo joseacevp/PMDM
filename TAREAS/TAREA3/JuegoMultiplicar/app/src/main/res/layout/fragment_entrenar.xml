@@ -32,25 +32,29 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|left"
-                android:layout_marginLeft="23dp" />
+                android:layout_marginLeft="23dp"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/area_respuesta_usuario"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:inputType="number"
                 android:layout_gravity="center|left"
-                android:layout_marginLeft="23dp"/>
+                android:layout_marginLeft="23dp"
+                android:inputType="number"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
 
         <TextView
             android:id="@+id/area_respuesta_correcta"
-            android:layout_width="100dp"
+            android:layout_width="222dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
-            android:layout_marginLeft="23dp" />
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="16dp"
+            android:textSize="20sp" />
 
         <ProgressBar
             android:id="@+id/progressBar"

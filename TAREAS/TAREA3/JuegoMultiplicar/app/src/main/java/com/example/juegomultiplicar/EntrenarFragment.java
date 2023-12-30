@@ -2,6 +2,7 @@ package com.example.juegomultiplicar;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -25,7 +26,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
     private int e = 10;
     Random random = new Random();
     private int primer, respuestaEsperada;
-    private String tabla, dificultad, heroe, fecha,aleatorio;
+    private String tabla, dificultad, heroe, fecha, aleatorio;
 
     private int indiceActualImagen = 0;
     private int indiceActualBarra = 1;
@@ -120,18 +121,18 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         if (tabla.equals("aleatorio")) {
             primer = Integer.parseInt(aleatorio);
         } else {
-          try {
-              primer = Integer.parseInt(tabla);
-          }catch (Exception e ){
-              Toast.makeText(getContext(), "No selecciono numero de tabla por defecto tabla del 1", Toast.LENGTH_SHORT).show();
-              primer = 1;
-          }
+            try {
+                primer = Integer.parseInt(tabla);
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "No selecciono numero de tabla por defecto tabla del 1", Toast.LENGTH_SHORT).show();
+                primer = 1;
+            }
         }
         switch (dificultad) {
             case "Facil"://tabla de multiplicar en orden ascendente
 //                primer = numeroTablaAleter(tabla);
                 // Muestra la pregunta en el formato "número X número"
-                pregunta.setText(primer + " x " + i);
+                pregunta.setText(primer + " x " + i + " = ");
                 // Establece la respuesta esperada para la multiplicación de los dos números
                 respuestaEsperada = primer * i;
                 // Guarda la respuesta esperada para usarla en el método chekearRespuesta
@@ -144,7 +145,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
             case "Normal"://tabla de multiplicar en orden descendente
 //                primer = Integer.parseInt(tabla);
                 // Muestra la pregunta en el formato "número X número"
-                pregunta.setText(primer + " x " + e);
+                pregunta.setText(primer + " x " + e+ " = ");
                 // Establece la respuesta esperada para la multiplicación de los dos números
                 respuestaEsperada = primer * e;
                 // Guarda la respuesta esperada para usarla en el método chekearRespuesta
@@ -158,7 +159,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
                 int numero1 = random.nextInt(10) + 1;
 //                primer = Integer.parseInt(tabla);
                 // Muestra la pregunta en el formato "número X número"
-                pregunta.setText(primer + " x " + numero1);
+                pregunta.setText(primer + " x " + numero1 + " = ");
                 // Establece la respuesta esperada para la multiplicación de los dos números
                 respuestaEsperada = primer * numero1;
                 // Guarda la respuesta esperada para usarla en el método chekearRespuesta
@@ -254,13 +255,14 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
             // Compara la respuesta del usuario con la respuesta esperada
             if (respuestaUsuarioInt == respuestaEsperada) {
                 // La respuesta es correcta
-//                respuesta.setText("¡Respuesta Correcta!");
+                respuesta.setText("");
                 mostrarImagen(heroe);
+
+            } else {
+                // La respuesta es incorrecta
+                respuesta.setTextColor(Color.RED);
+                respuesta.setText(pregunta.getText().toString()+ respuestaEsperada);
             }
-//            else {
-//                // La respuesta es incorrecta
-////  respuesta.setText("Respuesta Incorrecta. La respuesta correcta es " + respuestaEsperada);
-//            }
             mostrarBarra();
         }
     }
