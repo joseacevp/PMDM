@@ -90,8 +90,8 @@
                     android:id="@+id/tabla_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp">
 
                     <TableRow
                         android:layout_width="match_parent"
@@ -198,17 +198,6 @@
                     android:layout_marginBottom="8dp"
                     android:text="Seleccionar Fecha"
                     android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/botonGrabarConf"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="16dp"
-                    android:text="Grabar Configuración"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 

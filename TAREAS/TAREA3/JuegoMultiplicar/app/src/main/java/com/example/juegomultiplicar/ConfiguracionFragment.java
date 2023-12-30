@@ -25,7 +25,6 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
     //variables
     View view;
     String heroe, dificultad, fechaSeleccionada, tabla, numero_tabla_selec;
-    Button botonGrabar;
 
     private String[] heroes = {"Batman",
             "Hulk",
@@ -61,7 +60,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
     private void guardarPreferencias() {
 
         Random random = new Random();
-        int numeroAleatorio =  random.nextInt(10) + 1;
+        int numeroAleatorio = random.nextInt(10) + 1;
 
         SharedPreferences preferencias = getContext().getSharedPreferences
                 ("credenciales", Context.MODE_PRIVATE);
@@ -160,23 +159,18 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             }
         });
 
-        //boton grabar preferencias
-        botonGrabar = view.findViewById(R.id.botonGrabarConf);
-        grabarConfiguracion();
-
         return view;
 
     }
 
     //graba la configuración en fichero XML
-    private void grabarConfiguracion() {
-        botonGrabar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                guardarPreferencias();
-            }
-        });
+    //graba las preferencias de configuración al cambiar de fragmento.
+    @Override
+    public void onPause() {
+        super.onPause();
+        guardarPreferencias();
     }
+
 
     //botonera para seleccionar el numero de tabla multiplicar
     @Override

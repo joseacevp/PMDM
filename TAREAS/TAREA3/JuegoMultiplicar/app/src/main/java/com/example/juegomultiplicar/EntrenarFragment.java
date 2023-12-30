@@ -66,6 +66,16 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
 
     }
 
+    //resetea la pantalla pare iniciar desde cero
+    @Override
+    public void onPause() {
+        super.onPause();
+        indiceActualBarra = 1;
+        indiceActualImagen = 0;
+        i=1;
+        e=10;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -145,7 +155,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
             case "Normal"://tabla de multiplicar en orden descendente
 //                primer = Integer.parseInt(tabla);
                 // Muestra la pregunta en el formato "número X número"
-                pregunta.setText(primer + " x " + e+ " = ");
+                pregunta.setText(primer + " x " + e + " = ");
                 // Establece la respuesta esperada para la multiplicación de los dos números
                 respuestaEsperada = primer * e;
                 // Guarda la respuesta esperada para usarla en el método chekearRespuesta
@@ -261,7 +271,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
             } else {
                 // La respuesta es incorrecta
                 respuesta.setTextColor(Color.RED);
-                respuesta.setText(pregunta.getText().toString()+ respuestaEsperada);
+                respuesta.setText(pregunta.getText().toString() + respuestaEsperada);
             }
             mostrarBarra();
         }
