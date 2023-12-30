@@ -37,7 +37,7 @@
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_gravity="center"
                     android:layout_marginTop="8dp"
                     android:text="Elige Héroe"
                     android:textSize="24sp" />
@@ -59,8 +59,7 @@
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_gravity="center"
                     android:text="Elige Dificultad"
                     android:textSize="24sp" />
 
@@ -82,17 +81,17 @@
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_gravity="center"
                     android:layout_marginTop="8dp"
                     android:text="Elige Tabla Multiplicar"
                     android:textSize="24sp" />
 
                 <TableLayout
                     android:id="@+id/tabla_layout"
-                    android:layout_width="409dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="8dp">
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center">
 
                     <TableRow
                         android:layout_width="match_parent"
@@ -194,16 +193,18 @@
                     android:id="@+id/boton_fecha_config"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_gravity="center"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="32dp"
-                      android:text="Seleccionar Fecha"
+                    android:layout_marginBottom="8dp"
+                    android:text="Seleccionar Fecha"
                     android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/botonGrabarConf"
-                    android:layout_width="match_parent"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
                     android:text="Grabar Configuración"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
