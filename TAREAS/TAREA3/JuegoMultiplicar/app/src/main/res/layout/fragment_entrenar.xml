@@ -13,12 +13,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="50dp">
 
         <ImageView
             android:id="@+id/imageViewHeroe"
             android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
             android:layout_gravity="center"
             android:layout_marginBottom="8dp"
             />
@@ -55,6 +56,14 @@
             android:layout_gravity="center|left"
             android:layout_marginLeft="23dp"
             android:layout_marginTop="16dp"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/area_respuesta_correcta2"
+            android:layout_width="222dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_marginLeft="23dp"
             android:textSize="20sp" />
 
         <ProgressBar

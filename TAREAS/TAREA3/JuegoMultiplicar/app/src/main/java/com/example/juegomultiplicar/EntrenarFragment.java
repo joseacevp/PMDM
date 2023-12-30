@@ -21,6 +21,7 @@ import java.util.Random;
 public class EntrenarFragment extends Fragment implements View.OnClickListener {
 
     View view;
+    Bundle datos;
     EstadisticasFragment estadisticasFragment = new EstadisticasFragment();
     private int i = 1;
     private int e = 10;
@@ -30,7 +31,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
 
     private int indiceActualImagen = 0;
     private int indiceActualBarra = 1;
-    TextView respuesta, pregunta, respuestaUsuario;
+    TextView respuesta, respuestaIncorecta, pregunta, respuestaUsuario;
 
     int[] imagen;
     private int[] imagen_batman = {R.drawable.batmanuno
@@ -72,8 +73,8 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         super.onPause();
         indiceActualBarra = 1;
         indiceActualImagen = 0;
-        i=1;
-        e=10;
+        i = 1;
+        e = 10;
     }
 
     @Override
@@ -81,7 +82,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_entrenar, container, false);
-
+        datos = new Bundle();
         //carga los datos de la configuración almacenada y los muestra en logcat
         cargarPreferencias();
         Log.i("Tabla", tabla);
@@ -119,6 +120,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
 
 
         respuesta = view.findViewById(R.id.area_respuesta_correcta);
+        respuestaIncorecta = view.findViewById(R.id.area_respuesta_correcta2);
         respuestaUsuario = view.findViewById(R.id.area_respuesta_usuario);
         pregunta = view.findViewById(R.id.area_pregunta);
 
@@ -266,11 +268,14 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
             if (respuestaUsuarioInt == respuestaEsperada) {
                 // La respuesta es correcta
                 respuesta.setText("");
+                respuestaIncorecta.setText("");
                 mostrarImagen(heroe);
 
             } else {
                 // La respuesta es incorrecta
-                respuesta.setTextColor(Color.RED);
+                respuestaIncorecta.setTextColor(Color.RED);
+                respuestaIncorecta.setText(pregunta.getText() + respuestaUsuario.getText().toString());
+                respuesta.setTextColor(Color.GREEN);
                 respuesta.setText(pregunta.getText().toString() + respuestaEsperada);
             }
             mostrarBarra();
