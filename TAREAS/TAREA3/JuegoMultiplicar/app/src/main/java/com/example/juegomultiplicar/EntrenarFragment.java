@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -23,9 +24,8 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
     private int i = 1;
     private int e = 10;
     Random random = new Random();
-
-    private int primer,respuestaEsperada ;
-    private String tabla, dificultad, heroe, fecha;
+    private int primer, respuestaEsperada;
+    private String tabla, dificultad, heroe, fecha,aleatorio;
 
     private int indiceActualImagen = 0;
     private int indiceActualBarra = 1;
@@ -77,6 +77,8 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         Log.i("Dificulatad", dificultad);
         Log.i("Heroe", heroe);
         Log.i("Fecha", fecha);
+        Log.i("aleatoria", aleatorio);
+
 
         //botones de la botonera para indicar los datos
         Button boton_cero = view.findViewById(R.id.boton_diez);
@@ -115,10 +117,19 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
     }
 
     private void iniciarTablaDificil(String dificultad, String tabla) {
-
+        if (tabla.equals("aleatorio")) {
+            primer = Integer.parseInt(aleatorio);
+        } else {
+          try {
+              primer = Integer.parseInt(tabla);
+          }catch (Exception e ){
+              Toast.makeText(getContext(), "No selecciono numero de tabla por defecto tabla del 1", Toast.LENGTH_SHORT).show();
+              primer = 1;
+          }
+        }
         switch (dificultad) {
             case "Facil"://tabla de multiplicar en orden ascendente
-               primer = Integer.parseInt(tabla);
+//                primer = numeroTablaAleter(tabla);
                 // Muestra la pregunta en el formato "número X número"
                 pregunta.setText(primer + " x " + i);
                 // Establece la respuesta esperada para la multiplicación de los dos números
@@ -128,9 +139,10 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
                 // Limpia el área de respuesta del usuario
                 respuestaUsuario.setText("");
                 i++;
+
                 break;
             case "Normal"://tabla de multiplicar en orden descendente
-                primer = Integer.parseInt(tabla);
+//                primer = Integer.parseInt(tabla);
                 // Muestra la pregunta en el formato "número X número"
                 pregunta.setText(primer + " x " + e);
                 // Establece la respuesta esperada para la multiplicación de los dos números
@@ -143,8 +155,8 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
                 break;
             case "Dificil"://tabla de multiplicar en orden aleatorio
                 // Genera dos números aleatorios para la pregunta
-                 int numero1 = random.nextInt(10) + 1;
-                primer = Integer.parseInt(tabla);
+                int numero1 = random.nextInt(10) + 1;
+//                primer = Integer.parseInt(tabla);
                 // Muestra la pregunta en el formato "número X número"
                 pregunta.setText(primer + " x " + numero1);
                 // Establece la respuesta esperada para la multiplicación de los dos números
@@ -155,25 +167,8 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
                 respuestaUsuario.setText("");
                 break;
         }
-
-//        Random random = new Random();
-//        // Genera dos números aleatorios para la pregunta
-//        int numero1 = random.nextInt(10) + 1;
-//        int numero2 = random.nextInt(10) + 1;
-
-        // Muestra la pregunta en el formato "número X número"
-//        pregunta.setText(numero1 + " x " + numero2);
-
-        // Establece la respuesta esperada para la multiplicación de los dos números
-//        int respuestaEsperada = numero1 * numero2;
-//
-//        // Guarda la respuesta esperada para usarla en el método chekearRespuesta
-//        respuesta.setTag(respuestaEsperada);
-//
-//        // Limpia el área de respuesta del usuario
-//        respuestaUsuario.setText("");
-
     }
+
 
     private void mostrarBarra() {
         ProgressBar bar = view.findViewById(R.id.progressBar);
@@ -223,7 +218,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
                 // Aquí puedes procesar la respuesta actual (respuestaUsuario.getText().toString())
                 // y verificar si es correcta.
 
-                if (!respuestaUsuario.getText().toString().equals("")){//si la respuesta del usuario no esta vacia
+                if (!respuestaUsuario.getText().toString().equals("")) {//si la respuesta del usuario no esta vacia
                     if (indiceActualBarra < 10) {//si no a respondido 10 veces
                         chekearRespuesta(1);
                         iniciarTablaDificil(dificultad, tabla);
@@ -274,8 +269,8 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         Button button = (Button) view;
         String respuestaString = respuestaUsuario.getText().toString();
         // Limita la longitud de la respuesta a dos dígitos
-        if (respuestaString.length() < 2  ) {
-                respuestaUsuario.setText(respuestaString + button.getText().toString());
+        if (respuestaString.length() < 2) {
+            respuestaUsuario.setText(respuestaString + button.getText().toString());
         }
     }
 
@@ -296,6 +291,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         dificultad = preferencias.getString("dificultad", "Sin información");
         heroe = preferencias.getString("heroe", "Sin información");
         fecha = preferencias.getString("fecha", "Sin información");
+        aleatorio = preferencias.getString("aleatorio", "Sin información");
 
     }
 }

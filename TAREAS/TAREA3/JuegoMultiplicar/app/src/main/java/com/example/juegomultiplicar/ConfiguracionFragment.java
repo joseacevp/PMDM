@@ -15,10 +15,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Random;
 
 
 public class ConfiguracionFragment extends Fragment implements View.OnClickListener, DialogoFecha.OnFechaSeleccionada {
@@ -59,6 +59,10 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
     //metodo que almacena los datos de los campos de texto en un archivo .XML para compartirlos
     //con otra actividad de la aplicación.
     private void guardarPreferencias() {
+
+        Random random = new Random();
+        int numeroAleatorio =  random.nextInt(10) + 1;
+
         SharedPreferences preferencias = getContext().getSharedPreferences
                 ("credenciales", Context.MODE_PRIVATE);
 
@@ -67,6 +71,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
         editor.putString("dificultad", dificultad);
         editor.putString("fecha", fechaSeleccionada);
         editor.putString("tabla", numero_tabla_selec);
+        editor.putString("aleatorio", String.valueOf(numeroAleatorio));
 
         editor.commit();
     }
@@ -87,7 +92,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //codigo para gestionar lo que ocurre cuando seleccionas una opcion del Spinner
                 heroe = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(getContext(), heroe, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), heroe, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -106,7 +111,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 dificultad = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(getContext(), dificultad, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), dificultad, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -223,7 +228,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
     @Override
     public void onResultadoFecha(GregorianCalendar fecha) {
         fechaSeleccionada = fecha.get(Calendar.DAY_OF_MONTH) + "/" + fecha.get(Calendar.MONTH) + "/" + fecha.get(Calendar.YEAR);
-        Toast.makeText(getContext(), fechaSeleccionada, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), fechaSeleccionada, Toast.LENGTH_SHORT).show();
     }
 
     //adaptador personalizado para el spinner de los heroes
