@@ -80,9 +80,11 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_entrenar, container, false);
         datos = new Bundle();
+
         //carga los datos de la configuración almacenada y los muestra en logcat
         cargarPreferencias();
         Log.i("Tabla", tabla);
@@ -125,9 +127,12 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         pregunta = view.findViewById(R.id.area_pregunta);
 
         iniciarTablaDificil(dificultad, tabla);
+
+
         return view;
 
     }
+
 
     private void iniciarTablaDificil(String dificultad, String tabla) {
         if (tabla.equals("aleatorio")) {
@@ -214,6 +219,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
     //comportamiento de los botones de la botonera
     @Override
     public void onClick(View view) {
+
         switch (view.getId()) {
             case R.id.boton_diez:
             case R.id.boton_uno:
@@ -239,11 +245,8 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
                     } else {
                         //la tabla enpieza de 1 nuevamente
                         i = 1;
-                        //llamamos al fragmento estadisticas
-                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                        //relaciona el fragment recibido "f" con el contenedor de fragment 'frame_container'
-                        transaction.replace(R.id.fragment_container, estadisticasFragment);
-                        transaction.commit();
+                        llamarFragmentoEsta();
+
                     }
                 }
 
@@ -252,6 +255,20 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
                 borrarNumeroRespuesta();
                 break;
         }
+    }
+
+    private void llamarFragmentoEsta() {
+        //comunicacion entre fragmentos
+        datos.putString("numeroTabla",tabla);
+        datos.putString("fecha",fecha);
+        datos.putString("heroe",heroe);
+
+        estadisticasFragment.setArguments(datos);
+        //llamamos al fragmento estadisticas
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        //relaciona el fragment recibido "f" con el contenedor de fragment 'frame_container'
+        transaction.replace(R.id.fragment_container, estadisticasFragment);
+        transaction.commit();
     }
 
     private void chekearRespuesta(int numeroTabla) {

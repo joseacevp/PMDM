@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Fecha realización de la prueba."
+            android:text="Estadisticas de la Prueba Realizada."
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -25,8 +25,9 @@
 
         <TextView
             android:id="@+id/areaFechaEsta"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:hint="Fecha de la prueba:"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +46,19 @@
             app:layout_constraintTop_toBottomOf="@+id/areaFechaEsta" />
 
         <TextView
+            android:id="@+id/areaHeroeEst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="Heroe : "
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/areaTablaEsta" />
+
+        <TextView
             android:id="@+id/areaFallosEsta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,8 +67,9 @@
             android:hint="Fallos"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/areaTablaEsta" />
+            app:layout_constraintTop_toBottomOf="@+id/areaHeroeEst" />
 
         <TextView
             android:id="@+id/areaPorcenEsta"
