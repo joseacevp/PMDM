@@ -62,10 +62,10 @@
             android:id="@+id/areaFallosEsta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
             android:layout_marginTop="16dp"
             android:ems="10"
             android:hint="Fallos"
-            android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
@@ -104,6 +104,8 @@
             android:src="@android:drawable/ic_dialog_email"
             app:layout_constraintStart_toEndOf="@+id/areaEmailEsta"
             app:layout_constraintTop_toBottomOf="@+id/areaPorcenEsta" />
+
+
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

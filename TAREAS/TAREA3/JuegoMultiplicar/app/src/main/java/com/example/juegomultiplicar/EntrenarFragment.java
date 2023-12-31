@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class EntrenarFragment extends Fragment implements View.OnClickListener {
@@ -28,7 +29,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
     Random random = new Random();
     private int primer, respuestaEsperada;
     private String tabla, dificultad, heroe, fecha, aleatorio;
-
+    private ArrayList<String> fallos = new ArrayList<>();
     private int indiceActualImagen = 0;
     private int indiceActualBarra = 1;
     TextView respuesta, respuestaIncorecta, pregunta, respuestaUsuario;
@@ -259,9 +260,10 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
 
     private void llamarFragmentoEsta() {
         //comunicacion entre fragmentos
-        datos.putString("numeroTabla",tabla);
-        datos.putString("fecha",fecha);
-        datos.putString("heroe",heroe);
+        datos.putString("numeroTabla", tabla);
+        datos.putString("fecha", fecha);
+        datos.putString("heroe", heroe);
+        datos.putStringArrayList("fallos", fallos);
 
         estadisticasFragment.setArguments(datos);
         //llamamos al fragmento estadisticas
@@ -292,6 +294,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
                 // La respuesta es incorrecta
                 respuestaIncorecta.setTextColor(Color.RED);
                 respuestaIncorecta.setText(pregunta.getText() + respuestaUsuario.getText().toString());
+                fallos.add(pregunta.getText() + respuestaUsuario.getText().toString());
                 respuesta.setTextColor(Color.GREEN);
                 respuesta.setText(pregunta.getText().toString() + respuestaEsperada);
             }
