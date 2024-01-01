@@ -30,22 +30,22 @@ public class MainActivity extends AppCompatActivity {
 
         switch (seleccion) {
             case R.id.confFactura:
-                Toast.makeText(this, "Se puldo la Opción  Configurar Factura ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Se pulso la Opción  Configurar Factura ", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.confPedido:
-                Toast.makeText(this, "Se puldo la Opción Configurar Pedido", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Se pulso la Opción Configurar Pedido", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nueCliente:
-                Toast.makeText(this, "Se puldo la Opción Nuevo Cliente ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Se pulso la Opción Nuevo Cliente ", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.busCliente:
-                Toast.makeText(this, "Se puldo la Opción Buscar Cliente", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Se pulso la Opción Buscar Cliente", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nueFactura:
-                Toast.makeText(this, "Se puldo la Opción Nueva Factura", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Se pulso la Opción Nueva Factura", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.busFactura:
-                Toast.makeText(this, "Se puldo la Opción Buscar Factura", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Se pulso la Opción Buscar Factura", Toast.LENGTH_SHORT).show();
                 break;
         }
 

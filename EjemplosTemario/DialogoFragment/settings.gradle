@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "DialogoFragment"
+rootProject.name = "DialogosFragment"
 include ':app'
