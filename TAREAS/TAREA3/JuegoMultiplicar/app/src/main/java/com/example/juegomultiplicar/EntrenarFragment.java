@@ -193,6 +193,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         ProgressBar bar = view.findViewById(R.id.progressBar);
         indiceActualBarra++;
         bar.setProgress(indiceActualBarra);
+
     }
 
     private void mostrarImagen(String heroe) {
@@ -237,20 +238,17 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
             case R.id.boton_ok:
                 // Aquí puedes procesar la respuesta actual (respuestaUsuario.getText().toString())
                 // y verificar si es correcta.
-
                 if (!respuestaUsuario.getText().toString().equals("")) {//si la respuesta del usuario no esta vacia
                     if (indiceActualBarra < 10) {//si no a respondido 10 veces
-                        chekearRespuesta(1);
+                        chekearRespuesta();
                         iniciarTablaDificil(dificultad, tabla);
-
                     } else {
-                        //la tabla enpieza de 1 nuevamente
-                        i = 1;
+                        chekearRespuesta();
+                        //finalizada la tabla llama al fragmento estadisticas
                         llamarFragmentoEsta();
-
                     }
                 }
-
+                break;
             case R.id.boton_borrar:
                 // Aquí puedes implementar la lógica para borrar un dígito de la respuestaUsuario.
                 borrarNumeroRespuesta();
@@ -264,7 +262,11 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         datos.putString("fecha", fecha);
         datos.putString("heroe", heroe);
         datos.putStringArrayList("fallos", fallos);
-
+        if (indiceActualImagen != 0) {
+            datos.putString("aciertos", String.valueOf(indiceActualImagen + 1));
+        } else {
+            datos.putString("aciertos", String.valueOf(0));
+        }
         estadisticasFragment.setArguments(datos);
         //llamamos al fragmento estadisticas
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -273,7 +275,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         transaction.commit();
     }
 
-    private void chekearRespuesta(int numeroTabla) {
+    private void chekearRespuesta() {
         // Obtén la respuesta del usuario como una cadena
         String respuestaUsuarioStr = respuestaUsuario.getText().toString();
         // Obtiene la respuesta esperada del Tag de la vista respuesta
@@ -294,11 +296,16 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
                 // La respuesta es incorrecta
                 respuestaIncorecta.setTextColor(Color.RED);
                 respuestaIncorecta.setText(pregunta.getText() + respuestaUsuario.getText().toString());
-                fallos.add(pregunta.getText() + respuestaUsuario.getText().toString());
+//                fallos.add(pregunta.getText() + respuestaUsuario.getText().toString());
                 respuesta.setTextColor(Color.GREEN);
                 respuesta.setText(pregunta.getText().toString() + respuestaEsperada);
+                fallos.add(respuestaIncorecta.getText().toString());
             }
             mostrarBarra();
+        } else {
+            // Agrega esta lógica para manejar el caso cuando la respuesta del usuario está vacía
+            respuestaIncorecta.setTextColor(Color.RED);
+            respuestaIncorecta.setText("Debes ingresar una respuesta");
         }
     }
 
@@ -324,9 +331,9 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         SharedPreferences preferencias = getActivity().getSharedPreferences
                 ("credenciales", Context.MODE_PRIVATE);
 
-        tabla = preferencias.getString("tabla", "Sin información");
-        dificultad = preferencias.getString("dificultad", "Sin información");
-        heroe = preferencias.getString("heroe", "Sin información");
+        tabla = preferencias.getString("tabla", " 1");
+        dificultad = preferencias.getString("dificultad", "Por defecto Facil");
+        heroe = preferencias.getString("heroe", "Por defecto Batman");
         fecha = preferencias.getString("fecha", "Sin información");
         aleatorio = preferencias.getString("aleatorio", "Sin información");
 
