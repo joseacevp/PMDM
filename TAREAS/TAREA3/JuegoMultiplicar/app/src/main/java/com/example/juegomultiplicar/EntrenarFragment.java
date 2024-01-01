@@ -263,7 +263,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         datos.putString("heroe", heroe);
         datos.putStringArrayList("fallos", fallos);
         if (indiceActualImagen != 0) {
-            datos.putString("aciertos", String.valueOf(indiceActualImagen + 1));
+            datos.putString("aciertos", String.valueOf(indiceActualImagen));
         } else {
             datos.putString("aciertos", String.valueOf(0));
         }

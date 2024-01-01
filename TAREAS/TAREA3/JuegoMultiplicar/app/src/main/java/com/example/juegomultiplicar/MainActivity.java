@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity  {
         navigation.setOnNavigationItemSelectedListener(mOnNavegationListener);
 
         //carga la pantalla de configuracion por defecto
-        loadFragment(pantallaConfig);
+        loadFragment(pantallaEntrenar);
 
     }
 
