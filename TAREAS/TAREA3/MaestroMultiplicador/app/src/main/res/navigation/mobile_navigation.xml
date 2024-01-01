@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_entrenar">
+    app:startDestination="@+id/navigation_home">
 
     <fragment
-        android:id="@+id/navigation_entrenar"
-        android:name="com.example.maestromultiplicador.ui.entrenar.EntrenarFragment"
-        android:label="@string/title_entrenar"
-        tools:layout="@layout/fragment_entrenar" />
+        android:id="@+id/navigation_home"
+        android:name="com.example.maestromultiplicador.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_configuracion"
-        android:name="com.example.maestromultiplicador.ui.configuracion.ConfiguracionFragment"
-        android:label="@string/title_configuracion"
-        tools:layout="@layout/fragment_configuracion" />
+        android:id="@+id/navigation_dashboard"
+        android:name="com.example.maestromultiplicador.ui.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_estadisticas"
-        android:name="com.example.maestromultiplicador.ui.estadisticas.EstadisticasFragment"
-        android:label="@string/title_estadisticas"
-        tools:layout="@layout/fragment_estadisticas" />
+        android:id="@+id/navigation_notifications"
+        android:name="com.example.maestromultiplicador.ui.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
 </navigation>
