@@ -6,20 +6,20 @@
     app:startDestination="@+id/navigation_entrenar">
 
     <fragment
-        android:id="@+id/navigation_config"
+        android:id="@+id/navigation_entrenar"
         android:name="com.example.maestromultiplicador.ui.EntrenarFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_config"
         tools:layout="@layout/fragment_entrenar" />
 
     <fragment
-        android:id="@+id/navigation_entrenar"
+        android:id="@+id/navigation_config"
         android:name="com.example.maestromultiplicador.ui.ConfigurarFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_entrenar"
         tools:layout="@layout/fragment_configurar" />
 
     <fragment
         android:id="@+id/navigation_estadis"
         android:name="com.example.maestromultiplicador.ui.EstadisticasFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_estadis"
         tools:layout="@layout/fragment_estadisticas" />
 </navigation>
