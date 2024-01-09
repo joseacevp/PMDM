@@ -31,7 +31,7 @@ public class DialogoFecha extends DialogFragment implements DatePickerDialog.OnD
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Calendar c = Calendar.getInstance();
         int ano = c.get(Calendar.YEAR);
-        int mes = c.get(Calendar.MONTH);
+        int mes = c.get(Calendar.MONTH)+1;
         int dia = c.get(Calendar.DAY_OF_MONTH);
 
         return new DatePickerDialog(getActivity(), this, ano, mes, dia);

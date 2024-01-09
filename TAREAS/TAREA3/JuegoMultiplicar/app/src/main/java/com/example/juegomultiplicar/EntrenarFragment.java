@@ -29,7 +29,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
     Random random = new Random();
     private int primer, respuestaEsperada;
     private String tabla, dificultad, heroe, fecha, aleatorio;
-    private ArrayList<String> fallos = new ArrayList<>();
+    private ArrayList<String> fallos ;
     private int indiceActualImagen = 0;
     private int indiceActualBarra = 1;
     TextView respuesta, respuestaIncorecta, pregunta, respuestaUsuario;
@@ -85,7 +85,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_entrenar, container, false);
         datos = new Bundle();
-
+        fallos = new ArrayList<>();
         //carga los datos de la configuración almacenada y los muestra en logcat
         cargarPreferencias();
         Log.i("Tabla", tabla);
