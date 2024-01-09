@@ -40,7 +40,7 @@ public class EstadisticasFragment extends Fragment {
         fallos = view.findViewById(R.id.areaFallosEsta);
         aciertos = view.findViewById(R.id.areaPorcenEsta);
         if (datosRecividos != null) {
-
+            //inicio de registro de datos optenidos
             numeroTabla.setText("Tabla del: " + datosRecividos.getString("numeroTabla", "sin datos"));
 
             fecha.setText("Fecha de la Prueba: " + datosRecividos.getString("fecha", "sin datos"));
