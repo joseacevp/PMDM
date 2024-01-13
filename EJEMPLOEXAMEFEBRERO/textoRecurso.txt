@@ -1,0 +1,33 @@
+"Judías verdes",
+    calorias: 100
+    "Judías verdes"
+    "Puerro"
+
+"Lentejas con verdura"
+    calorias: 200;
+    "Lentejas"
+    "Calabacín"
+    "Zanahoria"
+    "Calabaza"
+
+"Pollo al ajillo"
+    calorias: 300
+    "Pollo"
+    "Ajos"
+
+"Salmón plancha"
+    calorias: 150
+    "Salmón"
+
+"Crema de calabaza"
+    calorias: 50
+    "Calabaza"
+    "Tomate"
+
+"Crema de calabacín"
+    calorias: 50
+    "Calabacín"
+
+"Trucha plancha"
+    calorias: 100
+    "Trucha"

@@ -1,6 +1,5 @@
-package com.example.selectorfechahora;
+package com.example.practicaexamenfebrero;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;

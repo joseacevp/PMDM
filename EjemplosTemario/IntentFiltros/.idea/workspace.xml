@@ -10,88 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3618b35-9c70-4a56-b033-94a11f52e6b3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/proguard-rules.pro" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/androidTest/java/com/example/filtrointent/ExampleInstrumentedTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/java/com/example/filtrointent/MainActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/mipmap-hdpi/ic_launcher.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/mipmap-mdpi/ic_launcher.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/values-night/themes.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/values/colors.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/values/strings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/values/themes.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/xml/backup_rules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/main/res/xml/data_extraction_rules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/app/src/test/java/com/example/filtrointent/ExampleUnitTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/gradle.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentExplicitos/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/proguard-rules.pro" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/androidTest/java/com/example/intentimplicitos/ExampleInstrumentedTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/java/com/example/intentimplicitos/MainActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/mipmap-hdpi/ic_launcher.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/mipmap-mdpi/ic_launcher.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/values-night/themes.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/values/colors.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/values/strings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/values/themes.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/xml/backup_rules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/main/res/xml/data_extraction_rules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/app/src/test/java/com/example/intentimplicitos/ExampleUnitTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/gradle.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../IntentImplicitos/settings.gradle" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ExamenFebrero/PracticaExamenFebrero/app/src/main/java/com/example/practicaexamenfebrero/AdapterDatos.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ExamenFebrero/PracticaExamenFebrero/app/src/main/java/com/example/practicaexamenfebrero/DialogoFecha.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ExamenFebrero/PracticaExamenFebrero/app/src/main/java/com/example/practicaexamenfebrero/VentanaDatos.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ExamenFebrero/PracticaExamenFebrero/app/src/main/res/layout/activity_ventana_datos.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ExamenFebrero/PracticaExamenFebrero/app/src/main/res/layout/item_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Binding/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Binding/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SelectorFechaHora/app/src/main/java/com/example/selectorfechahora/DialogoFecha.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SelectorFechaHora/app/src/main/java/com/example/selectorfechahora/DialogoFecha.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,13 +47,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../INTENT/IntentFiltros" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
-      <module name="FiltroIntent.app.main" />
       <option name="DEPLOY" value="true" />
-      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="true" />
       <option name="DEPLOY_AS_INSTANT" value="false" />
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
