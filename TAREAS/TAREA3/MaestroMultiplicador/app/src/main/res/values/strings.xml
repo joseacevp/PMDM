@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">MaestroMultiplicador</string>
-    <string name="title_config">Configurar</string>
-    <string name="title_entrenar">Entrenar</string>
-    <string name="title_estadis">Estadisticas</string>
-</resources>
