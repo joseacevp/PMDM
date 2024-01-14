@@ -14,6 +14,7 @@ public class AdapterDatos  extends RecyclerView.Adapter<AdapterDatos.ViewHolderD
     //1. lista de datos con los datos de los intem
     ArrayList<String> listDatos;
 
+
     //2. construptor de la lista de datos llega lista de datos y se
     //asignan al elemento listDatos
     public AdapterDatos(ArrayList<String> listDatos) {

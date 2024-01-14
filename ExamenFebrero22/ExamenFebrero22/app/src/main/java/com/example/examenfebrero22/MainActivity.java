@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == SELECCION_PRODUCTO) {
             if (resultCode == RESULT_OK){
 
+                binding.textPrincipalResultado.setText("Producto seleccionado :"+ data.getStringExtra("dato"));
             }
         }
     }

@@ -1,0 +1,34 @@
+{
+  "products_list": [
+    {
+      "name": "Lechuga",
+      "category": "Verdura",
+      "price": "1,25€",
+      "image": "lechuga.jpg"},
+    {
+      "name": "Aguacate",
+      "category": "Fruta",
+      "price": "2,55€",
+      "image": "aguacate.jpg"},  
+    {
+      "name": "Salmon",
+      "category": "Pescado",
+      "price": "16,25€",
+      "image": "salmon.jpg"},
+    {
+      "name": "Leche",
+      "category": "Lacteos",
+      "price": "5,50€",
+      "image": "leche.jpg"},
+    {
+      "name": "Yogur",
+      "category": "Lacteos",
+      "price": "2,15€",
+      "image": "yogur.jpg"},
+    {
+      "name": "Chuleton",
+      "category": "Carne",
+      "price": "15,99€",
+      "image": "chuleton.jpg"}  
+  ]
+}
