@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
     private ArrayList<String> listaDatos = new ArrayList<>();
+    private String caloriasString = "";
+    private int calorias = 0;
 
     DialogoCalorias dialogoCalorias;
 
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 //                Toast.makeText(getApplicationContext(), "Seleccionado: " + ingredientesPlato(posicion),
 //                        Toast.LENGTH_SHORT).show();
                 ingredientesPlato(posicion);
-
+                calcularCalorias(posicion);
 //                estado.setText("Seleccion: "+adapterView.getItemAtPosition(posicion).toString());
             }
 
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
                 ingredientesPlato(posicion);
+                calcularCalorias(posicion);
             }
 
             @Override
@@ -72,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
                 ingredientesPlato(posicion);
+                calcularCalorias(posicion);
             }
 
             @Override
@@ -83,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
                 ingredientesPlato(posicion);
+                calcularCalorias(posicion);
             }
 
             @Override
@@ -94,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
                 ingredientesPlato(posicion);
+                calcularCalorias(posicion);
             }
 
             @Override
@@ -105,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
                 ingredientesPlato(posicion);
+                calcularCalorias(posicion);
             }
 
             @Override
@@ -116,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
                 ingredientesPlato(posicion);
+                calcularCalorias(posicion);
             }
 
             @Override
@@ -183,8 +191,41 @@ public class MainActivity extends AppCompatActivity {
         return ingredientes;
     }
 
-    private String calcularCalorias(){
-        return null;
+    private String calcularCalorias(int posicion) {
+
+        switch (posicion) {
+
+            case 0:
+//                listaDatos.add(ingredientes);
+                break;
+            case 1:
+                calorias = calorias + 100;
+                break;
+            case 2:
+                calorias = calorias + 200;
+                break;
+            case 3:
+                calorias = calorias + 300;
+                break;
+            case 4:
+                calorias = calorias + 150;
+                break;
+            case 5:
+                calorias = calorias + 50;
+                break;
+            case 6:
+                calorias = calorias + 50;
+                break;
+            case 7:
+                calorias = calorias + 100;
+                break;
+
+        }
+        caloriasString = String.valueOf(calorias);
+        System.out.println("Total Calorias: " + caloriasString);
+        return caloriasString;
+
+
     }
     // Menu
 
@@ -208,7 +249,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.item_calorias:
+
+                Bundle datoCalorias = new Bundle();
+                datoCalorias.putString("dialogo_calo", caloriasString);
                 dialogoCalorias = new DialogoCalorias();
+                dialogoCalorias.setCalorias(caloriasString);
                 dialogoCalorias.show(getSupportFragmentManager(), "dialogo_calo");
                 break;
         }
