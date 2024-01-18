@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.menussemanales.databinding.ActivityMainBinding;
@@ -42,24 +43,19 @@ public class MainActivity extends AppCompatActivity {
         binding.spinner6.setAdapter(adapter);
         binding.spinner7.setAdapter(adapter);
 
-
         //evento del spinner captura la seleccion entre la lista de opciones del Spinner
-        binding.spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
-//                Toast.makeText(getApplicationContext(), "Seleccionado: " + ingredientesPlato(posicion),
-//                        Toast.LENGTH_SHORT).show();
-                ingredientesPlato(posicion);
-                calcularCalorias(posicion);
-//                estado.setText("Seleccion: "+adapterView.getItemAtPosition(posicion).toString());
-            }
+        seleccionMenu(binding.spinner1);
+        seleccionMenu(binding.spinner2);
+        seleccionMenu(binding.spinner3);
+        seleccionMenu(binding.spinner4);
+        seleccionMenu(binding.spinner5);
+        seleccionMenu(binding.spinner6);
+        seleccionMenu(binding.spinner7);
+     
+    }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-//                estado.setText("");
-            }
-        });
-        binding.spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    private void seleccionMenu(Spinner spinner) {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
                 ingredientesPlato(posicion);
@@ -71,67 +67,6 @@ public class MainActivity extends AppCompatActivity {
 //                estado.setText("");
             }
         });
-        binding.spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
-                ingredientesPlato(posicion);
-                calcularCalorias(posicion);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-//                estado.setText("");
-            }
-        });
-        binding.spinner4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
-                ingredientesPlato(posicion);
-                calcularCalorias(posicion);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-//                estado.setText("");
-            }
-        });
-        binding.spinner5.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
-                ingredientesPlato(posicion);
-                calcularCalorias(posicion);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-//                estado.setText("");
-            }
-        });
-        binding.spinner6.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
-                ingredientesPlato(posicion);
-                calcularCalorias(posicion);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-//                estado.setText("");
-            }
-        });
-        binding.spinner7.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
-                ingredientesPlato(posicion);
-                calcularCalorias(posicion);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-//                estado.setText("");
-            }
-        });
-
     }
 
     private String ingredientesPlato(int posicion) {
