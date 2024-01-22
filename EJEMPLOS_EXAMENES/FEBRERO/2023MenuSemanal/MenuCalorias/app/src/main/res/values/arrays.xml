@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="lista_platos">
+        <item></item>
+        <item>Lentejas con verdurar</item>
+        <item>Judías verdes</item>
+        <item>Trucha plancha</item>
+        <item>Crema de calbaza</item>
+        <item>Pollo al ajillo</item>
+    </string-array>
+</resources>
