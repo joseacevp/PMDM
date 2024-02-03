@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+
         // Objeto Intent: intención de arrancar una actividad del tipo MostrarRecyclerView
         Intent intent = new Intent(this, MostrarRecyclerView.class);
 

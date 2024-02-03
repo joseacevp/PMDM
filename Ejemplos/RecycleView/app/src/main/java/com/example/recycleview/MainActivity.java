@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -13,6 +15,10 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> listaDatos;
     //10. referencia al id del recycleView del layout main
     RecyclerView recyclerView;
+
+    public static void reenviarDatos(TextView dato) {
+        Toast.makeText(dato.getContext(), "hola "+ dato.getText(), Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

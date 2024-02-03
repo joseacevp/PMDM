@@ -27,12 +27,14 @@ public class MainActivity extends AppCompatActivity implements DialogoFecha.OnFe
 
     @Override
     public void onResultadoFecha(GregorianCalendar calendario) {
+        //     Hay que indicar todos los datos implementados en la clase dia mes y año
         fecha.setText(calendario.get(Calendar.DAY_OF_MONTH)+"/"+calendario.get(Calendar.MONTH)
         +"/"+calendario.get(Calendar.YEAR));
     }
 
     @Override
     public void onResulatadoHora(GregorianCalendar hora) {
+        //     Hay que indicar todos los datos implementados en la clase hora y minutos
         edithora.setText(hora.get(Calendar.HOUR)+":"+hora.get(Calendar.MINUTE));
     }
 

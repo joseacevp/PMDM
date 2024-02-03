@@ -23,7 +23,7 @@ public class MostrarRecyclerView extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_mostrar_recycler_view);
 
         inicializarDataSet(100);
-        //mostrarDataSet();
+        mostrarDataSet();
 
         Button buttonVolver = findViewById(R.id.buttonVolver);
         buttonVolver.setOnClickListener(this);
