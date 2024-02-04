@@ -68,10 +68,14 @@ public class SelectorAvatarFragment extends Fragment {
         adaptador.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "seleccionado: "+lista.get(recyclerView.getChildAdapterPosition(view)).getNombre(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "seleccionado: "+lista.get(recyclerView.getChildAdapterPosition(view)).getNombre(), Toast.LENGTH_SHORT).show();
                 heroe = lista.get(recyclerView.getChildAdapterPosition(view)).getNombre();
 
+                Bundle miDato = new Bundle();
+                miDato.putString("dato",heroe);
+
                 ConfiguracionFragment configuracionFragment = new ConfiguracionFragment();
+                configuracionFragment.setArguments(miDato);
                 selectorFragment(configuracionFragment);
             }
         });
