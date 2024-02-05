@@ -12,8 +12,8 @@
 
         <Button
             android:id="@+id/botonAvatarConfig"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
             android:layout_marginTop="32dp"
             android:text="Seleccionar Avatar"
             app:layout_constraintEnd_toEndOf="parent"
@@ -22,22 +22,35 @@
 
         <TextView
             android:id="@+id/textoNombreAvaConfig"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:text="Selecciono Avatar: "
+            android:textAlignment="textStart"
             android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/botonAvatarConfig" />
 
         <Spinner
             android:id="@+id/spinnerDificultadConf"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
             android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textoNombreAvaConfig" />
+
+        <EditText
+            android:id="@+id/editTextNumberSigned"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="32dp"
+            android:ems="10"
+            android:inputType="numberSigned"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerDificultadConf" />
+
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>

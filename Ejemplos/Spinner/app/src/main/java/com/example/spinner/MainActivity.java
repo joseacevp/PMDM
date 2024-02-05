@@ -25,18 +25,18 @@ public class MainActivity extends AppCompatActivity {
         opciones.setAdapter(adapter);
 
         //evento del spinner captura la seleccion entre la lista de opciones del Spinner
-       opciones.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-           @Override
-           public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
-               Toast.makeText(getApplicationContext(),"Seleccionado: "+ adapterView.getItemAtPosition(posicion).toString(),
-                       Toast.LENGTH_SHORT).show();
-               estado.setText("Seleccion: "+adapterView.getItemAtPosition(posicion).toString());
-           }
+        opciones.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
+                Toast.makeText(getApplicationContext(),"Seleccionado: "+ adapterView.getItemAtPosition(posicion).toString(),
+                        Toast.LENGTH_SHORT).show();
+                estado.setText("Seleccion: "+adapterView.getItemAtPosition(posicion).toString());
+            }
 
-           @Override
-           public void onNothingSelected(AdapterView<?> adapterView) {
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
                 estado.setText("");
-           }
-       });
+            }
+        });
     }
 }
