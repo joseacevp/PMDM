@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_configurar">
+
+    <fragment
+        android:id="@+id/nav_configurar"
+        android:name="com.example.maestromultiv2.ui.ConfiguracionFragment"
+        android:label="@string/menu_configurar"
+        tools:layout="@layout/fragment_configuracion" />
+
+    <fragment
+        android:id="@+id/nav_entrenar"
+        android:name="com.example.maestromultiv2.ui.EntrenarFragment"
+        android:label="@string/menu_entrenar"
+        tools:layout="@layout/fragment_entrenar" />
+
+    <fragment
+        android:id="@+id/nav_estadisticas"
+        android:name="com.example.maestromultiv2.ui.EstadisticasFragment"
+        android:label="@string/menu_estadisticas"
+        tools:layout="@layout/fragment_estadisticas" />
+</navigation>
