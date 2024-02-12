@@ -1,32 +1,36 @@
 package com.example.maestromultiv2.ui;
 
 import android.content.Context;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.maestromultiv2.DialogoFecha;
 import com.example.maestromultiv2.R;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
-public class ConfiguracionFragment extends Fragment implements View.OnClickListener, DialogoFecha.OnFechaSeleccionada {
+public class ConfiguracionFragment extends Fragment implements View.OnClickListener {
 
     //variables
     View view;
-    String heroe, dificultad, fechaSeleccionada, tabla, numero_tabla_selec;
+    String heroe, dificultad, fechaSeleccionada,  numero_tabla_selec;
+    TextView fecha;
+    EditText numeroTabla;
 
     private String[] heroes = {"Batman",
             "Hulk",
@@ -67,6 +71,19 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_configuracion, container, false);
+        //fecha
+        fecha = view.findViewById(R.id.texto_fecha);
+        fecha.setText(recuperarFechaActual());
+        fechaSeleccionada = fecha.getText().toString();
+
+        //numero de tabla
+        numeroTabla = view.findViewById(R.id.edit_numero_tabla);
+        // Crear un filtro para limitar la longitud del texto a 1 carácter
+        InputFilter[] filters = new InputFilter[1];
+        filters[0] = new InputFilter.LengthFilter(1);
+        // Establecer el filtro en el EditText
+        numeroTabla.setFilters(filters);
+        numero_tabla_selec = numeroTabla.getText().toString();
 
         //spinner selector de abatar
         Spinner selectorAbatar = view.findViewById(R.id.spinner_avatar);
@@ -107,7 +124,21 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             }
         });
 
+
   return view;
+    }
+
+    private String recuperarFechaActual() {
+        // Obtener la instancia de Calendar y establecer la fecha actual
+        Calendar calendar = Calendar.getInstance();
+
+        // Crear un formato de fecha deseado
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+        // Formatear la fecha actual
+        String fechaActual = dateFormat.format(calendar.getTime());
+
+      return  fechaActual;
     }
 
     @Override
@@ -115,12 +146,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
 
     }
 
-    //control de los datos optenidos en la selección de la fecha
-    @Override
-    public void onResultadoFecha(GregorianCalendar fecha) {
-        fechaSeleccionada = fecha.get(Calendar.DAY_OF_MONTH) + "/" + fecha.get(Calendar.MONTH) + "/" + fecha.get(Calendar.YEAR);
-//        Toast.makeText(getContext(), fechaSeleccionada, Toast.LENGTH_SHORT).show();
-    }
+
     //adaptador personalizado para el spinner de los heroes
     public class AdaptadorPersonalizado extends ArrayAdapter {
 

@@ -7,6 +7,7 @@
 
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -27,7 +28,7 @@
                     android:layout_gravity="center|left"
                     android:layout_marginLeft="23dp"
                     android:layout_marginTop="16dp"
-                    android:text="Elige Héroe"
+                    android:text="Elige Héroe: "
                     android:textSize="24sp" />
 
                 <Spinner
@@ -45,7 +46,7 @@
                     android:background="?android:attr/listDivider" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="23dp">
@@ -54,7 +55,7 @@
                         android:id="@+id/textView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Elige Dificultad"
+                        android:text="Elige Dificultad: "
                         android:textSize="24sp" />
 
                     <Spinner
@@ -71,11 +72,11 @@
                     android:id="@+id/divider3"
                     android:layout_width="409dp"
                     android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
+
                     android:background="?android:attr/listDivider" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="23dp">
@@ -86,7 +87,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center|left"
 
-                        android:text="Elige Tabla Multiplicar"
+                        android:text="Elige Tabla Multiplicar:"
                         android:textSize="24sp" />
 
                     <EditText
@@ -108,15 +109,31 @@
                     android:layout_height="1dp"
                     android:background="?android:attr/listDivider" />
 
-                <Button
-                    android:id="@+id/boton_fecha_config"
-                    android:layout_width="300dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="Seleccionar Fecha"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal"
+                    android:padding="23dp">
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|left"
+
+                        android:text="Fecha de la Prueba: "
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/texto_fecha"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="23dp"
+                        android:hint="fecha Actual" />
+
+                </LinearLayout>
+
 
             </LinearLayout>
         </ScrollView>
