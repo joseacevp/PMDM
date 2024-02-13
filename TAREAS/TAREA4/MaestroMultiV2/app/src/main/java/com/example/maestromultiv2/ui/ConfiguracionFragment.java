@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,27 +43,6 @@ public class ConfiguracionFragment extends Fragment {
     EditText numeroTabla;
     Partida partida;
     Button botonAvatar;
-    RecyclerView recyclerView;
-
-    //3
-    ArrayList<Avatar> lista;
-
-    private String[] heroes = {"Batman",
-            "Hulk",
-            "Iron Man",
-            "Capitan America"};
-
-    private String[] descripcion = {"Matches Malone\u200B El caballero de la noche El caballero oscuro Zurdo Knox\u200B El señor de la noche\u200B",
-            "Hulk, El Increíble Hulk,\u200B El Justiciero, El Hombre Increíble",
-            "Tony Stark, Iron Man (El Hombre de Hierro)",
-            "Nómada, El Capitán, Cap, Steve Rogers, Steve"
-    };
-
-    private int imagenes[] = {R.drawable.batman,
-            R.drawable.huld,
-            R.drawable.iron,
-            R.drawable.capi
-    };
 
 
     public ConfiguracionFragment() {
@@ -85,12 +66,16 @@ public class ConfiguracionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_configuracion, container, false);
-        recyclerView = view.findViewById(R.id.recyclerView);
+
         botonAvatar = view.findViewById(R.id.boton_avatar);
         botonAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                llamarRecyclerAvatar();
+               //accion para llamar an fragmento contenedor del recyclerView avatar
+                NavController navController =
+                        Navigation.findNavController(getActivity(),
+                                R.id.nav_host_fragment_content_main);
+                navController.navigate(R.id.action_nav_configurar_to_avatarFragment);
             }
         });
         //fecha
@@ -130,30 +115,7 @@ public class ConfiguracionFragment extends Fragment {
         return view;
     }
 
-    private void llamarRecyclerAvatar() {
-        lista = new ArrayList<>();
-        lista.add(new Avatar("Hulk", "El forzudo Verde", R.drawable.huld));
-        lista.add(new Avatar("Capitan America", "Heroe Americano", R.drawable.capi));
-        lista.add(new Avatar("Iron Man", "Rico Bueno", R.drawable.iron));
-        lista.add(new Avatar("Batman", "El caballero Oscuro", R.drawable.batman));
 
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        AdaptadorRecycleViewPers adaptador = new AdaptadorRecycleViewPers(lista);
-
-        //metodo para manejar los eventos al click en los intem del RecycleView
-        adaptador.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "Pulsaste : "
-                        + lista.get(recyclerView.getChildAdapterPosition(view)).getNombre(), Toast.LENGTH_SHORT).show();
-
-            }
-        });
-        recyclerView.setAdapter(adaptador);
-
-    }
 
 
 
@@ -172,49 +134,4 @@ public class ConfiguracionFragment extends Fragment {
     }
 
 
-    //adaptador personalizado para el spinner de los heroes
-    public class AdaptadorPersonalizado extends ArrayAdapter {
-
-
-        public AdaptadorPersonalizado(@NonNull Context context,
-                                      int textViewResourceId,
-                                      @NonNull Object[] objects) {
-            super(context, textViewResourceId, objects);
-        }
-
-        @Override
-        public View getDropDownView(int position,
-                                    @Nullable View convertView,
-                                    @NonNull ViewGroup parent) {
-            return crearFilaPersonalizada(position, convertView, parent);
-        }
-
-        @NonNull
-        @Override
-        public View getView(int position,
-                            @Nullable View convertView,
-                            @NonNull ViewGroup parent) {
-            return crearFilaPersonalizada(position, convertView, parent);
-        }
-
-        private View crearFilaPersonalizada(int position,
-                                            View convertView,
-                                            ViewGroup parent) {
-            LayoutInflater inflater = getLayoutInflater();
-            View miFila = inflater.inflate(R.layout.linea_personaje,
-                    parent, false);
-
-            TextView nombre = miFila.findViewById(R.id.nombre);
-            nombre.setText(heroes[position]);
-
-            TextView descipcion = miFila.findViewById(R.id.descripcion);
-            descipcion.setText(descripcion[position]);
-
-            ImageView imagen = miFila.findViewById(R.id.imagen_heroe);
-            imagen.setImageResource(imagenes[position]);
-            return miFila;
-        }
-
-
-    }
 }
