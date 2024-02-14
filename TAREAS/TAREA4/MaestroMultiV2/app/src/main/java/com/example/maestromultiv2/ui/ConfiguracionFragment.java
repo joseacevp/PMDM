@@ -72,8 +72,12 @@ public class ConfiguracionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_configuracion, container, false);
+<<<<<<< HEAD
         //carga la configuracion cargada incluye el heroe seleccionado
         cargarPreferencias();
+=======
+
+>>>>>>> 4f3bd7f9f5c9c30ecc20770b114e3286223a16de
         //boton avatar
         botonAvatar = view.findViewById(R.id.boton_avatar);
         botonAvatar.setOnClickListener(new View.OnClickListener() {
@@ -134,6 +138,25 @@ public class ConfiguracionFragment extends Fragment {
     //metodo que almacena los datos de los campos de texto en un archivo .XML para compartirlos
     //con otra actividad de la aplicación.
     private void guardarPreferencias() {
+<<<<<<< HEAD
+=======
+
+        Random random = new Random();
+        int numeroAleatorio = random.nextInt(10) + 1;
+
+        SharedPreferences preferencias = getContext().getSharedPreferences
+                ("credenciales", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putString("heroe", heroe);
+        editor.putString("dificultad", dificultad);
+        editor.putString("fecha", fechaSeleccionada);
+        editor.putString("tabla", numeroTabla.getText().toString());
+        editor.putString("aleatorio", String.valueOf(numeroAleatorio));
+
+        editor.commit();
+    }
+>>>>>>> 4f3bd7f9f5c9c30ecc20770b114e3286223a16de
 
         Random random = new Random();
         int numeroAleatorio = random.nextInt(10) + 1;
