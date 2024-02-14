@@ -1,6 +1,7 @@
 package com.example.maestromultiv2.ui;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 
@@ -33,22 +34,21 @@ import com.example.maestromultiv2.R;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Random;
 
 public class ConfiguracionFragment extends Fragment {
 
     //variables
     View view;
-    String heroe, dificultad, fechaSeleccionada, numero_tabla_selec;
+    static String heroe, dificultad, fechaSeleccionada;
     TextView fecha;
     EditText numeroTabla;
     Partida partida;
     Button botonAvatar;
 
-
     public ConfiguracionFragment() {
         // Required empty public constructor
     }
-
 
     public static ConfiguracionFragment newInstance(String param1, String param2) {
         ConfiguracionFragment fragment = new ConfiguracionFragment();
@@ -63,19 +63,23 @@ public class ConfiguracionFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        guardarPreferencias();
+        super.onPause();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_configuracion, container, false);
 
+        //boton avatar
         botonAvatar = view.findViewById(R.id.boton_avatar);
         botonAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //accion para llamar an fragmento contenedor del recyclerView avatar
-                NavController navController =
-                        Navigation.findNavController(getActivity(),
-                                R.id.nav_host_fragment_content_main);
-                navController.navigate(R.id.action_nav_configurar_to_avatarFragment);
+                //accion para llamar an fragmento contenedor del recyclerView avatar
+                Navigation.findNavController(view).navigate(R.id.action_nav_configurar_to_avatarFragment);
             }
         });
         //fecha
@@ -90,8 +94,6 @@ public class ConfiguracionFragment extends Fragment {
         filters[0] = new InputFilter.LengthFilter(1);
         // Establecer el filtro en el EditText
         numeroTabla.setFilters(filters);
-        numero_tabla_selec = numeroTabla.getText().toString();
-
 
         //spinner selector de dificultad
         Spinner selectorDificultad = view.findViewById(R.id.spinner_dificultad);
@@ -102,7 +104,7 @@ public class ConfiguracionFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 dificultad = adapterView.getItemAtPosition(i).toString();
-//                Toast.makeText(getContext(), dificultad, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), dificultad, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -114,11 +116,6 @@ public class ConfiguracionFragment extends Fragment {
 
         return view;
     }
-
-
-
-
-
 
     private String recuperarFechaActual() {
         // Obtener la instancia de Calendar y establecer la fecha actual
@@ -133,5 +130,24 @@ public class ConfiguracionFragment extends Fragment {
         return fechaActual;
     }
 
+    //metodo que almacena los datos de los campos de texto en un archivo .XML para compartirlos
+    //con otra actividad de la aplicación.
+    private void guardarPreferencias() {
+
+        Random random = new Random();
+        int numeroAleatorio = random.nextInt(10) + 1;
+
+        SharedPreferences preferencias = getContext().getSharedPreferences
+                ("credenciales", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putString("heroe", heroe);
+        editor.putString("dificultad", dificultad);
+        editor.putString("fecha", fechaSeleccionada);
+        editor.putString("tabla", numeroTabla.getText().toString());
+        editor.putString("aleatorio", String.valueOf(numeroAleatorio));
+
+        editor.commit();
+    }
 
 }

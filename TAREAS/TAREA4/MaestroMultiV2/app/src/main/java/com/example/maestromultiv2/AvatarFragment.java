@@ -1,5 +1,7 @@
 package com.example.maestromultiv2;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,7 +26,7 @@ import java.util.ArrayList;
 public class AvatarFragment extends Fragment {
     View view;
     RecyclerView recyclerView;
-
+    private String heroe;
     //3
     ArrayList<Avatar> lista;
 
@@ -55,15 +58,7 @@ public class AvatarFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AvatarFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static AvatarFragment newInstance(String param1, String param2) {
         AvatarFragment fragment = new AvatarFragment();
         Bundle args = new Bundle();
@@ -83,10 +78,15 @@ public class AvatarFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+//        guardarPreferencias();
+        super.onPause();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       view =  inflater.inflate(R.layout.fragment_avatar, container, false);
-
+        view = inflater.inflate(R.layout.fragment_avatar, container, false);
 
 
         construirRecycleView();
@@ -108,12 +108,11 @@ public class AvatarFragment extends Fragment {
         adaptador.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Pulsaste : "
-                        + lista.get(recyclerView.getChildAdapterPosition(view)).getNombre(), Toast.LENGTH_SHORT).show();
-                NavController navController =
-                        Navigation.findNavController(getActivity(),
-                                R.id.nav_host_fragment_content_main);
-                navController.navigate(R.id.action_avatarFragment_to_nav_configurar);
+                heroe = lista.get(recyclerView.getChildAdapterPosition(view)).getNombre();
+
+                //accion para llamar an fragmento contenedor del recyclerView avatar
+                Navigation.findNavController(view).navigate(R.id.action_avatarFragment_to_nav_configurar);
+
             }
         });
         recyclerView.setAdapter(adaptador);
@@ -123,5 +122,22 @@ public class AvatarFragment extends Fragment {
         lista.add(new Avatar("Hulk", "El forzudo Verde", R.drawable.huld));
         lista.add(new Avatar("Capitan America", "Heroe Americano", R.drawable.capi));
         lista.add(new Avatar("Iron Man", "Rico Bueno", R.drawable.iron));
+    }
+
+    //metodo que almacena los datos de los campos de texto en un archivo .XML para compartirlos
+    //con otra actividad de la aplicación.
+    private void guardarPreferencias() {
+
+        Random random = new Random();
+        int numeroAleatorio = random.nextInt(10) + 1;
+
+        SharedPreferences preferencias = getContext().getSharedPreferences
+                ("credenciales", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putString("heroe", heroe);
+
+
+        editor.commit();
     }
 }
