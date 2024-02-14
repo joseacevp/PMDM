@@ -187,7 +187,6 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-
     private void mostrarBarra() {
         ProgressBar bar = view.findViewById(R.id.progressBar);
         indiceActualBarra++;
@@ -332,7 +331,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
 
         tabla = preferencias.getString("tabla", " 1");
         dificultad = preferencias.getString("dificultad", "Por defecto Facil");
-        heroe = preferencias.getString("heroe", "Por defecto Batman");
+        heroe = preferencias.getString("heroe", "Capitan America");
         fecha = preferencias.getString("fecha", "Sin información");
         aleatorio = preferencias.getString("aleatorio", "Sin información");
 
