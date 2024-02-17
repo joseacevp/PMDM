@@ -79,16 +79,6 @@ public class AvatarFragment extends Fragment {
     }
 
     @Override
-    public void onPause() {
-<<<<<<< HEAD
-//
-=======
-//        guardarPreferencias();
->>>>>>> 4f3bd7f9f5c9c30ecc20770b114e3286223a16de
-        super.onPause();
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_avatar, container, false);
@@ -114,11 +104,9 @@ public class AvatarFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 heroe = lista.get(recyclerView.getChildAdapterPosition(view)).getNombre();
-<<<<<<< HEAD
-                guardarPreferencias();
-=======
 
->>>>>>> 4f3bd7f9f5c9c30ecc20770b114e3286223a16de
+                guardarPreferencias();
+
                 //accion para llamar an fragmento contenedor del recyclerView avatar
                 Navigation.findNavController(view).navigate(R.id.action_avatarFragment_to_nav_configurar);
 
@@ -137,22 +125,16 @@ public class AvatarFragment extends Fragment {
     //con otra actividad de la aplicación.
     private void guardarPreferencias() {
 
-<<<<<<< HEAD
-=======
         Random random = new Random();
         int numeroAleatorio = random.nextInt(10) + 1;
 
->>>>>>> 4f3bd7f9f5c9c30ecc20770b114e3286223a16de
         SharedPreferences preferencias = getContext().getSharedPreferences
                 ("credenciales", Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor = preferencias.edit();
         editor.putString("heroe", heroe);
-<<<<<<< HEAD
-        Log.i("Heroe", heroe);
-=======
 
->>>>>>> 4f3bd7f9f5c9c30ecc20770b114e3286223a16de
+        Log.i("Heroe", heroe);
 
         editor.commit();
     }
