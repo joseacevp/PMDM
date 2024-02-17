@@ -22,7 +22,7 @@ public class Utilidades {
     public static final String HEROE = "heroe";
     public static final String DIFICULTAD = "dificultad";
     public static final String NUMERO_TABLA = "numero_tabla";
-    public static final String FECHA = "numero_tabla";
+    public static final String FECHA = "fecha";
     //    String usuario,heroe,dificultad,nuero_tabla;
 
     public static final String CREAR_TABLA_PARTIDAS = "CREATE TABLE "

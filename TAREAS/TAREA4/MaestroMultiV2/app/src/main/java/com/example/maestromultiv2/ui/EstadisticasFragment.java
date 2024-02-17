@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.maestromultiv2.Avatar;
@@ -31,7 +32,7 @@ import java.util.ArrayList;
 public class EstadisticasFragment extends Fragment {
     View view;
     Spinner usuarios, fechas, numero_tabla;
-    EditText campo_fallos;
+    TextView campo_fallos;
     ConexionSqlLite con;
     private String tabla, dificultad, heroe, fecha, aleatorio;
 
@@ -70,18 +71,30 @@ public class EstadisticasFragment extends Fragment {
     }
 
     private void cargarSpinnerUsuarios() {
+        ArrayList<String> lista_usuarios = new ArrayList<>();
+        String nombre = "";
         SQLiteDatabase db = con.getReadableDatabase();
         //parametros de la consulta
-        String[] campos = {Utilidades.USUARIO};
+        String[] parametros = {" usuario "};
         try {
-            Cursor cursor = db.rawQuery("SELECT " + Utilidades.USUARIO + " FROM " + Utilidades.TABLA_PARTIDAS, null);
-            cursor.moveToFirst();
-            campo_fallos.setText(cursor.getString(0));
+            Cursor cursor = db.rawQuery("SELECT  " + Utilidades.USUARIO + " FROM " + Utilidades.TABLA_PARTIDAS, null);
+
+
+            while (cursor.moveToNext()) {
+                String usuario = cursor.getString(0);
+                lista_usuarios.add(usuario);
+            }
+            cursor.close();
         } catch (Exception e) {
-            Toast.makeText(getActivity(), "Sin usuarios registrados", Toast.LENGTH_SHORT).show();;
+            Toast.makeText(getActivity(), "Sin usuarios registrados", Toast.LENGTH_SHORT).show();
+
         }
-
-
+        //COMPROBACION DE DATOS RECUPERADOS
+        for (int i = 0; i < lista_usuarios.size(); i++) {
+            nombre += lista_usuarios.get(i).toString();
+        }
+        System.out.println(nombre);
+       //
     }
 
 

@@ -90,8 +90,6 @@ public class FormularioUsuario extends Fragment {
             Toast.makeText(getActivity(), "Fallo al registrar Usuario.", Toast.LENGTH_SHORT).show();
 
         }
-
-
         //añadir datos a la base de datos con values
 //        ContentValues values = new ContentValues();
 //        values.put(Utilidades.NOMBRE,nombre_formulario_usuario.getText().toString());
