@@ -36,7 +36,8 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
     Random random = new Random();
     private int primer, respuestaEsperada;
     private String tabla, dificultad, heroe, fecha, aleatorio;
-    private ArrayList<String> fallos;
+    private String fallos;
+//    private ArrayList<String> fallos;
     private int indiceActualImagen = 0;
     private int indiceActualBarra = 1;
     TextView respuesta, respuestaIncorecta, pregunta, respuestaUsuario;
@@ -87,7 +88,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.fragment_entrenar, container, false);
 
         datos = new Bundle();
-        fallos = new ArrayList<>();
+//        fallos = new ArrayList<>();
         //carga los datos de la configuración almacenada y los muestra en logcat
         cargarPreferencias();
         Log.i("Tabla", tabla);
@@ -257,6 +258,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
 
 
     private void chekearRespuesta() {
+        fallos = "";
         // Obtén la respuesta del usuario como una cadena
         String respuestaUsuarioStr = respuestaUsuario.getText().toString();
         // Obtiene la respuesta esperada del Tag de la vista respuesta
@@ -280,7 +282,8 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
 //                fallos.add(pregunta.getText() + respuestaUsuario.getText().toString());
                 respuesta.setTextColor(Color.GREEN);
                 respuesta.setText(pregunta.getText().toString() + respuestaEsperada);
-                fallos.add(respuestaIncorecta.getText().toString());
+                fallos +=respuestaIncorecta.getText().toString()+ " \n";
+//                fallos.add(respuestaIncorecta.getText().toString());
             }
             mostrarBarra();
         } else {
@@ -341,13 +344,15 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
                     + Utilidades.NUMERO_TABLA + " , "
                     + Utilidades.HEROE + " , "
                     + Utilidades.DIFICULTAD + " , "
+                    + Utilidades.FALLOS + " , "
                     + Utilidades.FECHA
                     + " )  "
-                    + "VALUES ( ' " + "usuario2"
+                    + "VALUES ( ' " + "usuario3"
                     + "' , ' "
                     + tabla + "' , ' "
                     + heroe + "' , ' "
                     + dificultad + "' , ' "
+                    + fallos + "' , ' "
                     + fecha
                     + " ' )";
 

@@ -1,27 +1,35 @@
 package com.example.maestromultiv2.basedatos;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import androidx.annotation.NonNull;
-
 import java.util.ArrayList;
 
-public class Partida  {
-    String usuario,heroe,dificultad,nuero_tabla,fecha;
-    ArrayList<String> lista_aciertos;
+public class Partida {
+    String usuario;
+    String heroe;
+    String dificultad;
+    String nuero_tabla;
+    String fecha;
+    String lista_fallos;
 
-    public Partida(String usuario, String heroe, String dificultad, String nuero_tabla, String fecha, ArrayList<String> lista_aciertos) {
+
+    public Partida(String usuario, String heroe, String dificultad, String nuero_tabla, String fecha, ArrayList<String> lista_fallos) {
         this.usuario = usuario;
         this.heroe = heroe;
         this.dificultad = dificultad;
         this.nuero_tabla = nuero_tabla;
         this.fecha = fecha;
-        this.lista_aciertos = lista_aciertos;
+
     }
 
     public String getUsuario() {
         return usuario;
+    }
+
+    public String getLista_fallos() {
+        return lista_fallos;
+    }
+
+    public void setLista_fallos(String lista_fallos) {
+        this.lista_fallos = lista_fallos;
     }
 
     public void setUsuario(String usuario) {
@@ -60,11 +68,4 @@ public class Partida  {
         this.fecha = fecha;
     }
 
-    public ArrayList<String> getLista_aciertos() {
-        return lista_aciertos;
-    }
-
-    public void setLista_aciertos(ArrayList<String> lista_aciertos) {
-        this.lista_aciertos = lista_aciertos;
-    }
 }

@@ -23,6 +23,7 @@ public class Utilidades {
     public static final String DIFICULTAD = "dificultad";
     public static final String NUMERO_TABLA = "numero_tabla";
     public static final String FECHA = "fecha";
+    public static final String FALLOS = "fallos";
     //    String usuario,heroe,dificultad,nuero_tabla;
 
     public static final String CREAR_TABLA_PARTIDAS = "CREATE TABLE "
@@ -35,6 +36,8 @@ public class Utilidades {
             + DIFICULTAD
             + "  TEXT,"
             + FECHA
+            + "  TEXT,"
+            + FALLOS
             + "  TEXT,"
             + NUMERO_TABLA
             + "  TEXT )";
