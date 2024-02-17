@@ -16,5 +16,9 @@
             android:id="@+id/nav_estadisticas"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_estadisticas" />
+        <item
+            android:id="@+id/nav_formulario_usuario"
+            android:icon="@android:drawable/ic_input_add"
+            android:title="@string/menu_formulario_usuario" />
     </group>
 </menu>
