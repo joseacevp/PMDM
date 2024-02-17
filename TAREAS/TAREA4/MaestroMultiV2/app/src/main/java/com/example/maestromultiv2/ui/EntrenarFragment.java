@@ -2,6 +2,7 @@ package com.example.maestromultiv2.ui;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -19,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.maestromultiv2.R;
+import com.example.maestromultiv2.basedatos.ConexionSqlLite;
+import com.example.maestromultiv2.basedatos.Utilidades;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -33,7 +36,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
     Random random = new Random();
     private int primer, respuestaEsperada;
     private String tabla, dificultad, heroe, fecha, aleatorio;
-    private ArrayList<String> fallos ;
+    private ArrayList<String> fallos;
     private int indiceActualImagen = 0;
     private int indiceActualBarra = 1;
     TextView respuesta, respuestaIncorecta, pregunta, respuestaUsuario;
@@ -60,6 +63,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
             , R.drawable.capicuatro, R.drawable.capicinco, R.drawable.capiseis
             , R.drawable.capisiete, R.drawable.capiocho
             , R.drawable.capinueve, R.drawable.capi};
+
     public EntrenarFragment() {
         // Required empty public constructor
     }
@@ -126,9 +130,6 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         pregunta = view.findViewById(R.id.area_pregunta);
 
         iniciarTablaDificil(dificultad, tabla);
-
-
-
 
 
         return view;
@@ -254,24 +255,6 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void llamarFragmentoEsta() {
-        //comunicacion entre fragmentos
-        datos.putString("numeroTabla", tabla);
-        datos.putString("fecha", fecha);
-        datos.putString("heroe", heroe);
-        datos.putStringArrayList("fallos", fallos);
-        if (indiceActualImagen != 0) {
-            datos.putString("aciertos", String.valueOf(indiceActualImagen));
-        } else {
-            datos.putString("aciertos", String.valueOf(0));
-        }
-        estadisticasFragment.setArguments(datos);
-        //llamamos al fragmento estadisticas
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        //relaciona el fragment recibido "f" con el contenedor de fragment 'frame_container'
-        transaction.replace(R.id.nav_host_fragment_content_main, estadisticasFragment);
-        transaction.commit();
-    }
 
     private void chekearRespuesta() {
         // Obtén la respuesta del usuario como una cadena
@@ -335,5 +318,44 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         fecha = preferencias.getString("fecha", "Sin información");
         aleatorio = preferencias.getString("aleatorio", "Sin información");
 
+    }
+
+    @Override
+    public void onPause() {
+
+        guardarEstadisticasPartida();
+        super.onPause();
+    }
+
+    private void guardarEstadisticasPartida() {
+
+        //crea la base de datos
+        ConexionSqlLite conn = new ConexionSqlLite(getActivity(),
+                "base_datos_tarea4", null, 1);
+        SQLiteDatabase db = conn.getWritableDatabase();
+        try {
+            String insert = "INSERT INTO " + Utilidades.TABLA_PARTIDAS
+                    + " ( "
+                    + Utilidades.USUARIO
+                    + " , "
+                    + Utilidades.NUMERO_TABLA + " , "
+                    + Utilidades.HEROE + " , "
+                    + Utilidades.DIFICULTAD + " , "
+                    + Utilidades.FECHA
+                    + " )  "
+                    + "VALUES ( ' " + "usuario2"
+                    + "' , ' "
+                    + tabla + "' , ' "
+                    + heroe + "' , ' "
+                    + dificultad + "' , ' "
+                    + fecha
+                    + " ' )";
+
+            db.execSQL(insert);
+            db.close();
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), "Fallo al registrar Usuario.", Toast.LENGTH_SHORT).show();
+
+        }
     }
 }

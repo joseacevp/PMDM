@@ -1,7 +1,7 @@
 package com.example.maestromultiv2.basedatos;
 
 public class Utilidades {
-    //constantes campos tablas
+    //constantes campos tablas usuarios
     public static final String TABLA_USUARIOS = "usuarios";
     public static final String NOMBRE = "nombre";
     public static final String PASSWORD = "password";
@@ -16,5 +16,27 @@ public class Utilidades {
             + PASSWORD
             + "  TEXT)";
 
+    //constantes campos tabla partidas
+    public static final String TABLA_PARTIDAS = "partidas";
+    public static final String USUARIO = "usuario";
+    public static final String HEROE = "heroe";
+    public static final String DIFICULTAD = "dificultad";
+    public static final String NUMERO_TABLA = "numero_tabla";
+    public static final String FECHA = "numero_tabla";
+    //    String usuario,heroe,dificultad,nuero_tabla;
+
+    public static final String CREAR_TABLA_PARTIDAS = "CREATE TABLE "
+            + TABLA_PARTIDAS
+            + " ( "
+            + USUARIO
+            + " TEXT,"
+            + HEROE
+            + "  TEXT,"
+            + DIFICULTAD
+            + "  TEXT,"
+            + FECHA
+            + "  TEXT,"
+            + NUMERO_TABLA
+            + "  TEXT )";
 
 }

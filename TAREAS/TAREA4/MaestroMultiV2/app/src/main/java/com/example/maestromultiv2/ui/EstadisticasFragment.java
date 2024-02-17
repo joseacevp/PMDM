@@ -1,5 +1,9 @@
 package com.example.maestromultiv2.ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,9 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.maestromultiv2.Avatar;
 import com.example.maestromultiv2.R;
+import com.example.maestromultiv2.basedatos.ConexionSqlLite;
+import com.example.maestromultiv2.basedatos.Utilidades;
 
 import java.util.ArrayList;
 
@@ -21,52 +30,59 @@ import java.util.ArrayList;
  */
 public class EstadisticasFragment extends Fragment {
     View view;
-
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    Spinner usuarios, fechas, numero_tabla;
+    EditText campo_fallos;
+    ConexionSqlLite con;
+    private String tabla, dificultad, heroe, fecha, aleatorio;
 
     public EstadisticasFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EstadisticasFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static EstadisticasFragment newInstance(String param1, String param2) {
         EstadisticasFragment fragment = new EstadisticasFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       view =inflater.inflate(R.layout.fragment_estadisticas, container, false);
+        view = inflater.inflate(R.layout.fragment_estadisticas, container, false);
+
+        //instancia de la base de datos para consultar leer
+        con = new ConexionSqlLite(getActivity(), "base_datos_tarea4", null, 1);
+
+
+        usuarios = view.findViewById(R.id.spinner_estadis_usuarios);
+        fechas = view.findViewById(R.id.spinner_estadis_fechas);
+        numero_tabla = view.findViewById(R.id.spinner_estadis_tablas);
+        campo_fallos = view.findViewById(R.id.area_fallos_estadis);
+        cargarSpinnerUsuarios();
         return view;
     }
+
+    private void cargarSpinnerUsuarios() {
+        SQLiteDatabase db = con.getReadableDatabase();
+        //parametros de la consulta
+        String[] campos = {Utilidades.USUARIO};
+        try {
+            Cursor cursor = db.rawQuery("SELECT " + Utilidades.USUARIO + " FROM " + Utilidades.TABLA_PARTIDAS, null);
+            cursor.moveToFirst();
+            campo_fallos.setText(cursor.getString(0));
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), "Sin usuarios registrados", Toast.LENGTH_SHORT).show();;
+        }
+
+
+    }
+
+
 }

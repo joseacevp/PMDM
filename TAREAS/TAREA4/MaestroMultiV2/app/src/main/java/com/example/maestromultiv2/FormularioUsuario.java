@@ -1,6 +1,7 @@
 package com.example.maestromultiv2;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
@@ -54,10 +55,16 @@ public class FormularioUsuario extends Fragment {
             @Override
             public void onClick(View v) {
                 registrarUsuarios();
+                limpiarFormulario();
             }
         });
 
         return view;
+    }
+
+    private void limpiarFormulario() {
+        nombre_formulario_usuario.setText("");
+        pass_formulario_usuario.setText("");
     }
 
     private void registrarUsuarios() {
@@ -65,13 +72,33 @@ public class FormularioUsuario extends Fragment {
         ConexionSqlLite conn = new ConexionSqlLite(getActivity(),
                 "base_datos_tarea4", null, 1);
         SQLiteDatabase db = conn.getWritableDatabase();
+        try {
+            String insert = "INSERT INTO " + Utilidades.TABLA_USUARIOS
+                    + " ( "
+                    + Utilidades.NOMBRE
+                    + " , "
+                    + Utilidades.PASSWORD
+                    + " )  "
+                    + "VALUES ( ' " + nombre_formulario_usuario.getText().toString()
+                    + "' , ' "
+                    + pass_formulario_usuario.getText().toString()
+                    + " ' )";
 
-        ContentValues values = new ContentValues();
-        values.put(Utilidades.NOMBRE,nombre_formulario_usuario.getText().toString());
-        values.put(Utilidades.PASSWORD,pass_formulario_usuario.getText().toString());
+            db.execSQL(insert);
+            db.close();
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), "Fallo al registrar Usuario.", Toast.LENGTH_SHORT).show();
 
-        Long idResultante = db.insert(Utilidades.TABLA_USUARIOS,Utilidades.NOMBRE,values);
-        Toast.makeText(getActivity(), "Registrado el usuario: "+ idResultante, Toast.LENGTH_SHORT).show();
+        }
+
+
+        //añadir datos a la base de datos con values
+//        ContentValues values = new ContentValues();
+//        values.put(Utilidades.NOMBRE,nombre_formulario_usuario.getText().toString());
+//        values.put(Utilidades.PASSWORD,pass_formulario_usuario.getText().toString());
+//
+//        Long idResultante = db.insert(Utilidades.TABLA_USUARIOS,Utilidades.NOMBRE,values);
+//        Toast.makeText(getActivity(), "Registrado el usuario: "+ idResultante, Toast.LENGTH_SHORT).show();
 
     }
 }
