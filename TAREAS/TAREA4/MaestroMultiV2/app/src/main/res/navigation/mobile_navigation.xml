@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_configurar">
+    app:startDestination="@+id/inicioFragment">
 
     <fragment
         android:id="@+id/nav_configurar"
@@ -41,4 +41,13 @@
         android:name="com.example.maestromultiv2.FormularioUsuario"
         android:label="fragment_formulario_usuario"
         tools:layout="@layout/fragment_formulario_usuario" />
+    <fragment
+        android:id="@+id/inicioFragment"
+        android:name="com.example.maestromultiv2.InicioFragment"
+        android:label="fragment_inicio"
+        tools:layout="@layout/fragment_inicio" >
+        <action
+            android:id="@+id/action_inicioFragment_to_nav_configurar"
+            app:destination="@id/nav_configurar" />
+    </fragment>
 </navigation>

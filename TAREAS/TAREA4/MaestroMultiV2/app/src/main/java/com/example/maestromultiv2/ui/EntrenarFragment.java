@@ -36,7 +36,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
     Random random = new Random();
     private int primer, respuestaEsperada;
     private String tabla, dificultad, heroe, fecha, aleatorio;
-    private String fallos;
+    private String fallos = "";
 //    private ArrayList<String> fallos;
     private int indiceActualImagen = 0;
     private int indiceActualBarra = 1;
@@ -258,7 +258,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
 
 
     private void chekearRespuesta() {
-        fallos = "";
+
         // Obtén la respuesta del usuario como una cadena
         String respuestaUsuarioStr = respuestaUsuario.getText().toString();
         // Obtiene la respuesta esperada del Tag de la vista respuesta
@@ -283,6 +283,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
                 respuesta.setTextColor(Color.GREEN);
                 respuesta.setText(pregunta.getText().toString() + respuestaEsperada);
                 fallos +=respuestaIncorecta.getText().toString()+ " \n";
+                System.out.println(fallos);
 //                fallos.add(respuestaIncorecta.getText().toString());
             }
             mostrarBarra();
