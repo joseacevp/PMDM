@@ -13,4 +13,6 @@
     <string name="menu_formulario_usuario">Añadir Usuario</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="titulo_inicio">Bien venido a Maestro de la Multiplicación v2. Selecciona un usuario.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="titulo_login">Escribe tus datos para iniciar el Juego</string>
 </resources>

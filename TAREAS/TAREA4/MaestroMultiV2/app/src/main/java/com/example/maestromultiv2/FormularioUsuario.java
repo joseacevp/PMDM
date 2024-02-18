@@ -74,15 +74,15 @@ public class FormularioUsuario extends Fragment {
         SQLiteDatabase db = conn.getWritableDatabase();
         try {
             String insert = "INSERT INTO " + Utilidades.TABLA_USUARIOS
-                    + " ( "
+                    + " ("
                     + Utilidades.NOMBRE
-                    + " , "
+                    + ","
                     + Utilidades.PASSWORD
-                    + " )  "
-                    + "VALUES ( ' " + nombre_formulario_usuario.getText().toString()
-                    + "' , ' "
+                    + ")  "
+                    + "VALUES ( '" + nombre_formulario_usuario.getText().toString()
+                    + "' , '"
                     + pass_formulario_usuario.getText().toString()
-                    + " ' )";
+                    + "' )";
 
             db.execSQL(insert);
             db.close();

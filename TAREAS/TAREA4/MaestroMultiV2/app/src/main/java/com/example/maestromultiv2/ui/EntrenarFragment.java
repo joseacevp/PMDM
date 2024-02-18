@@ -35,7 +35,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
     private int e = 10;
     Random random = new Random();
     private int primer, respuestaEsperada;
-    private String tabla, dificultad, heroe, fecha, aleatorio;
+    private String tabla, dificultad, heroe, fecha, aleatorio,usuario;
     private String fallos = "";
 //    private ArrayList<String> fallos;
     private int indiceActualImagen = 0;
@@ -96,6 +96,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         Log.i("Heroe", heroe);
         Log.i("Fecha", fecha);
         Log.i("aleatoria", aleatorio);
+        Log.i("usuario", usuario);
 
 
         //botones de la botonera para indicar los datos
@@ -321,6 +322,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
         heroe = preferencias.getString("heroe", "Capitan America");
         fecha = preferencias.getString("fecha", "Sin información");
         aleatorio = preferencias.getString("aleatorio", "Sin información");
+        usuario = preferencias.getString("usuario","sin informacion");
 
     }
 
@@ -348,7 +350,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
                     + Utilidades.FALLOS + " , "
                     + Utilidades.FECHA
                     + " )  "
-                    + "VALUES ( ' " + "usuario3"
+                    + "VALUES ( ' " + usuario
                     + "' , ' "
                     + tabla + "' , ' "
                     + heroe + "' , ' "
@@ -360,7 +362,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
             db.execSQL(insert);
             db.close();
         } catch (Exception e) {
-            Toast.makeText(getActivity(), "Fallo al registrar Usuario.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Fallo al registrar partida.", Toast.LENGTH_SHORT).show();
 
         }
     }

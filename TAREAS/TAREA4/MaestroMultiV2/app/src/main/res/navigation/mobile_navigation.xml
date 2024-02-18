@@ -47,7 +47,19 @@
         android:label="fragment_inicio"
         tools:layout="@layout/fragment_inicio" >
         <action
-            android:id="@+id/action_inicioFragment_to_nav_configurar"
+            android:id="@+id/action_inicioFragment_to_nav_formulario_usuario"
+            app:destination="@id/nav_formulario_usuario" />
+        <action
+            android:id="@+id/action_inicioFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.maestromultiv2.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_nav_configurar"
             app:destination="@id/nav_configurar" />
     </fragment>
 </navigation>
