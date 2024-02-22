@@ -25,7 +25,6 @@ public class InicioActivity extends AppCompatActivity {
     SQLiteDatabase db;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +35,6 @@ public class InicioActivity extends AppCompatActivity {
         botonRegistro = findViewById(R.id.botonRegistroInico);
 
         crearBaseDatos();
-//        cargarDatosUsuariosSQL();
 
 //Spinner usuarios
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter(getApplicationContext(),
@@ -57,14 +55,13 @@ public class InicioActivity extends AppCompatActivity {
         botonInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent enviar = new Intent(InicioActivity.this, MainActivity.class);
+                Intent enviar = new Intent(InicioActivity.this, LoginActivity.class);
                 Bundle miDato = new Bundle();
                 miDato.putString("nombreUsuarioInicio", nombreUsuarioInicio);
                 enviar.putExtras(miDato);
                 startActivity(enviar);
             }
         });
-
 //boton crear usuario
         botonRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +71,6 @@ public class InicioActivity extends AppCompatActivity {
             }
         });
     }
-
 
     //crea una base de datos con un usario Administrador y un password 1234
     private void crearBaseDatos() {
