@@ -6,16 +6,16 @@
     app:startDestination="@+id/nav_configurar">
 
     <fragment
-        android:id="@+id/nav_configurar"
-        android:name="com.example.tarea4v2.ui.entrenar.EntrenarFragment"
-        android:label="@string/menu_configurar"
-        tools:layout="@layout/fragment_comfigurar" />
-
-    <fragment
         android:id="@+id/nav_entrenar"
-        android:name="com.example.tarea4v2.ui.configurar.ConfigurarFragment"
+        android:name="com.example.tarea4v2.ui.entrenar.EntrenarFragment"
         android:label="@string/menu_entrenar"
         tools:layout="@layout/fragment_entrenar" />
+
+    <fragment
+        android:id="@+id/nav_configurar"
+        android:name="com.example.tarea4v2.ui.configurar.ConfigurarFragment"
+        android:label="@string/menu_configurar"
+        tools:layout="@layout/fragment_comfigurar" />
 
     <fragment
         android:id="@+id/nav_estadisticas"

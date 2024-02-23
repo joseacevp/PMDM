@@ -3,6 +3,7 @@ package com.example.tarea4v2;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+    String usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Bundle datoRecivido = this.getIntent().getExtras();
+        if (datoRecivido != null) {
+            usuario = datoRecivido.getString("nombreUsuarioInicio");
+        }
+        Toast.makeText(this, "Usuario seleccionado: "+usuario, Toast.LENGTH_SHORT).show();
+//
 
         setSupportActionBar(binding.appBarMain.toolbar);
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {

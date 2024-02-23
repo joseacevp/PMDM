@@ -3,6 +3,7 @@ package com.example.tarea4v2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -40,12 +41,16 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (conprobarCredenciales(passwordLog.getText().toString(), usuario)) {
-                    //llamar a jugo con el dato del nombre de usuario
                     Toast.makeText(getApplicationContext(), "DATOS CORRECTOS", Toast.LENGTH_SHORT).show();
+                    //llamar a jugo con el dato del nombre de usuario
+                    Intent enviar = new Intent(LoginActivity.this, MainActivity.class);
+                    Bundle miDato = new Bundle();
+                    miDato.putString("nombreUsuarioInicio", usuario);
+                    enviar.putExtras(miDato);
+                    startActivity(enviar);
                 } else {
                     Toast.makeText(getApplicationContext(), "Los datos no son correctos", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }
