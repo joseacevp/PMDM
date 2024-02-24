@@ -10,17 +10,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.tarea4v2.ConexionSqlLite;
 import com.example.tarea4v2.R;
 import com.example.tarea4v2.Utilidades;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EstadisticasFragment extends Fragment {
 
@@ -28,9 +31,11 @@ public class EstadisticasFragment extends Fragment {
     Spinner usuarios, fechas, numero_tablas;
     TextView campo_fallos;
     ConexionSqlLite con;
-    ArrayList<String> lista_usuarios, lista_fechas, lista_tablas, lista_fallos;
+    ArrayList<String> lista_usuarios, lista_fechas, lista_tablas, lista_fallos, lista_limpia;
+    Button resetEsta;
     private String tabla, dificultad, heroe, fecha, aleatorio, usuario;
-
+    ArrayAdapter<CharSequence> adapter2;
+    ArrayAdapter<CharSequence> adapter3;
     public EstadisticasFragment() {
         // Required empty public constructor
     }
@@ -67,13 +72,14 @@ public class EstadisticasFragment extends Fragment {
                 android.R.layout.simple_spinner_item, cargarDatosUsuariosSQL());
         usuarios.setAdapter(adapter);
 
+
         //evento del spinner captura la seleccion entre la lista de opciones del Spinner
         usuarios.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterViewUsuario, View view, int posicionUsuario, long l) {
                 //forma de crear un adaptador para usar un ArrayList en vez de una lista de Item desde Archivo en Values
                 usuario = adapterViewUsuario.getItemAtPosition(posicionUsuario).toString();
-                ArrayAdapter<CharSequence> adapter2 = new ArrayAdapter(getActivity(),
+                 adapter2 = new ArrayAdapter(getActivity(),
                         android.R.layout.simple_spinner_item, cargarDatosFechasSQL(adapterViewUsuario.getItemAtPosition(posicionUsuario).toString()));
                 fechas.setAdapter(adapter2);
 
@@ -82,7 +88,7 @@ public class EstadisticasFragment extends Fragment {
                     public void onItemSelected(AdapterView<?> adapterViewfechas, View view, int posicionFecha, long id) {
                         fecha = adapterViewfechas.getItemAtPosition(posicionFecha).toString();
                         //forma de crear un adaptador para usar un ArrayList en vez de una lista de Item desde Archivo en Values
-                        ArrayAdapter<CharSequence> adapter3 = new ArrayAdapter(getActivity(),
+                        adapter3 = new ArrayAdapter(getActivity(),
                                 android.R.layout.simple_spinner_item, cargarDatosTablasSQL(adapterViewfechas.getItemAtPosition(posicionFecha).toString()));
                         numero_tablas.setAdapter(adapter3);
                         numero_tablas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -111,8 +117,24 @@ public class EstadisticasFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+
+        resetEsta = view.findViewById(R.id.botonResetEstadisticas);
+        resetEsta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetearEstadisticas();
+                adapter.clear(); // Elimina todos los elementos del adaptador
+                adapter.notifyDataSetChanged(); // Notifica al adaptador que los datos han cambiado
+                adapter2.clear(); // Elimina todos los elementos del adaptador
+                adapter2.notifyDataSetChanged(); // Notifica al adaptador que los datos han cambiado
+                adapter3.clear(); // Elimina todos los elementos del adaptador
+                adapter3.notifyDataSetChanged(); // Notifica al adaptador que los datos han cambiado
+                campo_fallos.setText("");
+            }
+        });
         return view;
     }
+
 
     private ArrayList<String> cargarDatosUsuariosSQL() {
         lista_usuarios = new ArrayList<>();
@@ -236,5 +258,23 @@ public class EstadisticasFragment extends Fragment {
         System.out.println(dato);
         //
         return dato;
+    }
+
+
+    private void resetearEstadisticas() {
+        //crea la base de datos
+        ConexionSqlLite conn = new ConexionSqlLite(getActivity(),
+                "BaseDatosTarea4", null, 1);
+        SQLiteDatabase db = conn.getWritableDatabase();
+        try {
+            // Ejecutar la consulta DELETE
+            db.delete(Utilidades.TABLA_PARTIDAS, null, null);
+
+            // Cerrar la conexión de la base de datos
+            db.close();
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), "Fallo al borrar partida.", Toast.LENGTH_SHORT).show();
+
+        }
     }
 }

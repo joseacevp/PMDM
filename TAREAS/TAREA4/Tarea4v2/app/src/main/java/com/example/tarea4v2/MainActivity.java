@@ -2,6 +2,7 @@ package com.example.tarea4v2;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        // Evitar el giro automático
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 //recive el usuario de la actividad login
         Bundle datoRecivido = this.getIntent().getExtras();
         if (datoRecivido != null) {
