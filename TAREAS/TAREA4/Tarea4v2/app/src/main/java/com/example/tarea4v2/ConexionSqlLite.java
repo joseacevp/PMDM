@@ -16,15 +16,15 @@ public class ConexionSqlLite extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL(Utilidades.CREAR_TABLA_USUARIO);
+
         db.execSQL(Utilidades.CREAR_TABLA_PARTIDAS);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS usuarios");
+
         db.execSQL("DROP TABLE IF EXISTS partidas");
-        db.execSQL(Utilidades.CREAR_TABLA_USUARIO);
+
         db.execSQL(Utilidades.CREAR_TABLA_PARTIDAS);
     }
 }

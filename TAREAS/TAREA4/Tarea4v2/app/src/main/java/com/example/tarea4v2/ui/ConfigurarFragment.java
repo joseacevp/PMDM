@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tarea4v2.MainActivity;
 import com.example.tarea4v2.R;
 
 import androidx.fragment.app.Fragment;
@@ -33,7 +34,7 @@ public class ConfigurarFragment extends Fragment {
     View view;
     static String heroe, dificultad, fechaSeleccionada;
     TextView fecha;
-    EditText numeroTabla;
+    EditText numeroTabla ;
     Partida partida;
     Button botonAvatar;
 
@@ -51,6 +52,7 @@ public class ConfigurarFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
 
     @Override
@@ -65,6 +67,7 @@ public class ConfigurarFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_comfigurar, container, false);
         //carga la configuracion cargada incluye el heroe seleccionado
         cargarPreferencias();
+
         //boton avatar
         botonAvatar = view.findViewById(R.id.boton_avatar);
         botonAvatar.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +135,11 @@ public class ConfigurarFragment extends Fragment {
         editor.putString("heroe", heroe);
         editor.putString("dificultad", dificultad);
         editor.putString("fecha", fechaSeleccionada);
-        editor.putString("tabla", numeroTabla.getText().toString());
+        if (numeroTabla.getText().toString().isEmpty()){
+            editor.putString("tabla", "1");
+        }else{
+            editor.putString("tabla", numeroTabla.getText().toString());
+        }
         editor.putString("aleatorio", String.valueOf(numeroAleatorio));
 
         editor.commit();

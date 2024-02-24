@@ -1,5 +1,7 @@
 package com.example.tarea4v2;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -17,11 +19,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tarea4v2.databinding.ActivityMainBinding;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-    String usuario;
+    private String usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +33,14 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+//recive el usuario de la actividad login
         Bundle datoRecivido = this.getIntent().getExtras();
         if (datoRecivido != null) {
-            usuario = datoRecivido.getString("nombreUsuarioInicio");
+            String datoString = datoRecivido.getString("nombreUsuarioInicio");
+            usuario = datoString.toString();
+            guardarPreferencias();
+            System.out.println(usuario);
         }
-        Toast.makeText(this, "Usuario seleccionado: "+usuario, Toast.LENGTH_SHORT).show();
-//
 
         setSupportActionBar(binding.appBarMain.toolbar);
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
@@ -69,5 +75,18 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    private void guardarPreferencias() {
+
+        Random random = new Random();
+        int numeroAleatorio = random.nextInt(10) + 1;
+
+        SharedPreferences preferencias = getApplicationContext().getSharedPreferences
+                ("credenciales", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putString("usuario", usuario);
+        editor.commit();
     }
 }

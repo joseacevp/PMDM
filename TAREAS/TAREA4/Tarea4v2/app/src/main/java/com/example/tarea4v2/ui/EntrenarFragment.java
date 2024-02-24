@@ -335,7 +335,7 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
 
         //crea la base de datos
         ConexionSqlLite conn = new ConexionSqlLite(getActivity(),
-                "base_datos_tarea4", null, 1);
+                "BaseDatosTarea4", null, 1);
         SQLiteDatabase db = conn.getWritableDatabase();
         try {
             String insert = "INSERT INTO " + Utilidades.TABLA_PARTIDAS

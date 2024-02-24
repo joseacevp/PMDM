@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.tarea4v2.ui.ConfigurarFragment;
+
 import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {

@@ -1,5 +1,7 @@
 package com.example.tarea4v2.ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -26,8 +28,8 @@ public class EstadisticasFragment extends Fragment {
     Spinner usuarios, fechas, numero_tablas;
     TextView campo_fallos;
     ConexionSqlLite con;
-    ArrayList<String> lista_usuarios, lista_fechas, lista_tablas,lista_fallos;
-    private String tabla, dificultad, heroe, fecha, aleatorio;
+    ArrayList<String> lista_usuarios, lista_fechas, lista_tablas, lista_fallos;
+    private String tabla, dificultad, heroe, fecha, aleatorio, usuario;
 
     public EstadisticasFragment() {
         // Required empty public constructor
@@ -52,7 +54,7 @@ public class EstadisticasFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_estadisticas, container, false);
 
         //instancia de la base de datos para consultar leer
-        con = new ConexionSqlLite(getActivity(), "base_datos_tarea4", null, 1);
+        con = new ConexionSqlLite(getActivity(), "BaseDatosTarea4", null, 1);
 
 
         usuarios = view.findViewById(R.id.spinner_estadis_usuarios);
@@ -69,10 +71,8 @@ public class EstadisticasFragment extends Fragment {
         usuarios.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterViewUsuario, View view, int posicionUsuario, long l) {
-//                Toast.makeText(getActivity(), "Seleccionado: " + adapterView.getItemAtPosition(posicion).toString(),
-//                        Toast.LENGTH_SHORT).show();
-
                 //forma de crear un adaptador para usar un ArrayList en vez de una lista de Item desde Archivo en Values
+                usuario = adapterViewUsuario.getItemAtPosition(posicionUsuario).toString();
                 ArrayAdapter<CharSequence> adapter2 = new ArrayAdapter(getActivity(),
                         android.R.layout.simple_spinner_item, cargarDatosFechasSQL(adapterViewUsuario.getItemAtPosition(posicionUsuario).toString()));
                 fechas.setAdapter(adapter2);
@@ -80,6 +80,7 @@ public class EstadisticasFragment extends Fragment {
                 fechas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterViewfechas, View view, int posicionFecha, long id) {
+                        fecha = adapterViewfechas.getItemAtPosition(posicionFecha).toString();
                         //forma de crear un adaptador para usar un ArrayList en vez de una lista de Item desde Archivo en Values
                         ArrayAdapter<CharSequence> adapter3 = new ArrayAdapter(getActivity(),
                                 android.R.layout.simple_spinner_item, cargarDatosTablasSQL(adapterViewfechas.getItemAtPosition(posicionFecha).toString()));
@@ -87,14 +88,14 @@ public class EstadisticasFragment extends Fragment {
                         numero_tablas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> adapterViewTabla, View view, int positionTabla, long id) {
+                                tabla = adapterViewTabla.getItemAtPosition(positionTabla).toString();
                                 //implementar fallos de usuario fecha y tabla
                                 //select fallos from partidas where usuario = usuario and fecha = fecha and tabla = tabla
-                                campo_fallos.setText( cargarDatosFallosSQL(adapterViewTabla.getItemAtPosition(positionTabla).toString()));
+                                campo_fallos.setText(cargarDatosFallosSQL(adapterViewTabla.getItemAtPosition(positionTabla).toString()));
                             }
 
                             @Override
                             public void onNothingSelected(AdapterView<?> parent) {
-
                             }
                         });
 
@@ -102,19 +103,14 @@ public class EstadisticasFragment extends Fragment {
 
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
-
                     }
                 });
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
-
             }
         });
-
-
         return view;
     }
 
@@ -143,6 +139,7 @@ public class EstadisticasFragment extends Fragment {
         //
         return lista_usuarios;
     }
+
     private ArrayList<String> cargarDatosFechasSQL(String usuario) {
         lista_fechas = new ArrayList<>();
         String nombre = "";
@@ -172,9 +169,9 @@ public class EstadisticasFragment extends Fragment {
             nombre += lista_fechas.get(i).toString();
         }
         System.out.println(nombre);
-        //
         return lista_fechas;
     }
+
     private ArrayList<String> cargarDatosTablasSQL(String fecha) {
         lista_tablas = new ArrayList<>();
         String dato = "";
@@ -207,6 +204,7 @@ public class EstadisticasFragment extends Fragment {
         //
         return lista_tablas;
     }
+
     private String cargarDatosFallosSQL(String numero) {
         lista_fallos = new ArrayList<>();
         String dato = "";
