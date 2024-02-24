@@ -1,13 +1,9 @@
-package com.example.maestromultiv2.ui;
+package com.example.tarea4v2.ui;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
 import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,14 +16,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.maestromultiv2.basedatos.Partida;
-import com.example.maestromultiv2.R;
+import com.example.tarea4v2.R;
+
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
+import com.example.tarea4v2.Partida;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Random;
 
-public class ConfiguracionFragment extends Fragment {
+public class ConfigurarFragment extends Fragment {
 
     //variables
     View view;
@@ -37,12 +37,12 @@ public class ConfiguracionFragment extends Fragment {
     Partida partida;
     Button botonAvatar;
 
-    public ConfiguracionFragment() {
+    public ConfigurarFragment() {
         // Required empty public constructor
     }
 
-    public static ConfiguracionFragment newInstance(String param1, String param2) {
-        ConfiguracionFragment fragment = new ConfiguracionFragment();
+    public static ConfigurarFragment newInstance(String param1, String param2) {
+        ConfigurarFragment fragment = new ConfigurarFragment();
 
         return fragment;
     }
@@ -62,12 +62,9 @@ public class ConfiguracionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_configuracion, container, false);
-
+        view = inflater.inflate(R.layout.fragment_comfigurar, container, false);
         //carga la configuracion cargada incluye el heroe seleccionado
         cargarPreferencias();
-
-
         //boton avatar
         botonAvatar = view.findViewById(R.id.boton_avatar);
         botonAvatar.setOnClickListener(new View.OnClickListener() {
@@ -99,16 +96,12 @@ public class ConfiguracionFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 dificultad = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(getContext(), dificultad, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), dificultad, Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
-
-
         return view;
     }
 

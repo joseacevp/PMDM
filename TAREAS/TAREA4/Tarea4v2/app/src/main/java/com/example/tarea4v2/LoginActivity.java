@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
-    String usuario;
+    private String usuario;
     EditText passwordLog;
     Button botonRegistroLog;
     SQLiteDatabase db;
