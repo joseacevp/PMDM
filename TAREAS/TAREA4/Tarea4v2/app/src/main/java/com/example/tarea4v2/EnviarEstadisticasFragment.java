@@ -3,6 +3,9 @@ package com.example.tarea4v2;
 import android.content.ContentResolver;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,6 +21,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 //
@@ -84,40 +88,62 @@ public class EnviarEstadisticasFragment extends Fragment {
         return view;
     }
 
-    private ArrayList<String> obtenerContactos() {
-        ArrayList<String> listaContactos = new ArrayList<>();
+    private ArrayList<Contacto> obtenerContactos() {
+        ArrayList<Contacto> listaContactos = new ArrayList<>();
         ContentResolver cr = getContext().getContentResolver();
         Cursor cursor = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
-        if (cursor != null && cursor.getCount() > 0) {
-            while (cursor.moveToNext()) {
-                String nombre = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));//                String nombre = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-                listaContactos.add(nombre);
+        try {
+            if (cursor != null && cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    String nombre = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                    String id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+
+                    // Obtener correo electrónico
+                    Cursor emailCursor = cr.query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null,
+                            ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = ?", new String[]{id}, null);
+                    String email = "";
+                    if (emailCursor != null && emailCursor.moveToFirst()) {
+                        email = emailCursor.getString(emailCursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
+                        emailCursor.close();
+                    }
+
+                    // Obtener foto de perfil
+                    Bitmap fotoPerfil = null;
+                    if (cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_ID)) > 0) {
+                        Uri contactUri = ContactsContract.Contacts.CONTENT_URI;
+                        Uri photoUri = Uri.withAppendedPath(contactUri, id);
+                        InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(cr, photoUri);
+                        if (input != null) {
+                            fotoPerfil = BitmapFactory.decodeStream(input);
+                        }
+                    }
+
+                    listaContactos.add(new Contacto(nombre, email, fotoPerfil));
+                }
+                cursor.close();
             }
-            cursor.close();
+        }catch (Exception e){
+
         }
+
         return listaContactos;
     }
 
     private void construirRecycleView() {
-        ArrayList<String> lista = obtenerContactos();
+        ArrayList<Contacto> lista = obtenerContactos();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        AdaptadorRecyclerViewConta adaptador = new AdaptadorRecyclerViewConta(lista);
-
-        //metodo para manejar los eventos al click en los intem del RecycleView
-        adaptador.setOnClickListener(new View.OnClickListener() {
+        AdaptadorRecyclerViewConta adaptador = new AdaptadorRecyclerViewConta(lista, new AdaptadorRecyclerViewConta.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-//                heroe = lista.get(recyclerView.getChildAdapterPosition(view)).getNombre();
-//
-//                guardarPreferencias();
-
-                //accion para llamar an fragmento contenedor del recyclerView avatar
-//                Navigation.findNavController(view).navigate(R.id.action_avatarFragment_to_nav_configurar);
-
+            public void onItemClick(int position) {
+                Contacto contacto = lista.get(position);
+                String nombreContacto = contacto.getNombre();
+                Toast.makeText(getContext(), "Contacto seleccionado: " + nombreContacto, Toast.LENGTH_SHORT).show();
+                // Aquí puedes realizar otras acciones, como navegar a otro fragmento
             }
         });
+
         recyclerView.setAdapter(adaptador);
     }
 

@@ -3,6 +3,7 @@ package com.example.tarea4v2;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,34 +11,35 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class AdaptadorRecyclerViewConta  extends RecyclerView.Adapter<AdaptadorRecyclerViewConta.ViewHolderContactos>
-        implements View.OnClickListener {
-    ArrayList<String> listaContactos;
+public class AdaptadorRecyclerViewConta extends RecyclerView.Adapter<AdaptadorRecyclerViewConta.ViewHolderContactos> {
+    ArrayList<Contacto> listaContactos;
+    private OnItemClickListener mListener;
 
-    //propiedad escuchador para implementar onClick
-    private View.OnClickListener listener;
+    // Interfaz para manejar clics en los elementos de la lista
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
 
-    public AdaptadorRecyclerViewConta(ArrayList<String> listaContactos) {
+    public AdaptadorRecyclerViewConta(ArrayList<Contacto> listaContactos, OnItemClickListener listener) {
         this.listaContactos = listaContactos;
+        this.mListener = listener;
     }
 
     @NonNull
     @Override
-    public AdaptadorRecyclerViewConta.ViewHolderContactos onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()
-        ).inflate(R.layout.intem_list_contactos, null, false);
+    public ViewHolderContactos onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.intem_list_contactos, viewGroup, false);
 
-        //escuchador de onClick a la escucha
-        view.setOnClickListener(this);
-
-        return new AdaptadorRecyclerViewConta.ViewHolderContactos(view);
+        return new ViewHolderContactos(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdaptadorRecyclerViewConta.ViewHolderContactos viewHolderPersonajes, int i) {
-        //2.
-        viewHolderPersonajes.etiNombre.setText(listaContactos.get(i));
-
+    public void onBindViewHolder(@NonNull ViewHolderContactos viewHolderContactos, int i) {
+        Contacto contacto = listaContactos.get(i);
+        viewHolderContactos.etiNombre.setText(contacto.getNombre());
+        viewHolderContactos.etiEmail.setText(contacto.getEmail());
+        viewHolderContactos.imagenPerfil.setImageBitmap(contacto.getFotoPerfil());
     }
 
     @Override
@@ -45,29 +47,31 @@ public class AdaptadorRecyclerViewConta  extends RecyclerView.Adapter<AdaptadorR
         return listaContactos.size();
     }
 
-
-    //metodo para implementar onClick
-    public  void setOnClickListener(View.OnClickListener listener){
-        this.listener = listener;
-    }
-    //implementacion de onClick
-    @Override
-    public void onClick(View view) {
-        if (listener!=null){
-            listener.onClick(view);
-        }
-    }
-
-    public class ViewHolderContactos extends RecyclerView.ViewHolder {
+    public class ViewHolderContactos extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView etiNombre;
+        TextView etiEmail;
+        ImageView imagenPerfil;
 
         public ViewHolderContactos(@NonNull View itemView) {
             super(itemView);
 
             etiNombre = itemView.findViewById(R.id.textoNombreContacto);
+            etiEmail = itemView.findViewById(R.id.textoEmailcontacto);
+            imagenPerfil = itemView.findViewById(R.id.imagenPerfil);
+            // Establecer el clic en el elemento de la lista
+            itemView.setOnClickListener(this);
+        }
 
-            //1. cambia apartir de aqui
+        @Override
+        public void onClick(View view) {
+            if (mListener != null) {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    mListener.onItemClick(position);
+                }
+            }
         }
     }
+
 
 }
