@@ -24,6 +24,7 @@ import com.example.tarea4v2.Utilidades;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class EstadisticasFragment extends Fragment {
 
@@ -33,9 +34,10 @@ public class EstadisticasFragment extends Fragment {
     ConexionSqlLite con;
     ArrayList<String> lista_usuarios, lista_fechas, lista_tablas, lista_fallos, lista_limpia;
     Button resetEsta;
-    private String tabla, dificultad, heroe, fecha, aleatorio, usuario;
+    String tablaEst, fechaEsta, fallosEsta, usuarioEsta;
     ArrayAdapter<CharSequence> adapter2;
     ArrayAdapter<CharSequence> adapter3;
+
     public EstadisticasFragment() {
         // Required empty public constructor
     }
@@ -78,15 +80,17 @@ public class EstadisticasFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterViewUsuario, View view, int posicionUsuario, long l) {
                 //forma de crear un adaptador para usar un ArrayList en vez de una lista de Item desde Archivo en Values
-                usuario = adapterViewUsuario.getItemAtPosition(posicionUsuario).toString();
-                 adapter2 = new ArrayAdapter(getActivity(),
+                usuarioEsta = adapterViewUsuario.getItemAtPosition(posicionUsuario).toString();
+                guardarDatosEstadisticos();
+                adapter2 = new ArrayAdapter(getActivity(),
                         android.R.layout.simple_spinner_item, cargarDatosFechasSQL(adapterViewUsuario.getItemAtPosition(posicionUsuario).toString()));
                 fechas.setAdapter(adapter2);
 
                 fechas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterViewfechas, View view, int posicionFecha, long id) {
-                        fecha = adapterViewfechas.getItemAtPosition(posicionFecha).toString();
+                        fechaEsta = adapterViewfechas.getItemAtPosition(posicionFecha).toString();
+                        guardarDatosEstadisticos();
                         //forma de crear un adaptador para usar un ArrayList en vez de una lista de Item desde Archivo en Values
                         adapter3 = new ArrayAdapter(getActivity(),
                                 android.R.layout.simple_spinner_item, cargarDatosTablasSQL(adapterViewfechas.getItemAtPosition(posicionFecha).toString()));
@@ -94,10 +98,13 @@ public class EstadisticasFragment extends Fragment {
                         numero_tablas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> adapterViewTabla, View view, int positionTabla, long id) {
-                                tabla = adapterViewTabla.getItemAtPosition(positionTabla).toString();
+                                tablaEst = adapterViewTabla.getItemAtPosition(positionTabla).toString();
+                                guardarDatosEstadisticos();
                                 //implementar fallos de usuario fecha y tabla
                                 //select fallos from partidas where usuario = usuario and fecha = fecha and tabla = tabla
                                 campo_fallos.setText(cargarDatosFallosSQL(adapterViewTabla.getItemAtPosition(positionTabla).toString()));
+                                fallosEsta = cargarDatosFallosSQL(adapterViewTabla.getItemAtPosition(positionTabla).toString());
+                                guardarDatosEstadisticos();
                             }
 
                             @Override
@@ -132,6 +139,8 @@ public class EstadisticasFragment extends Fragment {
                 campo_fallos.setText("");
             }
         });
+
+
         return view;
     }
 
@@ -276,5 +285,18 @@ public class EstadisticasFragment extends Fragment {
             Toast.makeText(getActivity(), "Fallo al borrar partida.", Toast.LENGTH_SHORT).show();
 
         }
+    }
+
+    private void guardarDatosEstadisticos() {
+        SharedPreferences estadisticas = getContext().getSharedPreferences
+                ("estadisticas", Context.MODE_PRIVATE);
+//tablaEst, fechaEsta, fallosEsta, usuarioEsta;
+        SharedPreferences.Editor editor = estadisticas.edit();
+        editor.putString("usuario", usuarioEsta);
+        editor.putString("tabla", tablaEst);
+        editor.putString("fecha", fechaEsta);
+        editor.putString("fallos", fallosEsta);
+
+        editor.commit();
     }
 }

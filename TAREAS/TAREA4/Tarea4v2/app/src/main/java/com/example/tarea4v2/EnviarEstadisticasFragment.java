@@ -1,6 +1,9 @@
 package com.example.tarea4v2;
 
 import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -21,6 +24,8 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
+import com.example.tarea4v2.ui.EstadisticasFragment;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -28,6 +33,7 @@ import java.util.ArrayList;
 public class EnviarEstadisticasFragment extends Fragment {
     View view;
 
+    String tabla, fecha, fallos, usuario;
     RecyclerView recyclerView;
 
 
@@ -65,9 +71,8 @@ public class EnviarEstadisticasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_enviar_estadisticas, container, false);
+        cargarEstadisticas();
         recyclerView = view.findViewById(R.id.recyclerContactos);
-
-
         if (InicioActivity.tengo_permisos) {
             Toast.makeText(getActivity().getApplicationContext(), "Permisos obtenidos", Toast.LENGTH_SHORT).show();
             obtenerContactos();
@@ -111,7 +116,7 @@ public class EnviarEstadisticasFragment extends Fragment {
                 }
                 cursor.close();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
@@ -127,13 +132,35 @@ public class EnviarEstadisticasFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 Contacto contacto = lista.get(position);
-                String nombreContacto = contacto.getNombre();
-                Toast.makeText(getContext(), "Contacto seleccionado: " + nombreContacto, Toast.LENGTH_SHORT).show();
+                String email = contacto.getEmail();
+//                Toast.makeText(getContext(), "Contacto seleccionado: " + email, Toast.LENGTH_SHORT).show();
                 // Aquí puedes realizar otras acciones, como navegar a otro fragmento
+                Intent intent = new Intent();
+                Intent choose = null;
+                intent.setAction(Intent.ACTION_SEND);
+                intent.setData(Uri.parse("mailto:"));
+                String para[] = {email, "ihosuag@gmail.com"};//posible enviar a varios email y uno por defecto
+                intent.putExtra(Intent.EXTRA_EMAIL, para);
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Esta son las estadisticas que has optenido. ");
+                intent.putExtra(Intent.EXTRA_TEXT, "Tabla del: "+ tabla
+                        + "\n" + "Fecha seleccionada: "+ fecha
+                        + "\n" + "Usuario: "+usuario
+                        + "\n" + "Fallos Cometidos: "+ fallos);
+                intent.setType("message/rfc822");
+                choose = intent.createChooser(intent, "Enviar Email");
+                startActivity(intent);
             }
         });
 
         recyclerView.setAdapter(adaptador);
     }
 
+    private void cargarEstadisticas() {
+        SharedPreferences estadisticas = getActivity().getSharedPreferences
+                ("estadisticas", Context.MODE_PRIVATE);
+        usuario = estadisticas.getString("usuario", "sin datos");
+        tabla = estadisticas.getString("tabla", "sin datos");
+        fecha = estadisticas.getString("fecha", "sin datos");
+        fallos = estadisticas.getString("fallos", "sin datos");
+    }
 }
