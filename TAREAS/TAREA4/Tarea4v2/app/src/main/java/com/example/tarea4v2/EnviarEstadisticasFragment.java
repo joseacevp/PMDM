@@ -29,8 +29,7 @@ public class EnviarEstadisticasFragment extends Fragment {
     View view;
 
     RecyclerView recyclerView;
-    private boolean tengo_permisos = false;
-    private final int PETICION_PERMISOS = 1;
+
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -67,18 +66,9 @@ public class EnviarEstadisticasFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_enviar_estadisticas, container, false);
         recyclerView = view.findViewById(R.id.recyclerContactos);
-        // Solicitud de permisos
-        if (getContext().getApplicationContext().checkSelfPermission("android.permission.READ_CONTACTS") != PackageManager.PERMISSION_GRANTED
-                ||
-                getContext().getApplicationContext().checkSelfPermission("android.permission.SEND_SMS") != PackageManager.PERMISSION_GRANTED) {
 
-            requestPermissions(new String[]{
-                            "android.permission.READ_CONTACTS",
-                            "android.permission.SEND_SMS"},
-                    PETICION_PERMISOS);
-        } else {tengo_permisos = true;}
 
-        if (tengo_permisos) {
+        if (InicioActivity.tengo_permisos) {
             Toast.makeText(getActivity().getApplicationContext(), "Permisos obtenidos", Toast.LENGTH_SHORT).show();
             obtenerContactos();
 
@@ -117,7 +107,6 @@ public class EnviarEstadisticasFragment extends Fragment {
                             fotoPerfil = BitmapFactory.decodeStream(input);
                         }
                     }
-
                     listaContactos.add(new Contacto(nombre, email, fotoPerfil));
                 }
                 cursor.close();

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -24,7 +25,8 @@ public class InicioActivity extends AppCompatActivity {
     Button botonInicio, botonRegistro;
     private ArrayList<String> lista_usuarios;
     SQLiteDatabase db;
-
+    static boolean tengo_permisos = false;
+    private final int PETICION_PERMISOS = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,16 @@ public class InicioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inicio);
         // Evitar el giro automático
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        // Solicitud de permisos
+        if (getApplicationContext().getApplicationContext().checkSelfPermission("android.permission.READ_CONTACTS") != PackageManager.PERMISSION_GRANTED
+                ||
+                getApplicationContext().getApplicationContext().checkSelfPermission("android.permission.SEND_SMS") != PackageManager.PERMISSION_GRANTED) {
+
+            requestPermissions(new String[]{
+                            "android.permission.READ_CONTACTS",
+                            "android.permission.SEND_SMS"},
+                    PETICION_PERMISOS);
+        } else {InicioActivity.tengo_permisos = true;}
         usuarios = findViewById(R.id.spinner_usuarios_inicio);
         botonInicio = findViewById(R.id.botonSeleccionInicio);
         botonRegistro = findViewById(R.id.botonRegistroInico);
