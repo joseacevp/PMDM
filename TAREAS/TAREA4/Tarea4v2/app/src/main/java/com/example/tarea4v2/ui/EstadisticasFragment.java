@@ -144,7 +144,6 @@ public class EstadisticasFragment extends Fragment {
         return view;
     }
 
-
     private ArrayList<String> cargarDatosUsuariosSQL() {
         lista_usuarios = new ArrayList<>();
         String nombre = "";
@@ -268,7 +267,6 @@ public class EstadisticasFragment extends Fragment {
         //
         return dato;
     }
-
 
     private void resetearEstadisticas() {
         //crea la base de datos
