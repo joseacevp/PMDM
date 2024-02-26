@@ -11,9 +11,12 @@
     <string name="menu_configurar">Configurar</string>
     <string name="menu_entrenar">Entrenar</string>
     <string name="menu_estadisticas">Estadisticas</string>
+    <string name="menu_enviar">Enviar Estadisticas</string>
     <string name="menu_formulario_usuario">Añadir Usuario</string>
 
     <string name="titulo_inicio">Bien venido a Maestro de la Multiplicación v2. Selecciona un usuario.</string>
 
     <string name="titulo_login">Escribe tus datos para iniciar el Juego</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

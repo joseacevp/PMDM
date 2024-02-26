@@ -35,4 +35,9 @@
             android:id="@+id/action_avatarFragment_to_nav_configurar"
             app:destination="@id/nav_configurar" />
     </fragment>
+    <fragment
+        android:id="@+id/enviarEstadisticasFragment"
+        android:name="com.example.tarea4v2.EnviarEstadisticasFragment"
+        android:label="fragment_enviar_estadisticas"
+        tools:layout="@layout/fragment_enviar_estadisticas" />
 </navigation>
