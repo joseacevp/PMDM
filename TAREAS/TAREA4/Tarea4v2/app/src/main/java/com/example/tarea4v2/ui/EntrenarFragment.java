@@ -341,21 +341,21 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
             String insert = "INSERT INTO " + Utilidades.TABLA_PARTIDAS
                     + " ( "
                     + Utilidades.USUARIO
-                    + " , "
-                    + Utilidades.NUMERO_TABLA + " , "
-                    + Utilidades.HEROE + " , "
-                    + Utilidades.DIFICULTAD + " , "
-                    + Utilidades.FALLOS + " , "
+                    + ","
+                    + Utilidades.NUMERO_TABLA + ","
+                    + Utilidades.HEROE + ","
+                    + Utilidades.DIFICULTAD + ","
+                    + Utilidades.FALLOS + ","
                     + Utilidades.FECHA
-                    + " )  "
-                    + "VALUES ( ' " + usuario
-                    + "' , ' "
-                    + tabla + "' , ' "
-                    + heroe + "' , ' "
-                    + dificultad + "' , ' "
-                    + fallos + "' , ' "
+                    + ")"
+                    + "VALUES ( '"+ usuario
+                    + "','"
+                    + tabla + "','"
+                    + heroe + "','"
+                    + dificultad + "','"
+                    + fallos + "','"
                     + fecha
-                    + " ' )";
+                    + "')";
 
             db.execSQL(insert);
             db.close();

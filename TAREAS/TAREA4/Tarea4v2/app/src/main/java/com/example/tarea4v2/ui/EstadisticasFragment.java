@@ -34,7 +34,7 @@ public class EstadisticasFragment extends Fragment {
     ConexionSqlLite con;
     ArrayList<String> lista_usuarios, lista_fechas, lista_tablas, lista_fallos, lista_limpia;
     Button resetEsta;
-    String tablaEst, fechaEsta, fallosEsta, usuarioEsta;
+    public static String tablaEst, fechaEsta, fallosEsta, usuarioEsta;
     ArrayAdapter<CharSequence> adapter2;
     ArrayAdapter<CharSequence> adapter3;
 
@@ -93,7 +93,7 @@ public class EstadisticasFragment extends Fragment {
                         guardarDatosEstadisticos();
                         //forma de crear un adaptador para usar un ArrayList en vez de una lista de Item desde Archivo en Values
                         adapter3 = new ArrayAdapter(getActivity(),
-                                android.R.layout.simple_spinner_item, cargarDatosTablasSQL(adapterViewfechas.getItemAtPosition(posicionFecha).toString()));
+                                android.R.layout.simple_spinner_item, cargarDatosTablasSQL(adapterViewfechas.getItemAtPosition(posicionFecha).toString(), usuarioEsta));
                         numero_tablas.setAdapter(adapter3);
                         numero_tablas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
@@ -102,8 +102,8 @@ public class EstadisticasFragment extends Fragment {
                                 guardarDatosEstadisticos();
                                 //implementar fallos de usuario fecha y tabla
                                 //select fallos from partidas where usuario = usuario and fecha = fecha and tabla = tabla
-                                campo_fallos.setText(cargarDatosFallosSQL(adapterViewTabla.getItemAtPosition(positionTabla).toString()));
-                                fallosEsta = cargarDatosFallosSQL(adapterViewTabla.getItemAtPosition(positionTabla).toString());
+                                campo_fallos.setText(cargarDatosFallosSQL(adapterViewTabla.getItemAtPosition(positionTabla).toString(),fechaEsta,usuarioEsta));
+                                fallosEsta = cargarDatosFallosSQL(adapterViewTabla.getItemAtPosition(positionTabla).toString(),fechaEsta,usuarioEsta);
                                 guardarDatosEstadisticos();
                             }
 
@@ -183,7 +183,7 @@ public class EstadisticasFragment extends Fragment {
                     + Utilidades.TABLA_PARTIDAS
                     + " WHERE "
                     + Utilidades.USUARIO
-                    + " =? ", parametros);
+                    + " =?", parametros);
 
             while (cursor.moveToNext()) {
                 String fecha = cursor.getString(0);
@@ -192,7 +192,7 @@ public class EstadisticasFragment extends Fragment {
 
             cursor.close();
         } catch (Exception e) {
-            Toast.makeText(getActivity(), "Sin usuarios registrados", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Sin fechas registrados", Toast.LENGTH_SHORT).show();
         }
         //COMPROBACION DE DATOS RECUPERADOS
         for (int i = 0; i < lista_fechas.size(); i++) {
@@ -202,20 +202,23 @@ public class EstadisticasFragment extends Fragment {
         return lista_fechas;
     }
 
-    private ArrayList<String> cargarDatosTablasSQL(String fecha) {
+    private ArrayList<String> cargarDatosTablasSQL(String fecha, String nombre) {
+        System.out.println(nombre + " cargado");
         lista_tablas = new ArrayList<>();
         String dato = "";
         SQLiteDatabase db = con.getReadableDatabase();
         //parametros de la consulta
-        String[] parametros = {fecha};
+        String[] parametros = {fecha, nombre};
         try {
-            Cursor cursor = db.rawQuery("SELECT  "
+            Cursor cursor = db.rawQuery("SELECT "
                     + Utilidades.NUMERO_TABLA
                     + " FROM "
                     + Utilidades.TABLA_PARTIDAS
                     + " WHERE "
                     + Utilidades.FECHA
-                    + " =? ", parametros);
+                    + "=?AND "
+                    + Utilidades.USUARIO
+                    + "=?", parametros);
 
             while (cursor.moveToNext()) {
                 String tabla = cursor.getString(0);
@@ -224,7 +227,7 @@ public class EstadisticasFragment extends Fragment {
 
             cursor.close();
         } catch (Exception e) {
-            Toast.makeText(getActivity(), "Sin usuarios registrados", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Sin tablas registrados", Toast.LENGTH_SHORT).show();
         }
         //COMPROBACION DE DATOS RECUPERADOS
         for (int i = 0; i < lista_tablas.size(); i++) {
@@ -235,12 +238,12 @@ public class EstadisticasFragment extends Fragment {
         return lista_tablas;
     }
 
-    private String cargarDatosFallosSQL(String numero) {
+    private String cargarDatosFallosSQL(String numero, String fecha, String usuario) {
         lista_fallos = new ArrayList<>();
         String dato = "";
         SQLiteDatabase db = con.getReadableDatabase();
         //parametros de la consulta
-        String[] parametros = {numero};
+        String[] parametros = {numero, fecha, usuario};
         try {
             Cursor cursor = db.rawQuery("SELECT  "
                     + Utilidades.FALLOS
@@ -248,7 +251,11 @@ public class EstadisticasFragment extends Fragment {
                     + Utilidades.TABLA_PARTIDAS
                     + " WHERE "
                     + Utilidades.NUMERO_TABLA
-                    + " =? ", parametros);
+                    + " =?AND "
+                    + Utilidades.FECHA
+                    + " =?AND "
+                    + Utilidades.USUARIO
+                    + " =?", parametros);
 
             while (cursor.moveToNext()) {
                 String tabla = cursor.getString(0);
