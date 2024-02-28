@@ -2,8 +2,8 @@
     <string name="app_name">Tarea4v2</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Maestro Multiplicador V2</string>
+    <string name="nav_header_subtitle">Demuestra tus conocimientos de Matematicas.</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -14,7 +14,7 @@
     <string name="menu_enviar">Enviar Estadisticas</string>
     <string name="menu_formulario_usuario">Añadir Usuario</string>
 
-    <string name="titulo_inicio">Bienvenido a Maestro de la Multiplicación v2. Selecciona un usuario.</string>
+    <string name="titulo_inicio">Maestro de la Multiplicación v2. </string>
 
     <string name="titulo_login">Escribe tus datos para iniciar el Juego</string>
     <!-- TODO: Remove or change this placeholder text -->

@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 //                .build();
         System.out.println("usuario recivido: " + usuario);
         if (usuario.equals("Administrador")) {
+
             mAppBarConfiguration = new AppBarConfiguration.Builder(
                     R.id.nav_configurar, R.id.nav_entrenar, R.id.nav_estadisticas,R.id.enviarEstadisticasFragment)
                     .setOpenableLayout(drawer)
