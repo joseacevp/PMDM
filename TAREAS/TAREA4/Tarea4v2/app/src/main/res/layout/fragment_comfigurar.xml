@@ -4,12 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ConfigurarFragment">
+    tools:context=".ui.ConfigurarFragment"
+    android:padding="23dp"
+    android:background="#D7D4D4"
+    >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/fondo_herramientas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+       />
 
     <LinearLayout
 
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +65,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Elige Dificultad: "
-                        android:textSize="24sp" />
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
 
                     <Spinner
                         android:id="@+id/spinner_dificultad"
@@ -83,7 +98,8 @@
                         android:layout_gravity="center|left"
 
                         android:text="Elige Tabla Multiplicar:"
-                        android:textSize="24sp" />
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/edit_numero_tabla"
@@ -117,7 +133,8 @@
                         android:layout_gravity="center|left"
 
                         android:text="Fecha de la Prueba: "
-                        android:textSize="24sp" />
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/texto_fecha"

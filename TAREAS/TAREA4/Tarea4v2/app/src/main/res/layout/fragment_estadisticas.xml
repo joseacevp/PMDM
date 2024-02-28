@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo_estadisticas"
     tools:context=".ui.EstadisticasFragment">
 
     <TextView
@@ -13,7 +14,8 @@
         android:layout_marginTop="32dp"
         android:gravity="center"
         android:text="Pantalla de Estadisticas: "
-        android:textSize="23dp"
+        android:textColor="@color/black"
+        android:textSize="32dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +40,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="32dp"
-                android:text="Usuarios:" />
+                android:text="Usuarios:"
+                android:textColor="@color/black"
+                android:textSize="23dp" />
 
             <Spinner
                 android:id="@+id/spinner_estadis_usuarios"
@@ -58,7 +62,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="32dp"
-                android:text="Fechas :" />
+                android:text="Fechas :"
+                android:textColor="@color/black"
+                android:textSize="23dp" />
 
             <Spinner
                 android:id="@+id/spinner_estadis_fechas"
@@ -78,7 +84,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="32dp"
-                android:text="Tablas :" />
+                android:text="Tablas :"
+                android:textColor="@color/black"
+                android:textSize="23dp" />
 
             <Spinner
                 android:id="@+id/spinner_estadis_tablas"
@@ -99,14 +107,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="32dp"
                 android:layout_weight="1"
-                android:text="Fallos Cometidos: " />
+                android:text="Fallos Cometidos: "
+                android:textColor="@color/black"
+                android:textSize="23dp" />
 
             <TextView
 
                 android:id="@+id/area_fallos_estadis"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="23dp" />
+                android:layout_marginRight="23dp"
+                android:textColor="@color/black"
+                android:textSize="23dp"/>
         </LinearLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>

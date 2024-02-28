@@ -2,22 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/nav_header_height"
+    android:layout_height="200dp"
     android:background="@drawable/cavezarafondo"
-    android:gravity="bottom"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="87dp"
         android:layout_height="91dp"
+
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="@string/nav_header_desc"
         app:srcCompat="@drawable/profesora" />
 
@@ -25,6 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="23dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="16dp"
         android:text="@string/nav_header_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/black"
@@ -35,6 +33,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/nav_header_subtitle"
         android:textColor="@color/black"/>
 </LinearLayout>

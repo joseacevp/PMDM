@@ -56,12 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-//        mAppBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.nav_configurar, R.id.nav_entrenar, R.id.nav_estadisticas)
-//                .setOpenableLayout(drawer)
-//                .build();
+
         System.out.println("usuario recivido: " + usuario);
         if (usuario.equals("Administrador")) {
 
