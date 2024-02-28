@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:gravity="center"
-        android:text="Pantalla de Estadisticas: "
+        android:text="Estas son las esatadisticas Grabadas. "
         android:textColor="@color/black"
         android:textSize="32dp"
         android:textStyle="bold"

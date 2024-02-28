@@ -43,7 +43,9 @@ public class InicioActivity extends AppCompatActivity {
                             "android.permission.READ_CONTACTS",
                             "android.permission.SEND_SMS"},
                     PETICION_PERMISOS);
-        } else {InicioActivity.tengo_permisos = true;}
+        } else {
+            InicioActivity.tengo_permisos = true;
+        }
         usuarios = findViewById(R.id.spinner_usuarios_inicio);
         botonInicio = findViewById(R.id.botonSeleccionInicio);
         botonRegistro = findViewById(R.id.botonRegistroInico);
@@ -65,17 +67,29 @@ public class InicioActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-//boton inicio
+        System.out.println(nombreUsuarioInicio);
+        //boton inicio
+
         botonInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent enviar = new Intent(InicioActivity.this, LoginActivity.class);
-                Bundle miDato = new Bundle();
-                miDato.putString("nombreUsuarioInicio", nombreUsuarioInicio);
-                enviar.putExtras(miDato);
-                startActivity(enviar);
+                if (!nombreUsuarioInicio.equals("Administrador") ) {
+                    Intent enviar = new Intent(InicioActivity.this, MainActivity.class);
+                    Bundle miDato = new Bundle();
+                    miDato.putString("nombreUsuarioInicio", nombreUsuarioInicio);
+                    enviar.putExtras(miDato);
+                    startActivity(enviar);
+                } else {
+                    Intent enviar = new Intent(InicioActivity.this, LoginActivity.class);
+                    Bundle miDato = new Bundle();
+                    miDato.putString("nombreUsuarioInicio", nombreUsuarioInicio);
+                    enviar.putExtras(miDato);
+                    startActivity(enviar);
+                }
             }
         });
+
+
 //boton crear usuario
         botonRegistro.setOnClickListener(new View.OnClickListener() {
             @Override

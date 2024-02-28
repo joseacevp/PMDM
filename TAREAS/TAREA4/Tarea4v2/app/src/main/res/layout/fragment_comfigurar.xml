@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ConfigurarFragment"
-    android:padding="23dp"
     android:background="#D7D4D4"
-    >
+    android:padding="23dp"
+    tools:context=".ui.ConfigurarFragment">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -16,8 +15,7 @@
         android:src="@drawable/fondo_herramientas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-       />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
 
@@ -45,6 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="32dp"
+                    android:backgroundTint="#D4B587"
                     android:text="Elige Avatar" />
 
                 <View

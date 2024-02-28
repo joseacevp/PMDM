@@ -210,7 +210,7 @@ public class EstadisticasFragment extends Fragment {
         //parametros de la consulta
         String[] parametros = {fecha, nombre};
         try {
-            Cursor cursor = db.rawQuery("SELECT "
+            Cursor cursor = db.rawQuery("SELECT DISTINCT "
                     + Utilidades.NUMERO_TABLA
                     + " FROM "
                     + Utilidades.TABLA_PARTIDAS

@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/avatarFragment"
         android:name="com.example.tarea4v2.AvatarFragment"
-        android:label="fragment_avatar"
+        android:label="Avatares"
         tools:layout="@layout/fragment_avatar" >
         <action
             android:id="@+id/action_avatarFragment_to_nav_configurar"
@@ -38,6 +38,6 @@
     <fragment
         android:id="@+id/enviarEstadisticasFragment"
         android:name="com.example.tarea4v2.EnviarEstadisticasFragment"
-        android:label="fragment_enviar_estadisticas"
+        android:label="Contactos"
         tools:layout="@layout/fragment_enviar_estadisticas" />
 </navigation>

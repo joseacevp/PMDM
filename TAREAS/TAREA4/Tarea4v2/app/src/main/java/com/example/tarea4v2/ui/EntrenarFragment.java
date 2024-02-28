@@ -20,7 +20,6 @@ import androidx.fragment.app.Fragment;
 import com.example.tarea4v2.ConexionSqlLite;
 import com.example.tarea4v2.R;
 import com.example.tarea4v2.Utilidades;
-import com.example.tarea4v2.databinding.FragmentEntrenarBinding;
 
 import java.util.Random;
 
@@ -28,7 +27,6 @@ public class EntrenarFragment extends Fragment implements View.OnClickListener {
 
     View view;
     Bundle datos;
-    EstadisticasFragment estadisticasFragment = new EstadisticasFragment();
     private int i = 1;
     private int e = 10;
     Random random = new Random();
