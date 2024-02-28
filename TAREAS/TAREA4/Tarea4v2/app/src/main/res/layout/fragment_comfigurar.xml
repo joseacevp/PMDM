@@ -9,9 +9,9 @@
     tools:context=".ui.ConfigurarFragment">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="382dp"
+        android:layout_height="567dp"
+        android:layout_marginTop="200dp"
         android:src="@drawable/fondo_herramientas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Elige Dificultad: "
-                        android:textSize="24sp"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <Spinner
@@ -95,9 +96,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center|left"
-
                         android:text="Elige Tabla Multiplicar:"
-                        android:textSize="24sp"
+
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -107,6 +109,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="32dp"
                         android:inputType="number"
+                        android:textColor="@color/black"
                         android:textSize="24sp" />
 
 
@@ -130,9 +133,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center|left"
-
                         android:text="Fecha de la Prueba: "
-                        android:textSize="24sp"
+
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -141,7 +145,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="23dp"
-                        android:hint="fecha Actual" />
+                        android:hint="fecha Actual"
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
 

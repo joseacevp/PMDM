@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         // Evitar el giro automático
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//recive el usuario de la actividad login
+//recive el usuario de la actividad inicio
         Bundle datoRecivido = this.getIntent().getExtras();
         if (datoRecivido != null) {
             String datoString = datoRecivido.getString("nombreUsuarioInicio");

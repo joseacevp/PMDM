@@ -67,9 +67,9 @@ public class InicioActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        System.out.println(nombreUsuarioInicio);
-        //boton inicio
 
+
+        //boton inicio
         botonInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +90,7 @@ public class InicioActivity extends AppCompatActivity {
         });
 
 
-//boton crear usuario
+        //boton crear usuario
         botonRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
