@@ -15,10 +15,10 @@
         <item
             android:id="@+id/nav_estadisticas"
             android:icon="@drawable/iconoestadisticas"
-            android:title="@string/menu_estadisticas" />
+            android:title="@string/menu_estadisticas"/>
         <item
             android:id="@+id/enviarEstadisticasFragment"
             android:icon="@drawable/iconoenviar"
-            android:title="@string/menu_enviar" />
+            android:title="@string/menu_enviar"/>
     </group>
 </menu>

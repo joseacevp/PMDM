@@ -49,24 +49,24 @@ public class MainActivity extends AppCompatActivity {
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
+        Menu menu = navigationView.getMenu();
 
         System.out.println("usuario recivido: " + usuario);
-        if (usuario.equals("Administrador")) {
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_configurar, R.id.nav_entrenar, R.id.nav_estadisticas, R.id.enviarEstadisticasFragment)
+                .setOpenableLayout(drawer)
+                .build();
 
-            mAppBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.nav_configurar, R.id.nav_entrenar, R.id.nav_estadisticas,R.id.enviarEstadisticasFragment)
-                    .setOpenableLayout(drawer)
-                    .build();
-        } else {
-            mAppBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.nav_configurar, R.id.nav_entrenar)
-                    .setOpenableLayout(drawer)
-                    .build();
-        }
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        if (!usuario.equals("Administrador")) {
+            menu.findItem(R.id.enviarEstadisticasFragment).setVisible(false);
+            menu.findItem(R.id.nav_estadisticas).setVisible(false);
+        }
     }
+
 
     @Override
     public boolean onSupportNavigateUp() {
