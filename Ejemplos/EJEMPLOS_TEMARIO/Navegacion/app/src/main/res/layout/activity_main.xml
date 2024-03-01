@@ -13,7 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <include
             android:id="@+id/tool_barid"
@@ -27,6 +27,7 @@
             android:layout_height="match_parent">
 
         </FrameLayout>
+
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -36,6 +37,6 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/heder_navigation_drawer"
-        app:menu="@menu/menu_navegacion"/>
+        app:menu="@menu/menu_navegacion" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
