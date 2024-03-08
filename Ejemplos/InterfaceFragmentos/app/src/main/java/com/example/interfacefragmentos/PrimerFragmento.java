@@ -20,8 +20,9 @@ public class PrimerFragmento extends Fragment {
     Button botonIrSegundo;
     SegundoFragmento segundoFragmento = SegundoFragmento.newInstance(null,null);
     EditText editTextPrimer;
+
     //1.Define una interfaz en el primer fragmento que
-    // tenga un método para enviar los datos necesarios al segundo fragmento.
+    // tenga un método para enviar los datos necesarios al segundo fragmento.///////////////////
     private PasarDatos escuchador;
     public interface PasarDatos {
         void onPasaDatos(String datos);
@@ -36,11 +37,11 @@ public class PrimerFragmento extends Fragment {
             Toast.makeText(context, "Fallo pasar Datos", Toast.LENGTH_SHORT).show();
         }
     }
-    // En algún punto donde necesitas enviar datos al segundo fragmento
+    //Usar En algún punto donde necesitas enviar datos al segundo fragmento
     public void pasarDatosSegundoFragmento(String dato) {
         escuchador.onPasaDatos(dato);
     }
-    //fin 1.
+    //fin 1./////////////////////////////////////////////////////////////////////////////////////
 
     public PrimerFragmento() {
         // Required empty public constructor
@@ -65,6 +66,7 @@ public class PrimerFragmento extends Fragment {
         botonIrSegundo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //2. uso del metodo para pasar los datos atraves de una interface
                 pasarDatosSegundoFragmento(editTextPrimer.getText().toString());
                 irSegundoFragmento(segundoFragmento);
 
@@ -74,7 +76,7 @@ public class PrimerFragmento extends Fragment {
 
         return view;
     }
-
+//metodo para llamar a segundo fragmento y sustituir el primero en le contenedor del MainActivity
     private void irSegundoFragmento(Fragment f) {
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, f).commit();
     }

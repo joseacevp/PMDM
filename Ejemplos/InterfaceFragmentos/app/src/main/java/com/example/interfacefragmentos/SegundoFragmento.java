@@ -15,10 +15,11 @@ import android.widget.Toast;
 public class SegundoFragmento extends Fragment {
     View view;
     Button botoVolver;
+    //6.dato statico para manejar los datos recibidos desde la interface
     protected static String dato;
 
      public SegundoFragmento() {
-        // Required empty public constructor
+
     }
 
     public static SegundoFragmento newInstance(String param1, String param2) {
@@ -36,7 +37,7 @@ public class SegundoFragmento extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_segundo_fragmento, container, false);
         TextView textoSegun = view.findViewById(R.id.tituloSegundo);
-
+        //8. refleja los datos en el textView si han sido recibidos
         if (dato != null) {
             System.out.println("Dato recibido en el segundo fragmento: " + dato);
             // Actualizar el TextView con el dato recibido
@@ -55,7 +56,7 @@ public class SegundoFragmento extends Fragment {
 
         return view;
     }
-    //4.En la implementación de la interfaz en la actividad, obtén una referencia al segundo fragmento
+    //7.En la implementación de la interfaz en la actividad, obtén una referencia al segundo fragmento
     // y llama a un método público en el segundo fragmento para pasar los datos.
     public void recivirDatos(String datos) {
         dato = datos;
