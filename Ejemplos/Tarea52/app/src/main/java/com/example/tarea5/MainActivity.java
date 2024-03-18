@@ -16,6 +16,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.tarea5.appprincipal.AppPrincipal;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
-//                lanzarActividad();
+                lanzarActividad();
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
@@ -92,7 +93,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
-    private void firebaseAuthWithGoogle(String idToken) {
+
+     private void firebaseAuthWithGoogle(String idToken) {
 
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
@@ -135,5 +137,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         updateUI(null);
                     }
                 });
+    }
+    private void lanzarActividad() {
+        Intent intent = new Intent(MainActivity.this, AppPrincipal.class);
+        startActivity(intent);
     }
 }
