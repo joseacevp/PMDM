@@ -66,6 +66,7 @@ public class AdaptadorRecycleViewPers
     public class ViewHolderPersonajes extends RecyclerView.ViewHolder {
         TextView etiNombre, etiInfo;
         ImageView imagen;
+        
 
         public ViewHolderPersonajes(@NonNull View itemView) {
             super(itemView);

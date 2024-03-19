@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Personaje> lista;
     RecyclerView recyclerView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
