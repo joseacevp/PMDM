@@ -23,7 +23,7 @@ import java.util.List;
 public class EquipoFragment extends Fragment implements JugadorRecyclerMultiListener {
     //3
     private ArrayList<Jugador> lista;
-    public static ArrayList<Jugador> listaConvocados;
+    public static List<Jugador> judadoresSeleccionados;
     AdaptadorRecyclerMultipl adaptadorRecyclerMultipl;
     RecyclerView recyclerView;
     private FragmentEquipoBinding binding;
@@ -58,7 +58,7 @@ public class EquipoFragment extends Fragment implements JugadorRecyclerMultiList
         grabarListaSeleccionados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<Jugador> judadoresSeleccionados = adaptadorRecyclerMultipl.getListaJugadoresSeleccionados();
+                judadoresSeleccionados = adaptadorRecyclerMultipl.getListaJugadoresSeleccionados();
                 //para visualizar datos
                 StringBuilder nombresSeleccionados = new StringBuilder();
                 for (int i = 0; i < judadoresSeleccionados.size(); i++) {
@@ -70,7 +70,7 @@ public class EquipoFragment extends Fragment implements JugadorRecyclerMultiList
                     }
                 }
                 Toast.makeText(getContext(), "Jugadores Seleccionados:\n" + nombresSeleccionados.toString(), Toast.LENGTH_SHORT).show();
-                listaConvocados = (ArrayList<Jugador>) adaptadorRecyclerMultipl.getListaJugadoresSeleccionados();
+
             }
         });
     }

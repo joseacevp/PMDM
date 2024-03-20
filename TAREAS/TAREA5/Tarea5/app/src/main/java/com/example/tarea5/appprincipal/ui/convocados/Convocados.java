@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tarea5.appprincipal.ui.equipo.AdaptadorRecyclerMultipl;
 import com.example.tarea5.appprincipal.ui.equipo.EquipoFragment;
@@ -19,14 +21,23 @@ public class Convocados extends Fragment {
 
     private FragmentConvocadosBinding binding;
     private ArrayList<Jugador> jugadores;
+    RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-
         binding = FragmentConvocadosBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        jugadores = EquipoFragment.listaConvocados;
+
+        jugadores = (ArrayList<Jugador>) EquipoFragment.judadoresSeleccionados;
+        
+        recyclerView = binding.reciclerConvocados;
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        AdaptadorConvocados adaptadorConvocados = new AdaptadorConvocados((ArrayList<Jugador>) EquipoFragment.judadoresSeleccionados);
+        recyclerView.setAdapter(adaptadorConvocados);
+//        for (int i = 0; i< jugadores.size(); i++){
+//            String jugador = jugadores.get(i).getNombre();
+//            System.out.println(jugador);
+//        }
         return root;
     }
 

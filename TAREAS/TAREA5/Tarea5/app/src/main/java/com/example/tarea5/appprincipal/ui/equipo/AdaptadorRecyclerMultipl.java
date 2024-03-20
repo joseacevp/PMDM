@@ -28,7 +28,7 @@ public class AdaptadorRecyclerMultipl extends RecyclerView.Adapter<AdaptadorRecy
     public AdaptadorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new AdaptadorViewHolder(
                 LayoutInflater.from(parent.getContext()).inflate(
-                        R.layout.intem_list_jugadores,parent,false
+                        R.layout.item_list_jugadores,parent,false
                 )
         );
     }
