@@ -1,13 +1,21 @@
 package com.example.tarea5.appprincipal;
 
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.example.tarea5.R;
+import com.example.tarea5.appprincipal.ui.fechas.FechaViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -20,6 +28,11 @@ import com.example.tarea5.databinding.ActivityAppPrincipalBinding;
 public class AppPrincipal extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    private boolean fechaSeleccionada = false;
+    private DrawerLayout drawer;
+    private NavigationView navigationView;
+    private Menu menu;
+    private FechaViewModel fechaViewModel;
     private ActivityAppPrincipalBinding binding;
 
     @Override
@@ -29,34 +42,49 @@ public class AppPrincipal extends AppCompatActivity {
         binding = ActivityAppPrincipalBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setSupportActionBar(binding.appBarAppPrincipal.toolbar);
-        binding.appBarAppPrincipal.fab.setOnClickListener(new View.OnClickListener() {
+        fechaViewModel = new ViewModelProvider(this).get(FechaViewModel.class);
+        fechaViewModel.getSelectedDateString().observe(this, new Observer<String>() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null)
-                        .setAnchorView(R.id.fab).show();
+            public void onChanged(String s) {
+                if (s != null) {
+                    fechaSeleccionada = true;
+                } else {
+                    fechaSeleccionada = false;
+                }
             }
         });
-        DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
+        setSupportActionBar(binding.appBarAppPrincipal.toolbar);
+
+        drawer = binding.drawerLayout;
+        navigationView = binding.navView;
+
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_convocados, R.id.nav_equipo, R.id.nav_borrar_convocados)
+                R.id.nav_convocados, R.id.nav_equipo, R.id.nav_borrar_convocados,R.id.nav_seleccionar_fecha)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_app_principal);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+// Configurar listener para las opciones del Navigation Drawer
+        Menu menu = navigationView.getMenu();
+
+        menu.findItem(R.id.nav_guardar).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                if (fechaSeleccionada) {
+
+                } else {
+                    Toast toast = Toast.makeText(AppPrincipal.this, "No se seleccionó ninguna Fecha", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0); // Establece la gravedad en el centro de la pantalla
+                    toast.show();
+                }
+                return true;
+            }
+        });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.app_principal, menu);
-        return true;
-    }
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -64,4 +92,5 @@ public class AppPrincipal extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
 }

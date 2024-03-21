@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -31,9 +32,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int RC_SIGN_IN = 21;
-    Button signOut,signIn;
+    Button signOut, signIn;
 
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
@@ -54,11 +55,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 //        2. Registrar el listener para ambos botones y programar el método onClick:
         signOut = findViewById(R.id.signoutButton);
-        signIn= findViewById(R.id.signInButton);
+        signIn = findViewById(R.id.signInButton);
         signIn.setOnClickListener(this);
         signOut.setOnClickListener(this);
 
     }
+
     @Override
     public void onClick(View v) {
         int i = v.getId();
@@ -68,10 +70,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             signOut();
         }
     }
+
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -94,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-     private void firebaseAuthWithGoogle(String idToken) {
+    private void firebaseAuthWithGoogle(String idToken) {
 
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
@@ -114,17 +118,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
     }
-    public void updateUI(FirebaseUser user){
+
+    public void updateUI(FirebaseUser user) {
         if (user != null) {
-            Toast.makeText(this,"Bienvenido "+user.getDisplayName()
-                    +"["+user.getEmail()+"]",Toast.LENGTH_LONG).show();
-//            signInButton.setVisibility(View.GONE);
-//            signOutButton.setVisibility(View.VISIBLE);
+
+            Toast toast = Toast.makeText(getApplicationContext(), "Bienvenido " + user.getDisplayName(), Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP, 100, 0); // Establece la gravedad en el centro de la pantalla
+            toast.show();
         } else {
 //            signInButton.setVisibility(View.VISIBLE);
 //            signOutButton.setVisibility(View.GONE);
         }
     }
+
     private void signOut() {
         // Firebase sign out
         mAuth.signOut();
@@ -138,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
     }
+
     private void lanzarActividad() {
         Intent intent = new Intent(MainActivity.this, AppPrincipal.class);
         startActivity(intent);
