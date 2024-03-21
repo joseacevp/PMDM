@@ -35,7 +35,7 @@ public class EquipoFragment extends Fragment implements JugadorRecyclerMultiList
 
         binding = FragmentEquipoBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-
+        lista = new ArrayList<>();
         grabarListaSeleccionados = binding.equipoBotonGuardar;
         construirRecycleView();
         llenarPersonajes();
@@ -43,7 +43,7 @@ public class EquipoFragment extends Fragment implements JugadorRecyclerMultiList
     }
 
     private void construirRecycleView() {
-        lista = new ArrayList<>();
+
         recyclerView = binding.reciclerJugadores;
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

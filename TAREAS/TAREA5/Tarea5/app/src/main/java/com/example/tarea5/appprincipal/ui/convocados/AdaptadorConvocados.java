@@ -1,11 +1,13 @@
 package com.example.tarea5.appprincipal.ui.convocados;
 
+import android.app.Activity;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,7 +42,9 @@ public class AdaptadorConvocados extends RecyclerView.Adapter<AdaptadorConvocado
 
     @Override
     public int getItemCount() {
-        return listaConvocados.size();
+
+            return listaConvocados.size();
+
     }
 
     public class ViewHolderConvocados extends RecyclerView.ViewHolder {

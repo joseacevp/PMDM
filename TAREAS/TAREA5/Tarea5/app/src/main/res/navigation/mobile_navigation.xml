@@ -22,4 +22,10 @@
         android:name="com.example.tarea5.appprincipal.ui.borrar.BorrarConvocados"
         android:label="@string/menu_borrar_convocados"
         tools:layout="@layout/fragment_borrar_convocados" />
+    <fragment
+        android:id="@+id/nav_seleccionar_fecha"
+        android:name="com.example.tarea5.appprincipal.ui.fechas.FechaFragment"
+        android:label="@string/menu_seleccionar_fecha"
+        tools:layout="@layout/fragment_fecha" />
+
 </navigation>
