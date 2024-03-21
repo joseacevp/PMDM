@@ -10,11 +10,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tarea5.R;
 import com.example.tarea5.appprincipal.AppPrincipal;
+import com.example.tarea5.appprincipal.ui.convocados.ConvocadosViewModel;
 import com.example.tarea5.databinding.FragmentEquipoBinding;
 
 import java.util.ArrayList;
@@ -23,7 +25,8 @@ import java.util.List;
 public class EquipoFragment extends Fragment implements JugadorRecyclerMultiListener {
     //3
     private ArrayList<Jugador> lista;
-    public static List<Jugador> judadoresSeleccionados;
+    private ConvocadosViewModel convocadosViewModel;
+    private List<Jugador> judadoresSeleccionados;
     AdaptadorRecyclerMultipl adaptadorRecyclerMultipl;
     RecyclerView recyclerView;
     private FragmentEquipoBinding binding;
@@ -48,7 +51,6 @@ public class EquipoFragment extends Fragment implements JugadorRecyclerMultiList
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-//        iniciarRecyclerJugador();
         iniciarRecyclerJugadorMulti();
     }
 
@@ -59,6 +61,10 @@ public class EquipoFragment extends Fragment implements JugadorRecyclerMultiList
             @Override
             public void onClick(View v) {
                 judadoresSeleccionados = adaptadorRecyclerMultipl.getListaJugadoresSeleccionados();
+
+                convocadosViewModel = new ViewModelProvider(requireActivity()).get(ConvocadosViewModel.class);
+                convocadosViewModel.setListaConvocados((ArrayList<Jugador>) judadoresSeleccionados);
+
                 //para visualizar datos
                 StringBuilder nombresSeleccionados = new StringBuilder();
                 for (int i = 0; i < judadoresSeleccionados.size(); i++) {

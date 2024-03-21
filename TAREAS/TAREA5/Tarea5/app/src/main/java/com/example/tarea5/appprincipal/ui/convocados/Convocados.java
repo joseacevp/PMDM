@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 public class Convocados extends Fragment {
 
     private FragmentConvocadosBinding binding;
+    private ConvocadosViewModel convocadosViewModel;
     private ArrayList<Jugador> jugadores;
     RecyclerView recyclerView;
 
@@ -30,15 +33,23 @@ public class Convocados extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentConvocadosBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        jugadores = (ArrayList<Jugador>) EquipoFragment.judadoresSeleccionados;
-        if (jugadores != null) {
-            recyclerView = binding.reciclerConvocados;
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            AdaptadorConvocados adaptadorConvocados = new AdaptadorConvocados(jugadores);
-            recyclerView.setAdapter(adaptadorConvocados);
-        } else {
-            Toast.makeText(root.getContext(), "¡No Hay Convocados Aun!", Toast.LENGTH_SHORT).show();
-        }
+
+        recyclerView = binding.reciclerConvocados;
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        convocadosViewModel = new ViewModelProvider(requireActivity()).get(ConvocadosViewModel.class);
+        convocadosViewModel.getListaConvocados().observe(getViewLifecycleOwner(), new Observer<ArrayList<Jugador>>() {
+            @Override
+            public void onChanged(ArrayList<Jugador> jugadores) {
+                if (jugadores != null && jugadores.size() > 0) {
+                    AdaptadorConvocados adaptadorConvocados = new AdaptadorConvocados(jugadores);
+                    recyclerView.setAdapter(adaptadorConvocados);
+                } else {
+                    Toast.makeText(getContext(), "¡No Hay Convocados Aun!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         return root;
     }
 
