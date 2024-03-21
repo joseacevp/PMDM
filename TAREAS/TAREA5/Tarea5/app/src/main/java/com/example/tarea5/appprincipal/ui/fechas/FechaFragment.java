@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tarea5.R;
@@ -25,6 +26,7 @@ public class FechaFragment extends Fragment implements DialogoFecha.OnFechaSelec
     private FechaViewModel mViewModel;
     private FragmentFechaBinding binding;
     TextView textoFecha;
+    ImageView calendarioImagen;
     public static FechaFragment newInstance() {
         return new FechaFragment();
     }
@@ -34,10 +36,19 @@ public class FechaFragment extends Fragment implements DialogoFecha.OnFechaSelec
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentFechaBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        DialogoFecha fecha = new DialogoFecha();
-        // Establece ConfiguracionFragment como el oyente para los eventos de fecha
-        fecha.setFechaSeleccionadaListener(FechaFragment.this);
-        fecha.show(getFragmentManager(), "fecha");
+
+
+        calendarioImagen= binding.imagenCalendario;
+        calendarioImagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogoFecha fecha = new DialogoFecha();
+                // Establece ConfiguracionFragment como el oyente para los eventos de fecha
+                fecha.setFechaSeleccionadaListener(FechaFragment.this);
+                fecha.show(getFragmentManager(), "fecha");
+            }
+        });
+
         return  view;
     }
 
@@ -52,6 +63,6 @@ public class FechaFragment extends Fragment implements DialogoFecha.OnFechaSelec
     public void onResultadoFecha(GregorianCalendar fecha) {
         //resultado de la fecha seleccionada
         textoFecha = binding.textoFechaSeleccionada;
-        textoFecha.setText(fecha.get(Calendar.DAY_OF_MONTH) + "/" + fecha.get(Calendar.MONTH) + "/" + fecha.get(Calendar.YEAR));
+        textoFecha.setText("Fecha Seleccionada para el Partido: "+fecha.get(Calendar.DAY_OF_MONTH) + "/" + fecha.get(Calendar.MONTH) + "/" + fecha.get(Calendar.YEAR));
     }
 }
