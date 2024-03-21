@@ -1,5 +1,6 @@
 package com.example.tarea5.appprincipal.ui.fechas;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tarea5.R;
 import com.example.tarea5.databinding.FragmentEquipoBinding;
@@ -21,12 +23,14 @@ import com.example.tarea5.databinding.FragmentFechaBinding;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class FechaFragment extends Fragment implements DialogoFecha.OnFechaSeleccionada{
+public class FechaFragment extends Fragment implements DialogoFecha.OnFechaSeleccionada {
 
     private FechaViewModel mViewModel;
+    private String fechaString;
     private FragmentFechaBinding binding;
     TextView textoFecha;
     ImageView calendarioImagen;
+
     public static FechaFragment newInstance() {
         return new FechaFragment();
     }
@@ -37,8 +41,8 @@ public class FechaFragment extends Fragment implements DialogoFecha.OnFechaSelec
         binding = FragmentFechaBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-
-        calendarioImagen= binding.imagenCalendario;
+        textoFecha = binding.textoFechaSeleccionada;
+        calendarioImagen = binding.imagenCalendario;
         calendarioImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,8 +52,19 @@ public class FechaFragment extends Fragment implements DialogoFecha.OnFechaSelec
                 fecha.show(getFragmentManager(), "fecha");
             }
         });
+        mViewModel = new ViewModelProvider(requireActivity()).get(FechaViewModel.class);
 
-        return  view;
+        mViewModel.getSelectedDateString().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                if (s != null) {
+                    textoFecha.setText("Fecha Seleccionada: " + s);
+                } else {
+                    Toast.makeText(getContext(), "fecha perdida", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        return view;
     }
 
     @Override
@@ -62,7 +77,10 @@ public class FechaFragment extends Fragment implements DialogoFecha.OnFechaSelec
     @Override
     public void onResultadoFecha(GregorianCalendar fecha) {
         //resultado de la fecha seleccionada
-        textoFecha = binding.textoFechaSeleccionada;
-        textoFecha.setText("Fecha Seleccionada para el Partido: "+fecha.get(Calendar.DAY_OF_MONTH) + "/" + fecha.get(Calendar.MONTH) + "/" + fecha.get(Calendar.YEAR));
+        fechaString = fecha.get(Calendar.DAY_OF_MONTH) + "/" + fecha.get(Calendar.MONTH) + "/" + fecha.get(Calendar.YEAR);
+
+        mViewModel = new ViewModelProvider(requireActivity()).get(FechaViewModel.class);
+        mViewModel.setSelectedDateString(fechaString);
+        textoFecha.setText("Fecha Seleccionada:" + fechaString);
     }
 }
