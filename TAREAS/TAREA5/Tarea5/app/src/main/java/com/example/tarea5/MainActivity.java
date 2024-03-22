@@ -123,7 +123,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (user != null) {
 
             Toast toast = Toast.makeText(getApplicationContext(), "Bienvenido " + user.getDisplayName(), Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.TOP, 100, 0); // Establece la gravedad en el centro de la pantalla
             toast.show();
         } else {
 //            signInButton.setVisibility(View.VISIBLE);
