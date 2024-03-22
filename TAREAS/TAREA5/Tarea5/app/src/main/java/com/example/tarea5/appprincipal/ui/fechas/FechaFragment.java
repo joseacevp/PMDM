@@ -77,7 +77,7 @@ public class FechaFragment extends Fragment implements DialogoFecha.OnFechaSelec
     @Override
     public void onResultadoFecha(GregorianCalendar fecha) {
         //resultado de la fecha seleccionada
-        fechaString = fecha.get(Calendar.DAY_OF_MONTH) + "/" + fecha.get(Calendar.MONTH) + "/" + fecha.get(Calendar.YEAR);
+        fechaString = fecha.get(Calendar.DAY_OF_MONTH) + "-" + fecha.get(Calendar.MONTH) + "-" + fecha.get(Calendar.YEAR);
 
         mViewModel = new ViewModelProvider(requireActivity()).get(FechaViewModel.class);
         mViewModel.setSelectedDateString(fechaString);

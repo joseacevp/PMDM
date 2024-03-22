@@ -24,7 +24,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tarea5.databinding.ActivityAppPrincipalBinding;
+import com.google.firebase.Firebase;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -36,7 +41,8 @@ import java.util.Objects;
 public class AppPrincipal extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private FirebaseFirestore mFirestore;
+    //    private FirebaseFirestore mFirestore;
+    private DatabaseReference mDataBase;
     private String fechaSeleccionada;
     private ArrayList<Jugador> jugadoresSeleccionados;
     private boolean hayfechaSeleccionada = false;
@@ -56,7 +62,6 @@ public class AppPrincipal extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         comprobarDatos();
-        mFirestore = FirebaseFirestore.getInstance();
 
         setSupportActionBar(binding.appBarAppPrincipal.toolbar);
 
@@ -116,6 +121,7 @@ public class AppPrincipal extends AppCompatActivity {
     }
 
     private void guardarDatos() {
+        //optiene los datos de fecha y lista de jugadores de los fragmentos
         fechaViewModel = new ViewModelProvider(this).get(FechaViewModel.class);
         fechaViewModel.getSelectedDateString().observe(this, new Observer<String>() {
             @Override
@@ -134,33 +140,36 @@ public class AppPrincipal extends AppCompatActivity {
                 }
             }
         });
+        //optiene la referencia de la base de datos
+        mDataBase = FirebaseDatabase.getInstance().getReference();
 
-        for (int i = 0; i < jugadoresSeleccionados.size(); i++) {
-            Jugador jugador = jugadoresSeleccionados.get(i);
-            //guardar los datos del jugador
-            Map<String, Object> map = new HashMap<>();
-            map.put("nombre", jugador.getNombre());
-            map.put("posicion", jugador.getNombre());
-            map.put("foto", jugador.getFoto());
-            map.put("fecha", fechaSeleccionada);
+        // Crear un nodo para la fecha seleccionada
+        DatabaseReference fechaRef = mDataBase.child("Partidos").child(fechaSeleccionada);
 
-            mFirestore.collection("list_jugadores").add(map).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                @Override
-                public void onSuccess(DocumentReference documentReference) {
-                    Toast.makeText(AppPrincipal.this, "Grabado", Toast.LENGTH_SHORT).show();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(AppPrincipal.this, "Fallo Grabar", Toast.LENGTH_SHORT).show();
-                }
-            });
+        // Agregar cada jugador bajo la fecha seleccionada
+        for (Jugador jugador : jugadoresSeleccionados) {
+            // Generar una clave única para cada jugador
+            String jugadorKey = fechaRef.push().getKey();
 
+            // Guardar el jugador en la base de datos bajo la clave única
+            fechaRef.child(jugadorKey).setValue(jugador)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // Éxito al guardar el jugador
+                            Toast.makeText(AppPrincipal.this, "Jugador guardado exitosamente", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Error al guardar el jugador
+                            Toast.makeText(AppPrincipal.this, "Error al guardar el jugador: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
         }
 
-
     }
-
 
     @Override
     public boolean onSupportNavigateUp() {
