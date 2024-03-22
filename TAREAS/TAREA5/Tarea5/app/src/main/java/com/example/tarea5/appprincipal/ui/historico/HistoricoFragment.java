@@ -14,11 +14,12 @@ import android.view.ViewGroup;
 
 import com.example.tarea5.R;
 import com.example.tarea5.databinding.FragmentConvocadosBinding;
+import com.example.tarea5.databinding.FragmentHistoricoBinding;
 
 public class HistoricoFragment extends Fragment {
 
     private HistoricoViewModel mViewModel;
-    private FragmentConvocadosBinding binding;
+    private FragmentHistoricoBinding binding;
 
     public static HistoricoFragment newInstance() {
         return new HistoricoFragment();
@@ -28,11 +29,11 @@ public class HistoricoFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        binding = FragmentConvocadosBinding.inflate(inflater, container,false);
+        binding = FragmentHistoricoBinding.inflate(inflater, container,false);
         View view = binding.getRoot();
 
 
-        
+
         return view;
     }
 

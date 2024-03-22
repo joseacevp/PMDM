@@ -27,5 +27,10 @@
         android:name="com.example.tarea5.appprincipal.ui.fechas.FechaFragment"
         android:label="@string/menu_seleccionar_fecha"
         tools:layout="@layout/fragment_fecha" />
+    <fragment
+        android:id="@+id/nav_historico"
+        android:name="com.example.tarea5.appprincipal.ui.historico.HistoricoFragment"
+        android:label="@string/menu_historico"
+        tools:layout="@layout/fragment_historico" />
 
 </navigation>

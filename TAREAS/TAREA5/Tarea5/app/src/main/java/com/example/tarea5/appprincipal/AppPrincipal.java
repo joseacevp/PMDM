@@ -65,7 +65,9 @@ public class AppPrincipal extends AppCompatActivity {
 
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_convocados, R.id.nav_equipo, R.id.nav_borrar_convocados, R.id.nav_seleccionar_fecha)
+                R.id.nav_convocados, R.id.nav_equipo, R.id.nav_borrar_convocados,
+                R.id.nav_seleccionar_fecha,
+                R.id.nav_historico)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_app_principal);
@@ -140,7 +142,7 @@ public class AppPrincipal extends AppCompatActivity {
             map.put("nombre", jugador.getNombre());
             map.put("posicion", jugador.getNombre());
             map.put("foto", jugador.getFoto());
-            map.put("fecha",fechaSeleccionada);
+            map.put("fecha", fechaSeleccionada);
 
             mFirestore.collection("list_jugadores").add(map).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
