@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo_burbujas"
     tools:context=".MainActivity">
 
     <Button
@@ -34,9 +35,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="78dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="65dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="14dp"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/signInButton"
         app:layout_constraintStart_toStartOf="@+id/signInButton"
@@ -52,7 +53,7 @@
         android:background="@drawable/boton_rectangular"
         android:text="Futbol Manager"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
