@@ -157,7 +157,8 @@ public class AppPrincipal extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void aVoid) {
                             // Éxito al guardar el jugador
-                            Toast.makeText(AppPrincipal.this, "Jugador guardado exitosamente", Toast.LENGTH_SHORT).show();
+                            System.out.println("Jugador guardado exitosamente");
+//                            Toast.makeText(AppPrincipal.this, "Jugador guardado exitosamente", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -167,8 +168,9 @@ public class AppPrincipal extends AppCompatActivity {
                             Toast.makeText(AppPrincipal.this, "Error al guardar el jugador: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
-        }
 
+        }
+        Toast.makeText(AppPrincipal.this, "Jugadores guardado exitosamente", Toast.LENGTH_SHORT).show();
     }
 
     @Override

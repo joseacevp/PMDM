@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.example.tarea5.R;
 import com.example.tarea5.appprincipal.ui.convocados.AdaptadorConvocados;
@@ -31,11 +34,14 @@ import java.util.ArrayList;
 public class HistoricoFragment extends Fragment {
 
     private HistoricoViewModel mViewModel;
+    private String fechaSeleccionada;
+    private DatabaseReference mDatabase;
     private FragmentHistoricoBinding binding;
     private ArrayList<Jugador> jugadores;
     private Jugador jugador;
     private String fecha;
     RecyclerView recyclerView;
+
     public static HistoricoFragment newInstance() {
         return new HistoricoFragment();
     }
@@ -44,51 +50,82 @@ public class HistoricoFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        binding = FragmentHistoricoBinding.inflate(inflater, container,false);
+        binding = FragmentHistoricoBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        //consulta la lista de jugadores segun la fecha seleccionada
-        consultarBaseDatos(fecha);
+        consutarFechas();
 
-        recyclerView = binding.reciclerHistorico;
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        AdaptadorConvocados adaptadorConvocados = new AdaptadorConvocados(jugadores);
-        recyclerView.setAdapter(adaptadorConvocados);
 
         return view;
     }
 
-    //consulta la lista de jugadores segun la fecha seleccionada
-    private ArrayList<Jugador>  consultarBaseDatos(String fecha) {
-        ArrayList<Jugador> listaJugadoresConsula = null;
-        DatabaseReference partidosRef = FirebaseDatabase.getInstance().getReference().child("Partidos").child(fecha);
-
-        partidosRef.addListenerForSingleValueEvent(new ValueEventListener() {
+    private void consutarFechas() {
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Partidos");
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                ArrayList<String> fechas = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    // Obtener los datos de cada jugador y agregarlos a la lista
-                    String nombre = snapshot.child("nombre").getValue(String.class);
-                    String posicion = snapshot.child("posicion").getValue(String.class);
-                    int foto = snapshot.child("foto").getValue(Integer.class);
-                    int favorito = snapshot.child("favorito").getValue(Integer.class);
-
-                    // Añadir jugador a la lista
-                    listaJugadoresConsula.add(new Jugador(nombre, posicion,foto,favorito));
+                    String fecha = snapshot.getKey(); // Obtener la fecha del partido
+                    fechas.add(fecha);
                 }
-
-                // Hacer algo con la lista de jugadores obtenida
+                mostrarFechasEnSpinner(fechas);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Manejo de errores
+                // Manejar errores de base de datos, si es necesario
             }
         });
-        return listaJugadoresConsula;
     }
+
+    private void mostrarFechasEnSpinner(ArrayList<String> fechas) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, fechas);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.spinnerHistorico.setAdapter(adapter);
+
+        // Configurar el listener para el Spinner
+        binding.spinnerHistorico.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                fechaSeleccionada = parent.getItemAtPosition(position).toString();
+                Toast.makeText(requireContext(), "Fecha seleccionada: " + fechaSeleccionada, Toast.LENGTH_SHORT).show();
+                consultarJugadoresPorFecha(fechaSeleccionada);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // No hacer nada cuando no se selecciona nada
+            }
+        });
+    }
+    private void consultarJugadoresPorFecha(String fechaSeleccionada) {
+        DatabaseReference fechaRef = FirebaseDatabase.getInstance().getReference().child("Partidos").child(fechaSeleccionada);
+        fechaRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<Jugador> jugadores = new ArrayList<>();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Jugador jugador = snapshot.getValue(Jugador.class);
+                    jugadores.add(jugador);
+                }
+                mostrarJugadoresEnRecyclerView(jugadores);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Manejar errores de base de datos, si es necesario
+            }
+        });
+    }
+    private void mostrarJugadoresEnRecyclerView(ArrayList<Jugador> jugadores) {
+        RecyclerView recyclerView = binding.reciclerHistorico;
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        AdaptadorConvocados adaptadorConvocados = new AdaptadorConvocados(jugadores);
+        recyclerView.setAdapter(adaptadorConvocados);
+    }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

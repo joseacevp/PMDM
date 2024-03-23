@@ -9,11 +9,12 @@
 
     <Button
         android:id="@+id/signInButton"
-        android:layout_width="155dp"
-        android:layout_height="wrap_content"
+        android:layout_width="265dp"
+        android:layout_height="92dp"
         android:layout_marginTop="100dp"
         android:text="Iniciar Sesion"
         android:textAlignment="textEnd"
+        android:textSize="23dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -21,18 +22,20 @@
 
     <Button
         android:id="@+id/signoutButton"
-        android:layout_width="155dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_width="265dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="52dp"
         android:text="cerrar sesion"
+
+        android:textSize="23dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signInButton" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="78dp"
+        android:layout_height="54dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/signInButton"
@@ -43,12 +46,12 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="329dp"
+        android:layout_height="92dp"
         android:layout_marginTop="100dp"
         android:background="@drawable/boton_rectangular"
-
         android:text="Futbol Manager"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="32dp"
         app:layout_constraintEnd_toEndOf="parent"

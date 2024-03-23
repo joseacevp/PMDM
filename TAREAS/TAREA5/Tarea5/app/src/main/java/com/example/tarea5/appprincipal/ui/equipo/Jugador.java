@@ -5,6 +5,8 @@ public class Jugador {
     private int foto,favorito;
     Boolean isSelected = false;
 
+    public Jugador() {
+    }
 
     public Jugador(String nombre, String posicion, int foto, int favorito) {
         this.nombre = nombre;
