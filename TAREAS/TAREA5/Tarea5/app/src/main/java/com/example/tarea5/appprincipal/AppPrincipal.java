@@ -67,7 +67,8 @@ public class AppPrincipal extends AppCompatActivity {
 
         drawer = binding.drawerLayout;
         navigationView = binding.navView;
-
+        //para que respete los colores del los iconos
+        navigationView.setItemIconTintList(null);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_convocados, R.id.nav_equipo, R.id.nav_borrar_convocados,
