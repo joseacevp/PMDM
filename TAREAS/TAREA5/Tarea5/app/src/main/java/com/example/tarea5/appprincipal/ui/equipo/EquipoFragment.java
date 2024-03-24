@@ -1,5 +1,7 @@
 package com.example.tarea5.appprincipal.ui.equipo;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.lifecycle.Observer;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EquipoFragment extends Fragment implements JugadorRecyclerMultiListener {
-    //3
+    private EquipoViewModel equipoViewModel;
     private ArrayList<Jugador> lista;
     private ConvocadosViewModel convocadosViewModel;
     private List<Jugador> judadoresSeleccionados;
@@ -32,16 +35,30 @@ public class EquipoFragment extends Fragment implements JugadorRecyclerMultiList
     private FragmentEquipoBinding binding;
     private Button grabarListaSeleccionados;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-
         binding = FragmentEquipoBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+        // Inicializar el ViewModel compartido
+        equipoViewModel = new ViewModelProvider(requireActivity()).get(EquipoViewModel.class);
+
+        // Observar cambios en el ViewModel compartido
+
+        equipoViewModel.getJugadoresSeleccionados().observe(getViewLifecycleOwner(), new Observer<List<Jugador>>() {
+            @Override
+            public void onChanged(List<Jugador> jugadores) {
+                // Actualizar el RecyclerView con la lista de jugadores seleccionados
+                adaptadorRecyclerMultipl.setListaJugadores(jugadores);
+                adaptadorRecyclerMultipl.notifyDataSetChanged();
+            }
+        });
         lista = new ArrayList<>();
         grabarListaSeleccionados = binding.equipoBotonGuardar;
         construirRecycleView();
         llenarPersonajes();
+
+
         return view;
     }
 
@@ -79,9 +96,11 @@ public class EquipoFragment extends Fragment implements JugadorRecyclerMultiList
 
             }
         });
+
     }
 
     private void llenarPersonajes() {
+
         lista.add(new Jugador("Enrrique Similo", "Delantero Centro", R.drawable.carita01, R.drawable.imagen_estrella));
         lista.add(new Jugador("Juan Bueno", "Delantero Centro", R.drawable.carita02, R.drawable.imagen_estrella));
         lista.add(new Jugador("Lucas Disorio", "Delantero Centro", R.drawable.carita03, R.drawable.imagen_estrella));
@@ -117,5 +136,9 @@ public class EquipoFragment extends Fragment implements JugadorRecyclerMultiList
         } else {
             grabarListaSeleccionados.setVisibility(View.GONE);
         }
+        // Guardar el estado de los jugadores seleccionados en el ViewModel
+        equipoViewModel.setJugadoresSeleccionados(adaptadorRecyclerMultipl.getListaJugadores());
+
     }
+
 }

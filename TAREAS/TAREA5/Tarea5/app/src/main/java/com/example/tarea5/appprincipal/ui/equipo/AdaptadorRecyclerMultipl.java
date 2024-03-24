@@ -17,6 +17,11 @@ import java.util.List;
 
 public class AdaptadorRecyclerMultipl extends RecyclerView.Adapter<AdaptadorRecyclerMultipl.AdaptadorViewHolder> {
     private List<Jugador> listaJugadores;
+
+    public List<Jugador> getListaJugadores() {
+        return listaJugadores;
+    }
+
     private JugadorRecyclerMultiListener jugadorRecyclerMultiListener;
     public AdaptadorRecyclerMultipl(List<Jugador> listaJugadores, JugadorRecyclerMultiListener jugadorRecyclerMultiListener) {
         this.listaJugadores = listaJugadores;
@@ -52,6 +57,11 @@ public class AdaptadorRecyclerMultipl extends RecyclerView.Adapter<AdaptadorRecy
         }
         return listaJudadoresSelect;
     }
+
+    public void setListaJugadores(List<Jugador> jugadores) {
+        this.listaJugadores = jugadores;
+    }
+
     class AdaptadorViewHolder extends RecyclerView.ViewHolder {
         TextView etiNombre, etiPosicion;
         ImageView foto, favorito;
