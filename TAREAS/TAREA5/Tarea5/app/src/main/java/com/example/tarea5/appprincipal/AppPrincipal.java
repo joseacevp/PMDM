@@ -1,5 +1,6 @@
 package com.example.tarea5.appprincipal;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Menu;
@@ -60,7 +61,8 @@ public class AppPrincipal extends AppCompatActivity {
 
         binding = ActivityAppPrincipalBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        //evita el giro de la pantalla
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         comprobarDatos();
 
         setSupportActionBar(binding.appBarAppPrincipal.toolbar);

@@ -3,6 +3,7 @@ package com.example.tarea5;
 import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,11 +46,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //evita el giro de la pantalla
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         titulo = findViewById(R.id.tituloMain);
         // Cargar la fuente desde el directorio assets
-        Typeface typeface = Typeface.createFromAsset(getAssets(),"anton.ttf" );
-
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "anton.ttf");
         // Establecer la fuente en el TextView
         titulo.setTypeface(typeface);
 
@@ -88,18 +89,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        //devuelve el resultado del login
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                // Google Sign In was successful, authenticate with Firebase
+                // Google Sign In valido
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
                 lanzarActividad();
             } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e);
+                // Google Sign In fallo
+                Log.w(TAG, "Google sign FALLO", e);
                 // [START_EXCLUDE]
                 updateUI(null);
                 // [END_EXCLUDE]
@@ -134,8 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast toast = Toast.makeText(getApplicationContext(), "Bienvenido " + user.getDisplayName(), Toast.LENGTH_SHORT);
             toast.show();
         } else {
-//            signInButton.setVisibility(View.VISIBLE);
-//            signOutButton.setVisibility(View.GONE);
+            //En caso de no tener usuario previamente registrado
         }
     }
 
