@@ -4,8 +4,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Futbol Manager</string>
-    <string name="nav_header_subtitle">Selecciona los Jugadores y la Fecha del Partido.
-    Grabalo en la Base de Datos.</string>
+    <string name="nav_header_subtitle">Selecciona los Jugadores y la Fecha del Partido y
+    Grabarlos en la Base de Datos.</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 

@@ -19,7 +19,7 @@
             android:title="@string/menu_borrar_convocados" />
         <item
             android:id="@+id/nav_seleccionar_fecha"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/calendario"
             android:title="@string/menu_seleccionar_fecha" />
         <item
             android:id="@+id/nav_guardar"
