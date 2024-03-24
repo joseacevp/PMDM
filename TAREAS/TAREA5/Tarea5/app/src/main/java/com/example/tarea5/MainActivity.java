@@ -3,11 +3,13 @@ package com.example.tarea5;
 import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -35,7 +37,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int RC_SIGN_IN = 21;
     Button signOut, signIn;
-
+    TextView titulo;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -43,6 +45,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        titulo = findViewById(R.id.tituloMain);
+        // Cargar la fuente desde el directorio assets
+        Typeface typeface = Typeface.createFromAsset(getAssets(),"anton.ttf" );
+
+        // Establecer la fuente en el TextView
+        titulo.setTypeface(typeface);
 
         signIn = findViewById(R.id.signInButton);
         signOut = findViewById(R.id.signoutButton);
