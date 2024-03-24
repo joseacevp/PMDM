@@ -22,10 +22,9 @@ public class AdaptadorRecyclerMultipl extends RecyclerView.Adapter<AdaptadorRecy
         return listaJugadores;
     }
 
-    private JugadorRecyclerMultiListener jugadorRecyclerMultiListener;
-    public AdaptadorRecyclerMultipl(List<Jugador> listaJugadores, JugadorRecyclerMultiListener jugadorRecyclerMultiListener) {
+    public AdaptadorRecyclerMultipl(List<Jugador> listaJugadores) {
         this.listaJugadores = listaJugadores;
-        this.jugadorRecyclerMultiListener = jugadorRecyclerMultiListener;
+
     }
 
     @NonNull
@@ -33,14 +32,14 @@ public class AdaptadorRecyclerMultipl extends RecyclerView.Adapter<AdaptadorRecy
     public AdaptadorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new AdaptadorViewHolder(
                 LayoutInflater.from(parent.getContext()).inflate(
-                        R.layout.item_list_jugadores,parent,false
+                        R.layout.item_list_jugadores, parent, false
                 )
         );
     }
 
     @Override
     public void onBindViewHolder(@NonNull AdaptadorViewHolder holder, int position) {
-            holder.bindAdaptador(listaJugadores.get(position));
+        holder.bindAdaptador(listaJugadores.get(position));
     }
 
     @Override
@@ -48,10 +47,10 @@ public class AdaptadorRecyclerMultipl extends RecyclerView.Adapter<AdaptadorRecy
         return listaJugadores.size();
     }
 
-    public List<Jugador> getListaJugadoresSeleccionados(){
+    public List<Jugador> getListaJugadoresSeleccionados() {
         List<Jugador> listaJudadoresSelect = new ArrayList<>();
-        for (Jugador jugador : listaJugadores){
-            if (jugador.isSelected){
+        for (Jugador jugador : listaJugadores) {
+            if (jugador.isSelected) {
                 listaJudadoresSelect.add(jugador);
             }
         }
@@ -67,6 +66,7 @@ public class AdaptadorRecyclerMultipl extends RecyclerView.Adapter<AdaptadorRecy
         ImageView foto, favorito;
         CardView cardjudador;
         View view;
+
         public AdaptadorViewHolder(@NonNull View itemView) {
             super(itemView);
             cardjudador = itemView.findViewById(R.id.carJugador);
@@ -75,28 +75,25 @@ public class AdaptadorRecyclerMultipl extends RecyclerView.Adapter<AdaptadorRecy
             foto = itemView.findViewById(R.id.imageView);
             favorito = itemView.findViewById(R.id.imageViewFavorito);
         }
-        void bindAdaptador(final Jugador jugador){
+
+        void bindAdaptador(final Jugador jugador) {
             etiNombre.setText(jugador.getNombre());
             etiPosicion.setText(jugador.getPosicion());
             foto.setImageResource(jugador.getFoto());
-            if (jugador.isSelected){
+            if (jugador.isSelected) {
                 favorito.setImageResource(R.drawable.imagen_estrella);
-            }else{
+            } else {
                 favorito.setImageResource(R.drawable.imagen_favorito);
             }
             favorito.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (jugador.isSelected){
+                    if (jugador.isSelected) {
                         favorito.setImageResource(R.drawable.imagen_favorito);
                         jugador.isSelected = false;
-                        if (getListaJugadoresSeleccionados().size() == 0){
-                            jugadorRecyclerMultiListener.jugadorAccion(false);
-                        }
-                    }else {
+                    } else {
                         favorito.setImageResource(R.drawable.imagen_estrella);
                         jugador.isSelected = true;
-                        jugadorRecyclerMultiListener.jugadorAccion(true);
                     }
                 }
             });

@@ -25,7 +25,7 @@ import com.example.tarea5.databinding.FragmentEquipoBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EquipoFragment extends Fragment implements JugadorRecyclerMultiListener {
+public class EquipoFragment extends Fragment {
     private EquipoViewModel equipoViewModel;
     private ArrayList<Jugador> lista;
     private ConvocadosViewModel convocadosViewModel;
@@ -33,8 +33,6 @@ public class EquipoFragment extends Fragment implements JugadorRecyclerMultiList
     AdaptadorRecyclerMultipl adaptadorRecyclerMultipl;
     RecyclerView recyclerView;
     private FragmentEquipoBinding binding;
-    private Button grabarListaSeleccionados;
-
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -54,7 +52,7 @@ public class EquipoFragment extends Fragment implements JugadorRecyclerMultiList
             }
         });
         lista = new ArrayList<>();
-        grabarListaSeleccionados = binding.equipoBotonGuardar;
+
         construirRecycleView();
         llenarPersonajes();
 
@@ -72,30 +70,8 @@ public class EquipoFragment extends Fragment implements JugadorRecyclerMultiList
     }
 
     private void iniciarRecyclerJugadorMulti() {
-        adaptadorRecyclerMultipl = new AdaptadorRecyclerMultipl(lista, this);
+        adaptadorRecyclerMultipl = new AdaptadorRecyclerMultipl(lista);
         recyclerView.setAdapter(adaptadorRecyclerMultipl);
-        grabarListaSeleccionados.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                judadoresSeleccionados = adaptadorRecyclerMultipl.getListaJugadoresSeleccionados();
-
-                convocadosViewModel = new ViewModelProvider(requireActivity()).get(ConvocadosViewModel.class);
-                convocadosViewModel.setListaConvocados((ArrayList<Jugador>) judadoresSeleccionados);
-
-                //para visualizar datos
-                StringBuilder nombresSeleccionados = new StringBuilder();
-                for (int i = 0; i < judadoresSeleccionados.size(); i++) {
-                    if (i == 0) {
-                        nombresSeleccionados.append(judadoresSeleccionados.get(i).getNombre());
-
-                    } else {
-                        nombresSeleccionados.append("\n").append(judadoresSeleccionados.get(i).getNombre());
-                    }
-                }
-                Toast.makeText(getContext(), "Jugadores Seleccionados:\n" + nombresSeleccionados.toString(), Toast.LENGTH_SHORT).show();
-
-            }
-        });
 
     }
 
@@ -124,21 +100,36 @@ public class EquipoFragment extends Fragment implements JugadorRecyclerMultiList
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        grabarListaSeleccionados();
+        // Guardar el estado de los jugadores seleccionados en el ViewModel
+        equipoViewModel.setJugadoresSeleccionados(adaptadorRecyclerMultipl.getListaJugadores());
+    }
+
+    private void grabarListaSeleccionados() {
+        //envia la lista de jugadores seleccionados al cambiar de fragmento.
+        judadoresSeleccionados = adaptadorRecyclerMultipl.getListaJugadoresSeleccionados();
+        convocadosViewModel = new ViewModelProvider(requireActivity()).get(ConvocadosViewModel.class);
+        convocadosViewModel.setListaConvocados((ArrayList<Jugador>) judadoresSeleccionados);
+        //para visualizar datos
+        StringBuilder nombresSeleccionados = new StringBuilder();
+        for (int i = 0; i < judadoresSeleccionados.size(); i++) {
+            if (i == 0) {
+                nombresSeleccionados.append(judadoresSeleccionados.get(i).getNombre());
+
+            } else {
+                nombresSeleccionados.append("\n").append(judadoresSeleccionados.get(i).getNombre());
+            }
+        }
+//        Toast.makeText(getContext(), "Jugadores Seleccionados:\n" + nombresSeleccionados.toString(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
 
-    @Override
-    public void jugadorAccion(Boolean isSelected) {
-        if (isSelected) {
-            grabarListaSeleccionados.setVisibility(View.VISIBLE);
-        } else {
-            grabarListaSeleccionados.setVisibility(View.GONE);
-        }
-        // Guardar el estado de los jugadores seleccionados en el ViewModel
-        equipoViewModel.setJugadoresSeleccionados(adaptadorRecyclerMultipl.getListaJugadores());
-
-    }
 
 }
