@@ -90,7 +90,7 @@ public class HistoricoFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 fechaSeleccionada = parent.getItemAtPosition(position).toString();
-                Toast.makeText(requireContext(), "Fecha seleccionada: " + fechaSeleccionada, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(requireContext(), "Fecha seleccionada: " + fechaSeleccionada, Toast.LENGTH_SHORT).show();
                 consultarJugadoresPorFecha(fechaSeleccionada);
             }
 

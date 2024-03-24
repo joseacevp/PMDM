@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo_burbujas"
+    android:background="@drawable/fondo_futbol"
     tools:context=".MainActivity">
 
     <Button
@@ -52,6 +52,7 @@
         android:layout_marginTop="100dp"
         android:background="@drawable/boton_rectangular"
         android:text="Futbol Manager"
+        
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="32dp"

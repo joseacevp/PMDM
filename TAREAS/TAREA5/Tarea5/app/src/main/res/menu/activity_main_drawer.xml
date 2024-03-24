@@ -23,11 +23,11 @@
             android:title="@string/menu_seleccionar_fecha" />
         <item
             android:id="@+id/nav_guardar"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/disco_flexible"
             android:title="@string/menu_guardar" />
         <item
             android:id="@+id/nav_historico"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/memoria"
             android:title="@string/menu_historico" />
     </group>
 </menu>
